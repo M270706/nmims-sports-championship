@@ -235,8 +235,8 @@ function SportDashboardContent() {
       </PageHero>
 
       {/* 2. TABS: Schedule · Results · Points Table · Leaderboard */}
-      {/* Sticky pill row on mobile under 64px header, centred on laptop */}
-      <div className="sticky top-16 z-30 bg-navy/95 backdrop-blur-md border-b border-gold/20 py-3 shadow-md">
+      {/* Sticky pill row on mobile under 64px header, under 80px on laptop */}
+      <div className="sticky top-16 lg:top-20 z-30 bg-navy/95 backdrop-blur-md border-b border-gold/20 py-3 shadow-md">
         <Container>
           <div className="flex items-center justify-start lg:justify-center gap-2 sm:gap-3 overflow-x-auto no-scrollbar">
             <button

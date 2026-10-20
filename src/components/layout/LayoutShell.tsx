@@ -2,7 +2,7 @@
 
 import React from "react";
 import { usePathname } from "next/navigation";
-import Navbar from "@/components/layout/Navbar";
+import SiteHeader from "@/components/SiteHeader";
 import Footer from "@/components/layout/Footer";
 
 interface LayoutShellProps {
@@ -19,10 +19,10 @@ export default function LayoutShell({ children }: LayoutShellProps) {
     return <>{children}</>;
   }
 
-  // Standard user portal pages render top Navbar and bottom Footer
+  // Standard user portal pages render top SiteHeader and bottom Footer
   return (
     <>
-      <Navbar />
+      <SiteHeader />
       <main className="flex-grow">{children}</main>
       <Footer />
     </>

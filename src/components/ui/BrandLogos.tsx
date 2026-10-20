@@ -29,8 +29,8 @@ function getDimensions(size: LogoSize, mobileSize?: LogoSize) {
 
   const mobile = SIZE_SPECS[mobileSize];
   return {
-    boxClass: `${mobile.boxClass} md:${desktop.boxClass}`,
-    sizesAttr: `(max-width: 768px) ${mobile.px}px, ${desktop.px}px`,
+    boxClass: `${mobile.boxClass} lg:${desktop.boxClass}`,
+    sizesAttr: `(max-width: 1024px) ${mobile.px}px, ${desktop.px}px`,
   };
 }
 
