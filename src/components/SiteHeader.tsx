@@ -1,7 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { createPortal } from "react-dom";
+import { useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
@@ -11,7 +10,7 @@ const MAIN = [
   { href: "/sports", label: "Sports" },
   { href: "/teams", label: "Teams" },
   { href: "/campuses", label: "Campuses" },
-  { href: "/standings", label: "Points & Stats" },
+  { href: "/points", label: "Points & Stats" },
 ];
 const MORE = [
   { href: "/gallery", label: "Gallery" },
@@ -35,88 +34,30 @@ function LogoBox({ src, alt }: { src: string; alt: string }) {
 
 export default function SiteHeader() {
   const pathname = usePathname() || "";
-  const [open, setOpen] = useState(false);
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => setMounted(true), []);
-  useEffect(() => setOpen(false), [pathname]);
-  useEffect(() => {
-    if (!open) return;
-    const prev = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
-    window.addEventListener("keydown", onKey);
-    return () => {
-      document.body.style.overflow = prev;
-      window.removeEventListener("keydown", onKey);
-    };
-  }, [open]);
+  const stripRef = useRef<HTMLDivElement>(null);
 
   const isActive = (href: string) =>
     pathname === href || (href !== "/home" && pathname.startsWith(href));
 
-  const menu = (
-    <div
-      role="dialog"
-      aria-modal="true"
-      aria-label="Site menu"
-      className="fixed inset-0 z-[1000] flex flex-col bg-[#0F122E] lg:hidden"
-      style={{ paddingTop: "env(safe-area-inset-top)", paddingBottom: "env(safe-area-inset-bottom)" }}
-    >
-      <div className="flex h-16 shrink-0 items-center gap-3 border-b border-[#D9B26F]/15 px-4">
-        <LogoBox src={SVKM_LOGO} alt="SVKM" />
-        <span className="min-w-0 flex-1 text-center font-serif text-base font-semibold text-[#D9B26F]">Menu</span>
-        <button
-          type="button"
-          onClick={() => setOpen(false)}
-          aria-label="Close menu"
-          className="grid h-10 w-10 shrink-0 place-items-center rounded-lg border border-[#D9B26F]/40 text-[#D9B26F]"
-        >
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-            <path d="M6 6l12 12M18 6L6 18" />
-          </svg>
-        </button>
-        <LogoBox src={NMIMS_LOGO} alt="NMIMS" />
-      </div>
-
-      <nav className="flex-1 overflow-y-auto px-4 py-2">
-        {ALL.map((l) => (
-          <Link
-            key={l.href}
-            href={l.href}
-            onClick={() => setOpen(false)}
-            className={`flex min-h-[52px] items-center justify-between border-b border-[#D9B26F]/10 text-lg ${
-              isActive(l.href) ? "font-semibold text-[#F0D38F]" : "text-white/85"
-            }`}
-          >
-            {l.label}
-            <span className="text-[#D9B26F]/60">›</span>
-          </Link>
-        ))}
-      </nav>
-
-      <div className="shrink-0 border-t border-[#D9B26F]/15 p-4">
-        <Link
-          href="/admin/login"
-          onClick={() => setOpen(false)}
-          className="flex h-12 w-full items-center justify-center rounded-xl bg-gradient-to-r from-[#A88345] via-[#D9B26F] to-[#F0D38F] font-semibold text-[#0F122E]"
-        >
-          Admin Portal
-        </Link>
-      </div>
-    </div>
-  );
+  // Phone: keep the active link visible in the swipe strip
+  useEffect(() => {
+    const el = stripRef.current?.querySelector<HTMLElement>("[data-active='true']");
+    el?.scrollIntoView({ inline: "center", block: "nearest" });
+  }, [pathname]);
 
   return (
     <header className="sticky top-0 z-50 border-b border-[#D9B26F]/15 bg-[#0F122E]">
+      {/* Row 1 */}
       <div className="mx-auto flex h-16 max-w-7xl items-center gap-3 px-4 md:px-6 lg:h-20 lg:px-8">
         <LogoBox src={SVKM_LOGO} alt="SVKM" />
 
+        {/* Phone title */}
         <Link href="/home" className="min-w-0 flex-1 text-center leading-tight lg:hidden">
           <span className="block truncate font-serif text-[15px] font-semibold text-[#D9B26F]">SVKM&apos;s NMIMS</span>
           <span className="block truncate text-[10.5px] uppercase tracking-[0.12em] text-white/70">Championship 2026-27</span>
         </Link>
 
+        {/* Laptop nav */}
         <nav className="hidden flex-1 items-center justify-center gap-7 lg:flex">
           {MAIN.map((l) => (
             <Link
@@ -152,6 +93,7 @@ export default function SiteHeader() {
           </div>
         </nav>
 
+        {/* Laptop Admin */}
         <Link
           href="/admin/login"
           className="hidden h-10 shrink-0 items-center gap-2 rounded-xl border border-[#D9B26F]/40 px-4 text-sm font-semibold text-[#D9B26F] transition hover:bg-[#D9B26F]/10 lg:inline-flex"
@@ -160,22 +102,40 @@ export default function SiteHeader() {
           Admin
         </Link>
 
-        <button
-          type="button"
-          onClick={() => setOpen(true)}
-          aria-label="Open menu"
-          aria-expanded={open}
-          className="grid h-10 w-10 shrink-0 place-items-center rounded-lg border border-[#D9B26F]/40 text-[#D9B26F] lg:hidden"
-        >
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-            <path d="M4 7h16M4 12h16M4 17h16" />
-          </svg>
-        </button>
-
         <LogoBox src={NMIMS_LOGO} alt="NMIMS" />
       </div>
 
-      {mounted && open && createPortal(menu, document.body)}
+      {/* Row 2: phone swipe menu */}
+      <nav aria-label="Main" className="border-t border-[#D9B26F]/10 lg:hidden">
+        <div
+          ref={stripRef}
+          className="flex h-11 items-center gap-1 overflow-x-auto px-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        >
+          {ALL.map((l) => {
+            const active = isActive(l.href);
+            return (
+              <Link
+                key={l.href}
+                href={l.href}
+                data-active={active}
+                className={`relative flex h-full shrink-0 items-center whitespace-nowrap px-3 text-[14px] ${
+                  active ? "font-semibold text-[#D9B26F]" : "text-white/80"
+                }`}
+              >
+                {l.label}
+                {active && <span className="absolute inset-x-3 bottom-0 h-[2px] rounded-full bg-[#D9B26F]" />}
+              </Link>
+            );
+          })}
+          <Link
+            href="/admin/login"
+            className="ml-1 flex h-8 shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full border border-[#D9B26F]/40 px-3 text-[13px] font-semibold text-[#D9B26F]"
+          >
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z" /></svg>
+            Admin
+          </Link>
+        </div>
+      </nav>
     </header>
   );
 }
