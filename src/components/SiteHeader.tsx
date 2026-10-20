@@ -10,7 +10,7 @@ const MAIN = [
   { href: "/sports", label: "Sports" },
   { href: "/teams", label: "Teams" },
   { href: "/campuses", label: "Campuses" },
-  { href: "/points", label: "Points & Stats" },
+  { href: "/standings", label: "Points & Stats" },
 ];
 const MORE = [
   { href: "/gallery", label: "Gallery" },
