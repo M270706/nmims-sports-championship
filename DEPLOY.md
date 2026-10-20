@@ -41,7 +41,7 @@ The repository includes a `render.yaml` Blueprint for the Next.js Node.js web se
    - `NEXT_PUBLIC_SUPABASE_URL`
    - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
    - `SUPABASE_SERVICE_ROLE_KEY` (server-only secret; never expose it to the browser)
-   - `NEXT_PUBLIC_SITE_URL` (the Render URL shown after the service is created)
+   - `NEXT_PUBLIC_SITE_URL` = `https://nmims-sports-championship.onrender.com` (change this if Render assigns a different service URL)
 5. Create the Blueprint and wait for the first deploy. Verify `https://<your-service>.onrender.com/api/health` returns `status: "healthy"`.
 
 Render's free web services can spin down after inactivity and may take time to wake on the next request. For continuously warm availability, change the service to a paid plan in Render; review its current pricing before upgrading. Add the final Render URL to Supabase Auth's allowed redirect URLs and set it as the Supabase Site URL.

@@ -21,6 +21,7 @@ import {
   Menu,
   X,
   ExternalLink,
+  MoreHorizontal,
 } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 import BrandLogos from "@/components/ui/BrandLogos";
@@ -188,26 +189,45 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
         </div>
       </aside>
 
-      {/* Mobile Top Header: BrandLogos size="sm" (48x48) */}
-      <div className="md:hidden p-3 px-4 bg-[#0F122E] border-b border-[rgba(217,178,111,0.2)] sticky top-0 z-40">
-        <BrandLogos
-          size="sm"
-          href="/admin"
-          rightAddon={
-            <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 text-gold focus:outline-none"
-              aria-label="Toggle navigation menu"
-            >
-              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-            </button>
-          }
-        >
-          <span className="font-serif font-black text-xs text-gold uppercase">
+      {/* Mobile Top Header: 56px height, email (truncated), logout, and hamburger */}
+      <header className="md:hidden h-14 bg-[#0F122E] border-b border-[rgba(217,178,111,0.2)] px-4 flex items-center justify-between sticky top-0 z-40">
+        <div className="flex items-center gap-2 min-w-0">
+          <button
+            type="button"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="p-2 -ml-2 text-gold focus:outline-none flex items-center justify-center min-w-[44px] min-h-[44px] rounded-lg hover:bg-white/[0.04]"
+            aria-label="Toggle navigation menu"
+          >
+            {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+          </button>
+          <Link
+            href="/admin"
+            className="font-serif font-black text-xs text-gold uppercase tracking-wider whitespace-nowrap"
+          >
             Admin Portal
-          </span>
-        </BrandLogos>
-      </div>
+          </Link>
+        </div>
+
+        <div className="flex items-center gap-2 min-w-0 max-w-[58%] justify-end">
+          {adminEmail && (
+            <span
+              className="text-[11px] font-mono text-gold-light truncate max-w-[140px] sm:max-w-[200px]"
+              title={adminEmail}
+            >
+              {adminEmail}
+            </span>
+          )}
+          <button
+            type="button"
+            onClick={handleLogout}
+            className="p-2 rounded-lg bg-red-500/10 hover:bg-red-500/20 text-red-400 transition-colors flex items-center justify-center min-w-[44px] min-h-[44px]"
+            title="Sign Out"
+            aria-label="Sign Out"
+          >
+            <LogOut className="w-4 h-4" />
+          </button>
+        </div>
+      </header>
 
       {/* Mobile Drawer Menu */}
       {mobileMenuOpen && (
@@ -269,17 +289,20 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
         </div>
       )}
 
-      {/* Main Content Area */}
-      <main className="flex-1 min-w-0 p-4 sm:p-6 lg:p-8 overflow-y-auto pb-24 md:pb-8">
+      {/* Main Content Area: minimum px-4 on mobile */}
+      <main className="flex-1 min-w-0 px-4 py-4 sm:p-6 lg:p-8 overflow-y-auto pb-24 md:pb-8">
         {children}
       </main>
 
-      {/* Mobile Bottom Tab Bar (Quick Access for Top 4 admin tasks) */}
-      <div className="md:hidden fixed bottom-0 left-0 right-0 z-30 bg-[#0F122E] border-t border-[rgba(217,178,111,0.2)] px-4 py-2 flex items-center justify-around shadow-2xl">
+      {/* Mobile Bottom Tab Bar (Quick Access for Top Admin Tasks: Dashboard, Matches, Results, Groups, More) */}
+      <nav
+        aria-label="Mobile Admin Navigation"
+        className="md:hidden fixed bottom-0 left-0 right-0 z-30 bg-[#0F122E] border-t border-[rgba(217,178,111,0.2)] px-1 pt-1 pb-[env(safe-area-inset-bottom)] flex items-center justify-around shadow-2xl"
+      >
         <Link
           href="/admin"
-          className={`flex flex-col items-center gap-1 text-[10px] ${
-            pathname === "/admin" ? "text-gold font-bold" : "text-[#AEB3D6]"
+          className={`flex-1 min-w-[44px] min-h-[44px] flex flex-col items-center justify-center gap-1 text-[10px] transition-colors ${
+            pathname === "/admin" ? "text-gold font-bold" : "text-[#AEB3D6] hover:text-white"
           }`}
         >
           <LayoutDashboard className="w-4 h-4" />
@@ -287,8 +310,8 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
         </Link>
         <Link
           href="/admin/matches"
-          className={`flex flex-col items-center gap-1 text-[10px] ${
-            pathname.startsWith("/admin/matches") ? "text-gold font-bold" : "text-[#AEB3D6]"
+          className={`flex-1 min-w-[44px] min-h-[44px] flex flex-col items-center justify-center gap-1 text-[10px] transition-colors ${
+            pathname.startsWith("/admin/matches") ? "text-gold font-bold" : "text-[#AEB3D6] hover:text-white"
           }`}
         >
           <Calendar className="w-4 h-4" />
@@ -296,23 +319,34 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
         </Link>
         <Link
           href="/admin/results"
-          className={`flex flex-col items-center gap-1 text-[10px] ${
-            pathname.startsWith("/admin/results") ? "text-gold font-bold" : "text-[#AEB3D6]"
+          className={`flex-1 min-w-[44px] min-h-[44px] flex flex-col items-center justify-center gap-1 text-[10px] transition-colors ${
+            pathname.startsWith("/admin/results") ? "text-gold font-bold" : "text-[#AEB3D6] hover:text-white"
           }`}
         >
           <CheckCircle2 className="w-4 h-4" />
           <span>Results</span>
         </Link>
         <Link
-          href="/admin/points"
-          className={`flex flex-col items-center gap-1 text-[10px] ${
-            pathname.startsWith("/admin/points") ? "text-gold font-bold" : "text-[#AEB3D6]"
+          href="/admin/groups"
+          className={`flex-1 min-w-[44px] min-h-[44px] flex flex-col items-center justify-center gap-1 text-[10px] transition-colors ${
+            pathname.startsWith("/admin/groups") ? "text-gold font-bold" : "text-[#AEB3D6] hover:text-white"
           }`}
         >
-          <BarChart2 className="w-4 h-4" />
-          <span>Points</span>
+          <Layers className="w-4 h-4" />
+          <span>Groups</span>
         </Link>
-      </div>
+        <button
+          type="button"
+          onClick={() => setMobileMenuOpen(true)}
+          className={`flex-1 min-w-[44px] min-h-[44px] flex flex-col items-center justify-center gap-1 text-[10px] transition-colors ${
+            mobileMenuOpen ? "text-gold font-bold" : "text-[#AEB3D6] hover:text-white"
+          }`}
+          aria-label="Open full admin menu"
+        >
+          <MoreHorizontal className="w-4 h-4" />
+          <span>More</span>
+        </button>
+      </nav>
     </div>
   );
 }

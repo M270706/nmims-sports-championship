@@ -99,37 +99,38 @@ export default function AdminLoginPage() {
   };
 
   return (
-    <div className="relative min-h-screen bg-navy flex items-center justify-center p-4">
+    <div className="relative min-h-screen bg-navy flex items-center justify-center p-4 py-16 sm:py-6 overflow-x-hidden">
       <NavyPatchBackground />
 
       {/* Back to Starting Page Link */}
       <Link
         href="/"
-        className="absolute top-6 left-6 text-xs font-mono font-bold text-gold hover:text-gold-light flex items-center gap-1.5 transition-colors z-20"
+        className="absolute top-4 left-4 sm:top-6 sm:left-6 text-xs font-mono font-bold text-gold hover:text-gold-light flex items-center gap-1.5 transition-colors z-20 max-w-[calc(100vw-2rem)] truncate"
       >
-        <ArrowLeft className="w-4 h-4" />
-        <span>Return to Championship Portal</span>
+        <ArrowLeft className="w-4 h-4 shrink-0" />
+        <span className="hidden sm:inline">Return to Championship Portal</span>
+        <span className="sm:hidden">Back to Portal</span>
       </Link>
 
       <div className="relative z-10 w-full max-w-md">
-        {/* Logos Header: BrandLogos size="lg" (96x96) */}
-        <div className="w-full max-w-xs mx-auto mb-8">
-          <BrandLogos size="lg" href="/" />
+        {/* Logos Header: BrandLogos size="lg" (96x96 desktop, 72x72 mobile) */}
+        <div className="w-full max-w-xs mx-auto mb-6 sm:mb-8">
+          <BrandLogos size="lg" mobileSize="md" href="/" />
         </div>
 
         {/* Login Card */}
-        <div className="card-championship p-8 relative overflow-hidden backdrop-blur-2xl">
-          <div className="flex items-center justify-center mb-6">
-            <div className="w-14 h-14 rounded-2xl bg-[#0F122E] border border-gold/40 flex items-center justify-center shadow-gold-glow">
-              <ShieldCheck className="w-7 h-7 text-gold-light" />
+        <div className="card-championship p-5 sm:p-8 rounded-2xl sm:rounded-3xl relative overflow-hidden backdrop-blur-2xl">
+          <div className="flex items-center justify-center mb-5 sm:mb-6">
+            <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-[#0F122E] border border-gold/40 flex items-center justify-center shadow-gold-glow">
+              <ShieldCheck className="w-6 h-6 sm:w-7 sm:h-7 text-gold-light" />
             </div>
           </div>
 
-          <div className="text-center mb-6">
+          <div className="text-center mb-5 sm:mb-6">
             <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-gold">
               Organisers Portal
             </span>
-            <h1 className="text-2xl font-serif font-black uppercase text-gold-light mt-1">
+            <h1 className="text-xl sm:text-2xl font-serif font-black uppercase text-gold-light mt-1">
               Admin Login
             </h1>
             <p className="text-xs text-[#AEB3D6] mt-1">
@@ -138,14 +139,14 @@ export default function AdminLoginPage() {
           </div>
 
           {error && (
-            <div className="mb-6 p-4 rounded-xl bg-red-950/60 border border-red-500/50 text-red-200 text-xs font-semibold animate-fadeIn flex items-center gap-2">
+            <div className="mb-5 sm:mb-6 p-3.5 sm:p-4 rounded-xl bg-red-950/60 border border-red-500/50 text-red-200 text-xs font-semibold animate-fadeIn flex items-center gap-2">
               <AlertTriangle className="w-4 h-4 text-red-400 shrink-0" />
               <span>{error}</span>
             </div>
           )}
 
           {cooldownRemaining > 0 && (
-            <div className="mb-6 p-4 rounded-xl bg-amber-950/60 border border-amber-500/50 text-amber-200 text-xs font-mono text-center animate-fadeIn">
+            <div className="mb-5 sm:mb-6 p-3.5 sm:p-4 rounded-xl bg-amber-950/60 border border-amber-500/50 text-amber-200 text-xs font-mono text-center animate-fadeIn">
               Rate limit active: retry in {cooldownRemaining}s
             </div>
           )}
@@ -163,7 +164,7 @@ export default function AdminLoginPage() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="admin@nmims.edu"
-                  className="w-full pl-10 pr-4 py-3 rounded-xl bg-[#0F122E] border border-gold/30 text-xs text-[#F4EFE3] placeholder-gray-500 focus:outline-none focus:border-gold font-mono disabled:opacity-50"
+                  className="w-full pl-10 pr-4 py-3 min-h-[44px] rounded-xl bg-[#0F122E] border border-gold/30 text-base sm:text-xs text-[#F4EFE3] placeholder-gray-500 focus:outline-none focus:border-gold font-mono disabled:opacity-50"
                 />
                 <Mail className="w-4 h-4 text-gold absolute left-3.5 top-3.5" />
               </div>
@@ -181,7 +182,7 @@ export default function AdminLoginPage() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••••••"
-                  className="w-full pl-10 pr-4 py-3 rounded-xl bg-[#0F122E] border border-gold/30 text-xs text-[#F4EFE3] placeholder-gray-500 focus:outline-none focus:border-gold font-mono disabled:opacity-50"
+                  className="w-full pl-10 pr-4 py-3 min-h-[44px] rounded-xl bg-[#0F122E] border border-gold/30 text-base sm:text-xs text-[#F4EFE3] placeholder-gray-500 focus:outline-none focus:border-gold font-mono disabled:opacity-50"
                 />
                 <Lock className="w-4 h-4 text-gold absolute left-3.5 top-3.5" />
               </div>
@@ -190,7 +191,7 @@ export default function AdminLoginPage() {
             <button
               type="submit"
               disabled={loading || cooldownRemaining > 0}
-              className="w-full py-3.5 rounded-full btn-gold text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 shadow-gold-glow mt-6 disabled:opacity-50 min-h-[44px]"
+              className="w-full py-3.5 min-h-[48px] rounded-full btn-gold text-xs sm:text-sm font-bold uppercase tracking-wider flex items-center justify-center gap-2 shadow-gold-glow mt-6 disabled:opacity-50"
             >
               {loading ? (
                 <>
@@ -209,7 +210,7 @@ export default function AdminLoginPage() {
           </form>
 
           {/* Footer note */}
-          <div className="mt-6 pt-6 border-t border-[rgba(217,178,111,0.15)] text-center">
+          <div className="mt-5 sm:mt-6 pt-5 sm:pt-6 border-t border-[rgba(217,178,111,0.15)] text-center">
             <span className="text-[10px] text-text-muted">
               Access is strictly restricted to designated sports committee members and administrators.
             </span>

@@ -440,8 +440,8 @@ function MatchesAdminContent() {
             </p>
           </div>
 
-          <div className="flex items-center gap-2.5">
-            <label className="px-4 py-2.5 rounded-full btn-royal text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 cursor-pointer">
+          <div className="flex items-center gap-2.5 w-full sm:w-auto">
+            <label className="flex-1 sm:flex-initial px-4 py-2.5 rounded-full btn-royal text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-1.5 cursor-pointer min-h-[44px]">
               <Upload className="w-4 h-4 text-gold" />
               <span>Bulk CSV</span>
               <input
@@ -455,7 +455,7 @@ function MatchesAdminContent() {
             <button
               type="button"
               onClick={openNewMatch}
-              className="px-5 py-2.5 rounded-full btn-gold text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 shadow-gold-glow"
+              className="flex-1 sm:flex-initial px-5 py-2.5 rounded-full btn-gold text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-1.5 shadow-gold-glow min-h-[44px]"
             >
               <Plus className="w-4 h-4" />
               <span>Add Match</span>
@@ -464,23 +464,23 @@ function MatchesAdminContent() {
         </div>
 
         {/* Filter Toolbar */}
-        <div className="p-4 rounded-2xl bg-[#161A40] border border-[rgba(217,178,111,0.2)] flex flex-wrap items-center justify-between gap-3">
-          <div className="flex flex-wrap items-center gap-3 flex-1">
-            <div className="relative min-w-[200px]">
+        <div className="p-4 rounded-2xl bg-[#161A40] border border-[rgba(217,178,111,0.2)] flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3">
+          <div className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3 flex-1">
+            <div className="relative w-full sm:w-auto sm:min-w-[200px]">
               <Search className="w-4 h-4 text-gold absolute left-3 top-1/2 -translate-y-1/2" />
               <input
                 type="text"
                 placeholder="Search campus team..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-9 pr-3 py-2 rounded-xl bg-[#0F122E] border border-gold/30 text-xs text-[#F4EFE3] focus:outline-none"
+                className="w-full pl-9 pr-3 py-2.5 rounded-xl bg-[#0F122E] border border-gold/30 text-xs text-[#F4EFE3] focus:outline-none min-h-[40px]"
               />
             </div>
 
             <select
               value={filterSport}
               onChange={(e) => setFilterSport(e.target.value)}
-              className="px-3 py-2 rounded-xl bg-[#0F122E] border border-gold/30 text-xs text-gold font-semibold focus:outline-none"
+              className="w-full sm:w-auto px-3 py-2.5 rounded-xl bg-[#0F122E] border border-gold/30 text-xs text-gold font-semibold focus:outline-none min-h-[40px]"
             >
               <option value="all">All Sports</option>
               {SPORTS_CONFIG.map((s) => (
@@ -493,7 +493,7 @@ function MatchesAdminContent() {
             <select
               value={filterCategory}
               onChange={(e) => setFilterCategory(e.target.value)}
-              className="px-3 py-2 rounded-xl bg-[#0F122E] border border-gold/30 text-xs text-gold font-semibold focus:outline-none"
+              className="w-full sm:w-auto px-3 py-2.5 rounded-xl bg-[#0F122E] border border-gold/30 text-xs text-gold font-semibold focus:outline-none min-h-[40px]"
             >
               <option value="all">All Categories</option>
               <option value="men">Men</option>
@@ -503,7 +503,7 @@ function MatchesAdminContent() {
             <select
               value={filterStatus}
               onChange={(e) => setFilterStatus(e.target.value)}
-              className="px-3 py-2 rounded-xl bg-[#0F122E] border border-gold/30 text-xs text-gold font-semibold focus:outline-none"
+              className="w-full sm:w-auto px-3 py-2.5 rounded-xl bg-[#0F122E] border border-gold/30 text-xs text-gold font-semibold focus:outline-none min-h-[40px]"
             >
               <option value="all">All Statuses</option>
               <option value="Scheduled">Scheduled</option>
@@ -513,13 +513,13 @@ function MatchesAdminContent() {
             </select>
           </div>
 
-          <span className="text-xs text-gold/80 font-mono">
+          <span className="text-xs text-gold/80 font-mono text-right sm:text-left">
             {filteredMatches.length} Fixtures Found
           </span>
         </div>
 
-        {/* Matches Table */}
-        <div className="overflow-x-auto rounded-2xl border border-[rgba(217,178,111,0.2)] bg-[#161A40]">
+        {/* Desktop Matches Table */}
+        <div className="hidden md:block overflow-x-auto rounded-2xl border border-[rgba(217,178,111,0.2)] bg-[#161A40]">
           <table className="w-full text-left text-xs">
             <thead className="bg-[#20255A] text-gold uppercase tracking-wider font-semibold">
               <tr>
@@ -614,18 +614,115 @@ function MatchesAdminContent() {
           </table>
         </div>
 
-        {/* ADD / EDIT MATCH MODAL strictly per Part 1C */}
+        {/* Mobile Stacked Match Cards */}
+        <div className="md:hidden space-y-3">
+          {filteredMatches.length === 0 ? (
+            <div className="p-8 rounded-2xl border border-[rgba(217,178,111,0.2)] bg-[#161A40] text-center text-[#AEB3D6] italic text-xs">
+              No fixtures found matching filters. Click &quot;Add Match&quot; to schedule a fixture.
+            </div>
+          ) : (
+            filteredMatches.map((m) => (
+              <div
+                key={m.id}
+                className="p-4 rounded-2xl border border-[rgba(217,178,111,0.2)] bg-[#161A40] space-y-3"
+              >
+                {/* Header: Match #, Sport / Category, Status */}
+                <div className="flex items-center justify-between gap-2">
+                  <div className="flex items-center gap-2">
+                    <span className="font-mono font-bold text-sm text-gold">#{m.matchNo}</span>
+                    <span className="text-xs text-[#AEB3D6]">·</span>
+                    <span className="text-xs font-semibold text-[#F4EFE3] capitalize">
+                      {m.sportId} ({m.category})
+                    </span>
+                  </div>
+                  <span
+                    className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${
+                      m.status === "Completed"
+                        ? "bg-success/20 text-success border border-success/40"
+                        : m.status === "Postponed"
+                        ? "bg-warning/20 text-warning border border-warning/40"
+                        : m.status === "Cancelled"
+                        ? "bg-red-950 text-red-400 border border-red-500/30"
+                        : "bg-[#20255A] text-gold border border-gold/30"
+                    }`}
+                  >
+                    {m.status}
+                  </span>
+                </div>
+
+                {/* Match Round & Teams */}
+                <div className="p-3 rounded-xl bg-[#0F122E] border border-gold/15 space-y-1">
+                  <div className="text-[10px] font-mono text-gold-light uppercase tracking-wider">
+                    {m.round}
+                  </div>
+                  <div className="text-sm font-serif font-bold text-[#F4EFE3]">
+                    {m.teamAName} <span className="text-gold font-sans font-normal text-xs">vs</span> {m.teamBName}
+                  </div>
+                  <div className="text-[11px] font-mono text-[#AEB3D6]">
+                    {m.teamAShortCode} vs {m.teamBShortCode}
+                  </div>
+                </div>
+
+                {/* Date & Venue */}
+                <div className="flex items-center justify-between text-xs text-[#AEB3D6] pt-1">
+                  <span className="font-mono">
+                    {new Date(m.scheduledAt).toLocaleDateString("en-IN", {
+                      day: "numeric",
+                      month: "short",
+                    })} · {new Date(m.scheduledAt).toLocaleTimeString("en-IN", { hour: "2-digit", minute: "2-digit" })}
+                  </span>
+                  <span className="text-gold/80 truncate max-w-[150px] text-right font-medium">
+                    {m.venue}
+                  </span>
+                </div>
+
+                {/* Actions: Duplicate, Edit, Delete */}
+                <div className="pt-2 border-t border-[rgba(217,178,111,0.15)] flex items-center justify-end gap-2">
+                  <button
+                    type="button"
+                    onClick={() => handleDuplicate(m)}
+                    className="flex-1 py-2 px-3 rounded-xl bg-[#20255A] text-gold hover:bg-gold hover:text-indigo-black transition-colors flex items-center justify-center gap-1.5 text-xs font-semibold min-h-[44px]"
+                    title="Duplicate Match"
+                  >
+                    <Copy className="w-3.5 h-3.5" />
+                    <span>Duplicate</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => openEditMatch(m)}
+                    className="flex-1 py-2 px-3 rounded-xl bg-[#20255A] text-gold hover:bg-gold hover:text-indigo-black transition-colors flex items-center justify-center gap-1.5 text-xs font-semibold min-h-[44px]"
+                    title="Edit Match"
+                  >
+                    <Edit className="w-3.5 h-3.5" />
+                    <span>Edit</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => handleDelete(m.id, m.matchNo)}
+                    className="p-2 rounded-xl bg-[#20255A] text-red-400 hover:bg-red-950 transition-colors flex items-center justify-center min-w-[44px] min-h-[44px]"
+                    title="Delete Match"
+                  >
+                    <Trash2 className="w-4 h-4" />
+                  </button>
+                </div>
+              </div>
+            ))
+          )}
+        </div>
+
+        {/* ADD / EDIT MATCH MODAL - Full screen on mobile, single-column inputs */}
         {isEditorOpen && (
-          <div className="fixed inset-0 z-50 bg-[#0F122E]/85 backdrop-blur-md flex items-center justify-center p-4 overflow-y-auto">
-            <div className="w-full max-w-2xl bg-[#161A40] border-2 border-gold/40 rounded-3xl p-6 sm:p-8 shadow-2xl relative my-8">
+          <div className="fixed inset-0 z-50 bg-[#0F122E]/90 backdrop-blur-md flex items-start sm:items-center justify-center p-0 sm:p-4 overflow-y-auto">
+            <div className="w-full min-h-screen sm:min-h-0 sm:max-w-2xl bg-[#161A40] border-0 sm:border-2 border-gold/40 rounded-none sm:rounded-3xl p-5 sm:p-8 shadow-2xl relative my-0 sm:my-8 flex flex-col justify-between">
               <div className="flex items-center justify-between pb-4 border-b border-[rgba(217,178,111,0.2)] mb-4">
-                <h3 className="text-xl font-serif font-black uppercase text-gold">
+                <h3 className="text-lg sm:text-xl font-serif font-black uppercase text-gold">
                   {editingMatch ? `Edit Match #${editingMatch.matchNo}` : "Schedule New Fixture"}
                 </h3>
                 <button
                   type="button"
                   onClick={() => setIsEditorOpen(false)}
-                  className="p-1.5 text-gold hover:bg-[#20255A] rounded-full"
+                  className="p-2 text-gold hover:bg-[#20255A] rounded-full min-w-[44px] min-h-[44px] flex items-center justify-center"
+                  aria-label="Close modal"
                 >
                   <X className="w-5 h-5" />
                 </button>
@@ -633,7 +730,7 @@ function MatchesAdminContent() {
 
               <form onSubmit={handleSaveForm} className="space-y-4">
                 {/* 1. Sport then Category (only valid ones) */}
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-[11px] font-bold text-[#AEB3D6] uppercase mb-1">
                       Sport
@@ -648,7 +745,7 @@ function MatchesAdminContent() {
                           setFormCategory("men");
                         }
                       }}
-                      className="w-full p-2.5 rounded-xl bg-[#0F122E] border border-gold/30 text-xs text-[#F4EFE3] focus:outline-none"
+                      className="w-full p-3 sm:p-2.5 rounded-xl bg-[#0F122E] border border-gold/30 text-base sm:text-xs text-[#F4EFE3] focus:outline-none min-h-[44px]"
                     >
                       {SPORTS_CONFIG.map((s) => (
                         <option key={s.slug} value={s.slug}>
@@ -665,7 +762,7 @@ function MatchesAdminContent() {
                     <select
                       value={formCategory}
                       onChange={(e) => setFormCategory(e.target.value as CategoryGender)}
-                      className="w-full p-2.5 rounded-xl bg-[#0F122E] border border-gold/30 text-xs text-[#F4EFE3] focus:outline-none"
+                      className="w-full p-3 sm:p-2.5 rounded-xl bg-[#0F122E] border border-gold/30 text-base sm:text-xs text-[#F4EFE3] focus:outline-none min-h-[44px]"
                     >
                       <option value="men">Men</option>
                       {SPORTS_CONFIG.find((s) => s.slug === formSport)?.hasWomen && (
@@ -676,7 +773,7 @@ function MatchesAdminContent() {
                 </div>
 
                 {/* 2. Round & Group & Auto-Match No */}
-                <div className={`grid ${formRound === "Group Stage" ? "grid-cols-1 sm:grid-cols-3" : "grid-cols-2"} gap-4`}>
+                <div className={`grid grid-cols-1 ${formRound === "Group Stage" ? "sm:grid-cols-3" : "sm:grid-cols-2"} gap-4`}>
                   <div>
                     <label className="block text-[11px] font-bold text-[#AEB3D6] uppercase mb-1">
                       Round
@@ -684,7 +781,7 @@ function MatchesAdminContent() {
                     <select
                       value={formRound}
                       onChange={(e) => setFormRound(e.target.value as MatchRound)}
-                      className="w-full p-2.5 rounded-xl bg-[#0F122E] border border-gold/30 text-xs text-[#F4EFE3] focus:outline-none"
+                      className="w-full p-3 sm:p-2.5 rounded-xl bg-[#0F122E] border border-gold/30 text-base sm:text-xs text-[#F4EFE3] focus:outline-none min-h-[44px]"
                     >
                       <option value="Group Stage">Group Stage</option>
                       <option value="Group A">Group A</option>
@@ -705,7 +802,7 @@ function MatchesAdminContent() {
                       <select
                         value={formGroupId}
                         onChange={(e) => setFormGroupId(e.target.value)}
-                        className="w-full p-2.5 rounded-xl bg-[#0F122E] border border-gold/30 text-xs text-gold font-semibold focus:outline-none"
+                        className="w-full p-3 sm:p-2.5 rounded-xl bg-[#0F122E] border border-gold/30 text-base sm:text-xs text-gold font-semibold focus:outline-none min-h-[44px]"
                       >
                         <option value="">-- All Groups --</option>
                         {categoryGroups.map((g) => (
@@ -727,13 +824,13 @@ function MatchesAdminContent() {
                       required
                       value={formMatchNo}
                       onChange={(e) => setFormMatchNo(Number(e.target.value))}
-                      className="w-full p-2.5 rounded-xl bg-[#0F122E] border border-gold/30 text-xs text-[#F4EFE3] focus:outline-none"
+                      className="w-full p-3 sm:p-2.5 rounded-xl bg-[#0F122E] border border-gold/30 text-base sm:text-xs text-[#F4EFE3] focus:outline-none min-h-[44px]"
                     />
                   </div>
                 </div>
 
-                {/* 3. Team A and Team B (Filtered by group when round is Group A or Group B) */}
-                <div className="grid grid-cols-2 gap-4">
+                {/* 3. Team A and Team B */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-[11px] font-bold text-[#AEB3D6] uppercase mb-1">
                       Team A {formRound.startsWith("Group") ? `(${formRound})` : ""}
@@ -741,7 +838,7 @@ function MatchesAdminContent() {
                     <select
                       value={effectiveTeamAId}
                       onChange={(e) => setFormTeamAId(e.target.value)}
-                      className="w-full p-2.5 rounded-xl bg-[#0F122E] border border-gold/30 text-xs text-[#F4EFE3] focus:outline-none"
+                      className="w-full p-3 sm:p-2.5 rounded-xl bg-[#0F122E] border border-gold/30 text-base sm:text-xs text-[#F4EFE3] focus:outline-none min-h-[44px]"
                     >
                       {eligibleTeams.map((t) => (
                         <option key={t.id} value={t.id}>
@@ -758,7 +855,7 @@ function MatchesAdminContent() {
                     <select
                       value={effectiveTeamBId}
                       onChange={(e) => setFormTeamBId(e.target.value)}
-                      className="w-full p-2.5 rounded-xl bg-[#0F122E] border border-gold/30 text-xs text-[#F4EFE3] focus:outline-none"
+                      className="w-full p-3 sm:p-2.5 rounded-xl bg-[#0F122E] border border-gold/30 text-base sm:text-xs text-[#F4EFE3] focus:outline-none min-h-[44px]"
                     >
                       {eligibleTeams.map((t) => (
                         <option key={t.id} value={t.id}>
@@ -770,7 +867,7 @@ function MatchesAdminContent() {
                 </div>
 
                 {/* 4. Date (27–31 Oct 2026), Time, Venue/Court */}
-                <div className="grid grid-cols-3 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                   <div>
                     <label className="block text-[11px] font-bold text-[#AEB3D6] uppercase mb-1">
                       Date (27–31 Oct)
@@ -778,7 +875,7 @@ function MatchesAdminContent() {
                     <select
                       value={formDate}
                       onChange={(e) => setFormDate(e.target.value)}
-                      className="w-full p-2.5 rounded-xl bg-[#0F122E] border border-gold/30 text-xs text-[#F4EFE3] focus:outline-none"
+                      className="w-full p-3 sm:p-2.5 rounded-xl bg-[#0F122E] border border-gold/30 text-base sm:text-xs text-[#F4EFE3] focus:outline-none min-h-[44px]"
                     >
                       {TOURNAMENT_DAYS.map((d) => (
                         <option key={d.date} value={d.date}>
@@ -797,7 +894,7 @@ function MatchesAdminContent() {
                       required
                       value={formTime}
                       onChange={(e) => setFormTime(e.target.value)}
-                      className="w-full p-2.5 rounded-xl bg-[#0F122E] border border-gold/30 text-xs text-[#F4EFE3] focus:outline-none"
+                      className="w-full p-3 sm:p-2.5 rounded-xl bg-[#0F122E] border border-gold/30 text-base sm:text-xs text-[#F4EFE3] focus:outline-none min-h-[44px]"
                     />
                   </div>
 
@@ -811,13 +908,13 @@ function MatchesAdminContent() {
                       value={formVenue}
                       onChange={(e) => setFormVenue(e.target.value)}
                       placeholder="e.g. Court 1 / Main Ground"
-                      className="w-full p-2.5 rounded-xl bg-[#0F122E] border border-gold/30 text-xs text-[#F4EFE3] focus:outline-none"
+                      className="w-full p-3 sm:p-2.5 rounded-xl bg-[#0F122E] border border-gold/30 text-base sm:text-xs text-[#F4EFE3] focus:outline-none min-h-[44px]"
                     />
                   </div>
                 </div>
 
                 {/* 5. Status & Notes */}
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-[11px] font-bold text-[#AEB3D6] uppercase mb-1">
                       Status
@@ -825,7 +922,7 @@ function MatchesAdminContent() {
                     <select
                       value={formStatus}
                       onChange={(e) => setFormStatus(e.target.value as MatchStatus)}
-                      className="w-full p-2.5 rounded-xl bg-[#0F122E] border border-gold/30 text-xs text-[#F4EFE3] focus:outline-none"
+                      className="w-full p-3 sm:p-2.5 rounded-xl bg-[#0F122E] border border-gold/30 text-base sm:text-xs text-[#F4EFE3] focus:outline-none min-h-[44px]"
                     >
                       <option value="Scheduled">Scheduled</option>
                       <option value="Postponed">Postponed</option>
@@ -843,23 +940,23 @@ function MatchesAdminContent() {
                       value={formNotes}
                       onChange={(e) => setFormNotes(e.target.value)}
                       placeholder="e.g. Floodlit evening session"
-                      className="w-full p-2.5 rounded-xl bg-[#0F122E] border border-gold/30 text-xs text-[#F4EFE3] focus:outline-none"
+                      className="w-full p-3 sm:p-2.5 rounded-xl bg-[#0F122E] border border-gold/30 text-base sm:text-xs text-[#F4EFE3] focus:outline-none min-h-[44px]"
                     />
                   </div>
                 </div>
 
                 {/* Action Buttons */}
-                <div className="pt-4 flex gap-3 border-t border-[rgba(217,178,111,0.15)]">
+                <div className="pt-4 flex flex-col sm:flex-row gap-3 border-t border-[rgba(217,178,111,0.15)]">
                   <button
                     type="button"
                     onClick={() => setIsEditorOpen(false)}
-                    className="flex-1 py-2.5 rounded-full btn-royal text-xs font-bold uppercase"
+                    className="w-full sm:flex-1 py-3 sm:py-2.5 rounded-full btn-royal text-xs font-bold uppercase min-h-[44px]"
                   >
                     Cancel
                   </button>
                   <button
                     type="submit"
-                    className="flex-1 py-2.5 rounded-full btn-gold text-xs font-bold uppercase shadow-gold-glow"
+                    className="w-full sm:flex-1 py-3 sm:py-2.5 rounded-full btn-gold text-xs font-bold uppercase shadow-gold-glow min-h-[44px]"
                   >
                     Save Fixture
                   </button>

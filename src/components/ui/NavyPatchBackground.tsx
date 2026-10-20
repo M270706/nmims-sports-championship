@@ -34,7 +34,7 @@ export default function NavyPatchBackground({
   }[variant];
 
   return (
-    <div className={`relative overflow-hidden ${className}`}>
+    <div className={`relative overflow-clip max-w-full ${className}`}>
       {/* Background base */}
       <div className="absolute inset-0 bg-[#1B1F4B] -z-20 pointer-events-none" />
 

@@ -257,26 +257,15 @@ export default function PointsTable({
 
   return (
     <div className="space-y-6">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-2 border-b border-[rgba(217,178,111,0.15)]">
-        <div>
-          <h2 className="text-xl sm:text-2xl font-serif font-black text-gold uppercase tracking-wide">
-            OFFICIAL POINTS TABLE
-          </h2>
-          <p className="text-xs text-[#AEB3D6] mt-0.5">
-            Stage 1 Group Standings · Top 2 teams from each group qualify for semi-finals
-          </p>
-        </div>
-      </div>
-
       {relevantGroups.length === 0 ? (
-        <div className="card-championship bg-[#161A40]/90 border border-gold/30 rounded-2xl p-12 text-center max-w-xl mx-auto shadow-xl">
+        <div className="card-championship bg-[#161A40]/90 border border-gold/30 rounded-2xl p-6 sm:p-12 text-center w-full shadow-xl">
           <div className="w-14 h-14 rounded-2xl bg-[#0F122E] border border-gold/40 flex items-center justify-center mx-auto mb-4 text-gold shadow-gold-glow">
             <Trophy className="w-7 h-7 text-gold/70" />
           </div>
-          <h3 className="text-lg font-serif font-bold text-gold uppercase tracking-wider mb-2">
+          <h3 className="text-lg sm:text-xl font-serif font-bold text-gold uppercase tracking-wider mb-2 leading-snug">
             Groups will be announced soon.
           </h3>
-          <p className="text-xs text-[#AEB3D6] leading-relaxed">
+          <p className="text-sm sm:text-[15px] text-[#AEB3D6] leading-relaxed max-w-md mx-auto">
             Participating team group allocations and pool fixtures will be published by the organising committee prior to tournament commencement.
           </p>
         </div>

@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-export type LogoSize = "sm" | "md" | "lg" | "xl";
+export type LogoSize = "xs" | "sm" | "md" | "lg" | "xl";
 
 interface SizeSpec {
   px: number;
@@ -10,6 +10,7 @@ interface SizeSpec {
 }
 
 const SIZE_SPECS: Record<LogoSize, SizeSpec> = {
+  xs: { px: 40, boxClass: "w-10 h-10" },
   sm: { px: 48, boxClass: "w-12 h-12" },
   md: { px: 72, boxClass: "w-[72px] h-[72px]" },
   lg: { px: 96, boxClass: "w-24 h-24" },
@@ -52,7 +53,7 @@ export function SvkmLogo({
 
   const content = (
     <div
-      className={`relative ${boxClass} flex-shrink-0 flex items-center justify-start overflow-visible ${className}`}
+      className={`relative ${boxClass} flex-shrink-0 flex items-center justify-start overflow-hidden ${className}`}
     >
       <div className="relative w-full h-full">
         <Image
@@ -71,7 +72,7 @@ export function SvkmLogo({
     return (
       <Link
         href={href}
-        className="focus:outline-none focus-visible:ring-2 focus-visible:ring-gold rounded flex items-center"
+        className="focus:outline-none focus-visible:ring-2 focus-visible:ring-gold rounded flex items-center flex-shrink-0"
         title="SVKM - Shri Vile Parle Kelavani Mandal"
       >
         {content}
@@ -83,8 +84,9 @@ export function SvkmLogo({
 }
 
 /**
- * NMIMS Logo in a fixed square box with object-contain, scaled up visually by 1.25
+ * NMIMS Logo in a fixed square box with object-contain, scaled up visually by 1.15
  * so its circular crest and delicate wordmark equal the visual mass of the SVKM logo.
+ * overflow-hidden on the outer box prevents the scaled image from pushing layout wider.
  */
 export function NmimsLogo({
   size = "md",
@@ -96,10 +98,10 @@ export function NmimsLogo({
 
   const content = (
     <div
-      className={`relative ${boxClass} flex-shrink-0 flex items-center justify-end overflow-visible ${className}`}
+      className={`relative ${boxClass} flex-shrink-0 flex items-center justify-end overflow-hidden ${className}`}
     >
-      {/* Visual equalisation: scale up by 1.25 to balance visual weight against SVKM */}
-      <div className="relative w-full h-full transform scale-[1.25] origin-center">
+      {/* Visual equalisation: scale up by 1.15 to balance visual weight against SVKM */}
+      <div className="relative w-full h-full transform scale-[1.15] origin-center">
         <Image
           src="/images/nmims-logo-white.webp"
           alt="NMIMS Deemed to be University"
@@ -116,7 +118,7 @@ export function NmimsLogo({
     return (
       <Link
         href={href}
-        className="focus:outline-none focus-visible:ring-2 focus-visible:ring-gold rounded flex items-center"
+        className="focus:outline-none focus-visible:ring-2 focus-visible:ring-gold rounded flex items-center flex-shrink-0"
         title="NMIMS Deemed to be University"
       >
         {content}
@@ -144,6 +146,7 @@ export interface BrandLogosProps {
  * - lg = 96x96 (Navbar desktop, Admin login)
  * - md = 72x72 (Navbar mobile, Footer)
  * - sm = 48x48 (Admin sidebar)
+ * - xs = 40x40 (Mobile header)
  */
 export default function BrandLogos({
   size = "md",
@@ -155,9 +158,9 @@ export default function BrandLogos({
   children,
 }: BrandLogosProps) {
   return (
-    <div className={`flex items-center justify-between w-full ${className}`}>
+    <div className={`flex items-center justify-between w-full min-w-0 ${className}`}>
       {/* FAR LEFT: SVKM */}
-      <div className="flex items-center gap-3 flex-shrink-0">
+      <div className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
         <SvkmLogo size={size} mobileSize={mobileSize} href={href} />
         {leftAddon}
       </div>
@@ -166,7 +169,7 @@ export default function BrandLogos({
       {children}
 
       {/* FAR RIGHT: NMIMS + optional right addon */}
-      <div className="flex items-center gap-3 flex-shrink-0">
+      <div className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
         {rightAddon}
         <NmimsLogo size={size} mobileSize={mobileSize} href={href} />
       </div>

@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X, ChevronDown, Shield } from "lucide-react";
 import { TOURNAMENT_CONFIG } from "@/config/tournament";
-import BrandLogos from "@/components/ui/BrandLogos";
+import { SvkmLogo, NmimsLogo } from "@/components/ui/BrandLogos";
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -20,6 +20,18 @@ export default function Navbar() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [mobileMenuOpen]);
 
   // Close menus on route change
   const [prevPathname, setPrevPathname] = useState(pathname);
@@ -59,36 +71,42 @@ export default function Navbar() {
           : "bg-[#0F122E]/75 backdrop-blur-sm border-b border-[rgba(217,178,111,0.12)]"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <BrandLogos
-          size="lg"
-          mobileSize="md"
-          className="h-[72px] md:h-24"
-          rightAddon={
-            <div className="flex items-center space-x-3 sm:space-x-4">
-              {/* Small Admin link at far right just before NMIMS logo */}
-              <Link
-                href="/admin/login"
-                className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg border border-[rgba(217,178,111,0.3)] bg-[#161A40]/80 hover:bg-gold/15 text-gold text-xs font-semibold tracking-wider transition-all"
-                title="Organisers / Admin Login"
-              >
-                <Shield className="w-3.5 h-3.5" />
-                <span>Admin</span>
-              </Link>
+      {/* ===== MOBILE HEADER (below lg) ===== */}
+      <div className="lg:hidden flex items-center justify-between h-16 px-3">
+        {/* Left: SVKM logo */}
+        <SvkmLogo size="xs" href="/home" />
 
-              {/* Mobile hamburger button */}
-              <button
-                type="button"
-                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="lg:hidden p-1.5 rounded-lg text-gold hover:text-gold-light focus:outline-none focus:ring-2 focus:ring-gold"
-                aria-label="Toggle navigation menu"
-              >
-                {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-              </button>
-            </div>
-          }
-        >
-          {/* CENTRE: Navigation Links */}
+        {/* Centre: Short title, flex-1, truncated */}
+        <div className="flex-1 min-w-0 px-2 text-center">
+          <Link
+            href="/home"
+            className="block text-[14px] sm:text-[15px] font-serif font-semibold text-gold tracking-wide truncate"
+          >
+            NMIMS Sports 26-27
+          </Link>
+        </div>
+
+        {/* Right: NMIMS logo + hamburger */}
+        <div className="flex items-center gap-1.5">
+          <NmimsLogo size="xs" href="/home" />
+          <button
+            type="button"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="flex items-center justify-center w-11 h-11 rounded-lg text-gold hover:text-gold-light focus:outline-none focus:ring-2 focus:ring-gold"
+            aria-label="Toggle navigation menu"
+          >
+            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
+        </div>
+      </div>
+
+      {/* ===== DESKTOP HEADER (lg and above) ===== */}
+      <div className="hidden lg:block max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-[72px] xl:h-24">
+          {/* Left: SVKM logo */}
+          <SvkmLogo size="lg" href="/home" />
+
+          {/* Centre: Navigation Links */}
           <div className="hidden xl:flex flex-col items-center justify-center flex-1 px-4">
             <nav className="flex items-center space-x-1">
               {navLinks.map((link) => {
@@ -189,19 +207,25 @@ export default function Navbar() {
             </nav>
           </div>
 
-          {/* MOBILE: Center Short Title */}
-          <div className="flex lg:hidden flex-1 px-2 justify-center text-center">
-            <Link href="/home" className="text-xs sm:text-sm font-serif font-semibold text-gold tracking-wide truncate max-w-[200px] sm:max-w-[260px]">
-              {TOURNAMENT_CONFIG.shortName}
+          {/* Right: Admin link + NMIMS logo */}
+          <div className="flex items-center gap-3">
+            <Link
+              href="/admin/login"
+              className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg border border-[rgba(217,178,111,0.3)] bg-[#161A40]/80 hover:bg-gold/15 text-gold text-xs font-semibold tracking-wider transition-all"
+              title="Organisers / Admin Login"
+            >
+              <Shield className="w-3.5 h-3.5" />
+              <span>Admin</span>
             </Link>
+            <NmimsLogo size="lg" href="/home" />
           </div>
-        </BrandLogos>
+        </div>
       </div>
 
-      {/* MOBILE FULL-SCREEN NAV OVERLAY */}
+      {/* ===== MOBILE FULL-SCREEN NAV OVERLAY ===== */}
       {mobileMenuOpen && (
-        <div className="lg:hidden fixed inset-0 top-[72px] z-40 bg-[#0F122E]/95 backdrop-blur-xl border-t border-[rgba(217,178,111,0.2)] flex flex-col justify-between p-6 overflow-y-auto animate-fadeIn">
-          <div className="space-y-4 pt-2">
+        <div className="lg:hidden fixed inset-0 top-16 z-40 bg-[#0F122E]/98 backdrop-blur-xl flex flex-col justify-between overflow-y-auto animate-fadeIn">
+          <div className="p-4 space-y-3">
             <div className="text-center pb-3 border-b border-[rgba(217,178,111,0.15)]">
               <span className="text-[11px] uppercase tracking-widest text-[#AEB3D6]">
                 {TOURNAMENT_CONFIG.organizedBy}
@@ -211,17 +235,18 @@ export default function Navbar() {
               </h2>
             </div>
 
-            <nav className="flex flex-col space-y-1.5">
+            <nav className="flex flex-col space-y-1">
               {navLinks.map((link) => {
                 const active = isActive(link.href);
                 return (
                   <Link
                     key={link.href}
                     href={link.href}
-                    className={`px-4 py-2.5 rounded-xl text-base font-medium transition-all ${
+                    onClick={() => setMobileMenuOpen(false)}
+                    className={`px-4 py-3 rounded-xl text-base font-medium transition-all min-h-[44px] flex items-center ${
                       active
                         ? "bg-[#20255A] text-gold font-bold border-l-4 border-gold"
-                        : "text-[#F4EFE3] hover:bg-[#161A40] hover:text-gold"
+                        : "text-[#F4EFE3] active:bg-[#161A40]"
                     }`}
                   >
                     {link.label}
@@ -237,17 +262,20 @@ export default function Navbar() {
                   <Link
                     key={item.href}
                     href={item.href}
-                    className="block px-4 py-2 rounded-lg text-sm text-[#F4EFE3] hover:text-gold hover:bg-[#161A40]"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="block px-4 py-3 rounded-lg text-sm text-[#F4EFE3] active:text-gold active:bg-[#161A40] min-h-[44px] flex items-center"
                   >
                     {item.label}
                   </Link>
                 ))}
               </div>
 
+              {/* Admin link — visible only in mobile menu */}
               <div className="pt-2">
                 <Link
                   href="/admin/login"
-                  className="flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-gold/15 border border-gold/40 text-gold font-bold text-sm tracking-wide"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-gold/15 border border-gold/40 text-gold font-bold text-sm tracking-wide min-h-[44px]"
                 >
                   <Shield className="w-4 h-4" />
                   <span>Admin Portal Login</span>
@@ -256,7 +284,7 @@ export default function Navbar() {
             </nav>
           </div>
 
-          <div className="pt-4 border-t border-[rgba(217,178,111,0.15)] text-center text-xs text-[#AEB3D6]">
+          <div className="p-4 border-t border-[rgba(217,178,111,0.15)] text-center text-xs text-[#AEB3D6] pb-[env(safe-area-inset-bottom)]">
             <p>{TOURNAMENT_CONFIG.hostCampus}</p>
             <p className="mt-0.5 text-gold font-mono">{TOURNAMENT_CONFIG.dates}</p>
           </div>

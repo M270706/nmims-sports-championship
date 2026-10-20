@@ -11,8 +11,8 @@ export default function ChampionshipTitle() {
         style={{
           fontFamily: "var(--font-cinzel), Cinzel, Georgia, serif",
           fontWeight: 700,
-          fontSize: "clamp(30px, 5vw, 68px)",
-          letterSpacing: "0.02em",
+          fontSize: "clamp(26px, 5vw, 68px)",
+          letterSpacing: "0.01em",
           filter: "drop-shadow(0 4px 24px rgba(0,0,0,0.65))",
         }}
       >
@@ -42,8 +42,8 @@ export default function ChampionshipTitle() {
         style={{
           fontFamily: "var(--font-oswald), Oswald, sans-serif",
           fontWeight: 600,
-          fontSize: "clamp(26px, 3.6vw, 48px)",
-          letterSpacing: "0.35em",
+          fontSize: "clamp(22px, 3.6vw, 48px)",
+          letterSpacing: "0.2em",
           color: "#F0D38F",
           fontVariantNumeric: "lining-nums tabular-nums",
         }}

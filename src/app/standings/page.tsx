@@ -98,87 +98,96 @@ function StandingsContent() {
   }, [selectedSportSlug, selectedCategory]);
 
   return (
-    <NavyPatchBackground variant="calm" className="min-h-screen py-16 pb-24">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <NavyPatchBackground variant="calm" className="min-h-screen py-12 sm:py-16 pb-24">
+      <div className="w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Page Header */}
-        <div className="text-center max-w-3xl mx-auto mb-10">
-          <div className="title-ornament text-xs font-mono font-semibold uppercase tracking-widest text-gold mb-2">
-            Official Standings & Statistics
+        <div className="text-center max-w-md sm:max-w-3xl mx-auto mb-8 sm:mb-10">
+          {/* Subtitle - hide decorative side lines on mobile */}
+          <div className="text-[11px] sm:text-xs font-mono font-semibold uppercase text-gold mb-2 tracking-[0.2em] sm:tracking-widest">
+            <span className="hidden sm:inline-flex items-center gap-3 title-ornament">
+              Official Standings &amp; Statistics
+            </span>
+            <span className="sm:hidden">
+              Official Standings &amp; Statistics
+            </span>
           </div>
-          <h1 className="text-3xl sm:text-5xl font-serif font-black uppercase text-gold-gradient tracking-tight">
-            POINTS & STATS
+          <h1 className="text-[32px] sm:text-5xl font-serif font-black uppercase text-gold-gradient tracking-tight leading-tight">
+            POINTS &amp; STATS
           </h1>
-          <p className="mt-3 text-sm sm:text-base text-[#AEB3D6]">
+          <p className="mt-3 text-[15px] sm:text-base text-[#AEB3D6] max-w-md mx-auto">
             Group standings, qualification status, and verified player stat leaderboards computed strictly from official match scoresheets.
           </p>
         </div>
 
-        {/* Sport Switcher Tabs */}
-        <div className="flex items-center justify-start sm:justify-center overflow-x-auto pb-4 gap-2 sm:gap-3 mb-6 no-scrollbar">
-          {SPORTS_CONFIG.map((sport) => {
-            const active = selectedSportSlug === sport.slug;
-            return (
-              <button
-                key={sport.id}
-                type="button"
-                onClick={() => {
-                  setSelectedSportSlug(sport.slug as SportType);
-                  // Default to men unless sport is women-only
-                  setSelectedCategory("men");
-                }}
-                className={`flex items-center gap-2 px-4 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all whitespace-nowrap min-h-[44px] ${
-                  active
-                    ? "btn-gold shadow-gold-glow"
-                    : "bg-[#161A40] text-[#AEB3D6] hover:text-[#F4EFE3] hover:bg-[#20255A] border border-[rgba(217,178,111,0.2)]"
-                }`}
-              >
-                <span>{sport.icon}</span>
-                <span>{sport.name}</span>
-              </button>
-            );
-          })}
+        {/* Sport Switcher — horizontally scrollable pills */}
+        <div className="overflow-x-auto no-scrollbar -mx-4 px-4 sm:mx-0 sm:px-0 mb-6">
+          <div className="flex items-center gap-2 sm:gap-3 sm:justify-center w-max sm:w-auto sm:flex-wrap">
+            {SPORTS_CONFIG.map((sport) => {
+              const active = selectedSportSlug === sport.slug;
+              return (
+                <button
+                  key={sport.id}
+                  type="button"
+                  onClick={() => {
+                    setSelectedSportSlug(sport.slug as SportType);
+                    setSelectedCategory("men");
+                  }}
+                  className={`flex items-center gap-2 px-4 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all whitespace-nowrap h-11 flex-shrink-0 ${
+                    active
+                      ? "btn-gold shadow-gold-glow"
+                      : "bg-[#161A40] text-[#AEB3D6] hover:text-[#F4EFE3] hover:bg-[#20255A] border border-[rgba(217,178,111,0.2)]"
+                  }`}
+                >
+                  <span>{sport.icon}</span>
+                  <span>{sport.name}</span>
+                </button>
+              );
+            })}
+          </div>
         </div>
 
-        {/* Category Switcher (Men / Women) for sports with both */}
+        {/* Category Switcher (Men / Women) — full width on mobile */}
         {currentSport.hasMen && currentSport.hasWomen && (
-          <div className="flex items-center justify-center gap-3 mb-10">
-            <button
-              type="button"
-              onClick={() => setSelectedCategory("men")}
-              className={`px-5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all min-h-[36px] ${
-                selectedCategory === "men"
-                  ? "bg-men text-indigo-black shadow-md"
-                  : "bg-[#161A40] text-[#AEB3D6] border border-men/30 hover:text-men"
-              }`}
-            >
-              Men&apos;s Championship
-            </button>
-            <button
-              type="button"
-              onClick={() => setSelectedCategory("women")}
-              className={`px-5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all min-h-[36px] ${
-                selectedCategory === "women"
-                  ? "bg-women text-indigo-black shadow-md"
-                  : "bg-[#161A40] text-[#AEB3D6] border border-women/30 hover:text-women"
-              }`}
-            >
-              Women&apos;s Championship
-            </button>
+          <div className="flex w-full sm:w-auto sm:justify-center mb-8 sm:mb-10">
+            <div className="flex w-full sm:w-auto p-1 rounded-full bg-[#0F122E]/90 border border-gold/40 shadow-lg">
+              <button
+                type="button"
+                onClick={() => setSelectedCategory("men")}
+                className={`flex-1 sm:flex-none px-5 py-2 rounded-full text-xs font-bold uppercase tracking-wider transition-all min-h-[40px] ${
+                  selectedCategory === "men"
+                    ? "bg-men text-indigo-black shadow-md"
+                    : "text-[#AEB3D6] hover:text-men"
+                }`}
+              >
+                Men&apos;s
+              </button>
+              <button
+                type="button"
+                onClick={() => setSelectedCategory("women")}
+                className={`flex-1 sm:flex-none px-5 py-2 rounded-full text-xs font-bold uppercase tracking-wider transition-all min-h-[40px] ${
+                  selectedCategory === "women"
+                    ? "bg-women text-indigo-black shadow-md"
+                    : "text-[#AEB3D6] hover:text-women"
+                }`}
+              >
+                Women&apos;s
+              </button>
+            </div>
           </div>
         )}
 
-        {/* SECTION 1: POINTS TABLE */}
+        {/* SECTION 1: POINTS TABLE — single unified heading */}
         <div className="mb-14">
-          <div className="flex items-center justify-between pb-3 mb-6 border-b border-[rgba(217,178,111,0.2)]">
-            <div className="flex items-center gap-2">
-              <Trophy className="w-5 h-5 text-gold" />
-              <h2 className="text-xl sm:text-2xl font-serif font-black text-gold uppercase tracking-wider">
-                {currentSport.name} ({selectedCategory.toUpperCase()}) – GROUP POINTS TABLE
+          <div className="pb-3 mb-6 border-b border-[rgba(217,178,111,0.2)]">
+            <div className="flex items-center gap-2 mb-1">
+              <Trophy className="w-5 h-5 sm:w-6 sm:h-6 text-gold flex-shrink-0" />
+              <h2 className="text-[22px] sm:text-2xl font-serif font-black text-gold uppercase leading-tight">
+                {currentSport.name} ({selectedCategory === "men" ? "Men" : "Women"})
               </h2>
             </div>
-            <span className="text-xs font-mono text-gold-light/80">
-              Top 2 Qualify for Semis (Q)
-            </span>
+            <p className="text-[13px] text-gold-light/80 font-mono">
+              Group Points Table · Top 2 qualify for semis (Q)
+            </p>
           </div>
 
           <PointsTable
@@ -191,25 +200,25 @@ function StandingsContent() {
           />
         </div>
 
-        {/* SECTION 2: STAT LEADERBOARDS (Only Cricket, Football, Basketball, Volleyball) */}
+        {/* SECTION 2: STAT LEADERBOARDS */}
         {leaderboardConfig ? (
           <div>
-            <div className="flex items-center justify-between pb-3 mb-6 border-b border-[rgba(217,178,111,0.2)]">
-              <div className="flex items-center gap-2">
-                <Award className="w-5 h-5 text-gold" />
-                <h2 className="text-xl sm:text-2xl font-serif font-black text-gold uppercase tracking-wider">
-                  {currentSport.name} ({selectedCategory.toUpperCase()}) – STAT LEADERBOARDS
+            <div className="pb-3 mb-6 border-b border-[rgba(217,178,111,0.2)]">
+              <div className="flex items-center gap-2 mb-1">
+                <Award className="w-5 h-5 sm:w-6 sm:h-6 text-gold flex-shrink-0" />
+                <h2 className="text-[22px] sm:text-2xl font-serif font-black text-gold uppercase leading-tight">
+                  {currentSport.name} ({selectedCategory === "men" ? "Men" : "Women"}) – Stats
                 </h2>
               </div>
-              <span className="text-xs font-mono text-[#AEB3D6]">
+              <p className="text-[13px] text-[#AEB3D6] font-mono">
                 Official Records
-              </span>
+              </p>
             </div>
 
             <SportLeaderboard config={leaderboardConfig} />
           </div>
         ) : (
-          <div className="p-8 rounded-2xl bg-[#161A40]/50 border border-[rgba(217,178,111,0.2)] text-center text-xs sm:text-sm text-[#AEB3D6] max-w-xl mx-auto flex items-center justify-center gap-3">
+          <div className="p-6 sm:p-8 rounded-2xl bg-[#161A40]/50 border border-[rgba(217,178,111,0.2)] text-center text-sm text-[#AEB3D6] max-w-xl mx-auto flex flex-col sm:flex-row items-center justify-center gap-3">
             <AlertCircle className="w-5 h-5 text-gold flex-shrink-0" />
             <span>
               {currentSport.name} tournament standings and advancement are decided exclusively by the Group Points Table above.
@@ -226,7 +235,7 @@ export default function StandingsPage() {
     <Suspense
       fallback={
         <div className="min-h-screen bg-navy flex items-center justify-center text-gold font-serif">
-          Loading Points & Stats...
+          Loading Points &amp; Stats...
         </div>
       }
     >

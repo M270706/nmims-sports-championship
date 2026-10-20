@@ -97,15 +97,15 @@ function ResultsAdminContent() {
         </div>
 
         {/* Match Picker Toolbar */}
-        <div className="p-4 rounded-2xl bg-[#161A40] border border-[rgba(217,178,111,0.2)] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-          <div className="flex items-center gap-3 w-full sm:w-auto flex-1">
+        <div className="p-4 rounded-2xl bg-[#161A40] border border-[rgba(217,178,111,0.2)] flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-3 w-full sm:w-auto flex-1">
             <label className="text-xs font-mono uppercase text-gold font-bold whitespace-nowrap">
               Select Match:
             </label>
             <select
               value={selectedMatchId}
               onChange={(e) => setSelectedMatchId(e.target.value)}
-              className="p-2.5 rounded-xl bg-[#0F122E] border border-gold/30 text-xs text-[#F4EFE3] font-semibold focus:outline-none w-full sm:max-w-xl"
+              className="p-3 sm:p-2.5 rounded-xl bg-[#0F122E] border border-gold/30 text-xs text-[#F4EFE3] font-semibold focus:outline-none w-full sm:max-w-xl min-h-[44px]"
             >
               {matches.map((m) => (
                 <option key={m.id} value={m.id}>
@@ -117,7 +117,7 @@ function ResultsAdminContent() {
 
           {currentMatch && (
             <span
-              className={`px-3 py-1 rounded-full text-xs font-mono font-bold uppercase ${
+              className={`self-start sm:self-center px-3 py-1.5 rounded-full text-xs font-mono font-bold uppercase ${
                 currentMatch.status === "Completed"
                   ? "bg-success/20 text-success border border-success/40"
                   : "bg-gold/15 text-gold border border-gold/30"
