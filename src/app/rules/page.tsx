@@ -10,6 +10,10 @@ import {
 } from "lucide-react";
 import NavyPatchBackground from "@/components/ui/NavyPatchBackground";
 import FAQAccordion from "@/components/ui/FAQAccordion";
+import Container from "@/components/ui/Container";
+import PageHero from "@/components/ui/PageHero";
+import SectionHeader from "@/components/ui/SectionHeader";
+import Button from "@/components/ui/Button";
 
 export default function RulesPage() {
   const [openRule, setOpenRule] = useState<number | null>(0);
@@ -73,67 +77,52 @@ export default function RulesPage() {
 
   return (
     <NavyPatchBackground variant="calm" className="min-h-screen pb-24">
-      {/* 1. Header Banner: highlight-04-opening-ceremony-anthem.webp */}
-      <div className="relative h-64 sm:h-80 w-full overflow-hidden border-b border-[rgba(217,178,111,0.25)]">
-        <Image
-          src="/images/gallery/highlight-04-opening-ceremony-anthem.webp"
-          alt="Opening ceremony and national anthem"
-          fill
-          sizes="100vw"
-          className="object-cover"
-          priority
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#1B1F4B] via-[#161A40]/75 to-[#0F122E]/85" />
+      {/* 1. Header Banner */}
+      <PageHero
+        eyebrow="Governance & Compliance"
+        title="Rules & Eligibility"
+        subtitle="Official accreditation guidelines, player eligibility criteria, code of conduct, and technical regulations for the championship."
+        imageSrc="/images/gallery/highlight-04-opening-ceremony-anthem.webp"
+        imageAlt="Opening ceremony and national anthem"
+      />
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full relative z-10 flex flex-col justify-end pb-8">
-          <div className="title-ornament justify-start text-xs font-mono font-semibold uppercase tracking-widest text-gold mb-2">
-            Governance & Compliance
-          </div>
-          <h1 className="text-3xl sm:text-5xl font-serif font-black uppercase text-gold-gradient tracking-tight">
-            RULES & ELIGIBILITY
-          </h1>
-          <p className="mt-2 text-xs sm:text-sm text-[#AEB3D6] max-w-2xl">
-            Official guidelines, player eligibility criteria, code of conduct, and championship rules.
-          </p>
-        </div>
-      </div>
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 space-y-16">
+      <Container className="py-12 md:py-16 space-y-12 md:space-y-16">
         {/* 2. Eligibility Section */}
-        <div className="p-8 sm:p-10 rounded-3xl bg-gradient-to-br from-[#161A40] via-[#20255A] to-[#161A40] border-2 border-gold/40 shadow-2xl">
-          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 pb-6 mb-6 border-b border-[rgba(217,178,111,0.2)]">
+        <div className="p-6 sm:p-10 rounded-2xl bg-gradient-to-br from-surface via-surface-2 to-surface border border-gold/30 shadow-card">
+          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 pb-6 mb-6 border-b border-gold/20">
             <div className="flex items-center gap-4">
-              <div className="w-14 h-14 rounded-2xl bg-gold/15 border border-gold/40 flex items-center justify-center text-gold">
-                <ShieldCheck className="w-7 h-7" />
+              <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-gold/15 border border-gold/40 flex items-center justify-center text-gold flex-shrink-0">
+                <ShieldCheck className="w-6 h-6 sm:w-7 sm:h-7" />
               </div>
               <div>
-                <span className="text-xs font-mono font-bold uppercase text-gold">
+                <span className="text-xs font-mono font-bold uppercase tracking-wider text-gold">
                   Accreditation Requirements
                 </span>
-                <h2 className="text-2xl sm:text-3xl font-serif font-black text-gold-light uppercase">
-                  Player Eligibility
+                <h2 className="text-xl sm:text-2xl md:text-3xl font-serif font-black text-gold-light uppercase">
+                  Player Eligibility Criteria
                 </h2>
               </div>
             </div>
 
-            <button
-              type="button"
+            <Button
+              variant="primary"
+              size="md"
               onClick={handleDownloadProforma}
-              className="px-6 py-3 rounded-full btn-gold text-xs font-bold uppercase tracking-wider flex items-center gap-2 shadow-gold-glow"
+              icon={<Download className="w-4 h-4" />}
+              className="w-full md:w-auto"
             >
-              <Download className="w-4 h-4" />
-              <span>Download Eligibility Proforma (PDF)</span>
-            </button>
+              Download Eligibility Proforma
+            </Button>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {eligibilityRequirements.map((req, idx) => (
               <div
                 key={idx}
-                className="p-4 rounded-xl bg-[#0F122E]/80 border border-[rgba(217,178,111,0.15)] flex items-start gap-3"
+                className="p-4 rounded-xl bg-indigo-black/80 border border-gold/15 flex items-start gap-3"
               >
-                <CheckCircle2 className="w-5 h-5 text-gold flex-shrink-0 mt-0.5" />
-                <span className="text-xs sm:text-sm text-[#F4EFE3] leading-relaxed">
+                <CheckCircle2 className="w-4 h-4 text-gold flex-shrink-0 mt-0.5" />
+                <span className="text-xs sm:text-sm text-text-main leading-relaxed">
                   {req}
                 </span>
               </div>
@@ -143,14 +132,11 @@ export default function RulesPage() {
 
         {/* 3. General Tournament Rules (Accordion) */}
         <div>
-          <div className="text-center max-w-2xl mx-auto mb-8">
-            <div className="title-ornament text-xs font-mono font-semibold uppercase tracking-widest text-gold mb-2">
-              Championship Code
-            </div>
-            <h2 className="text-3xl sm:text-4xl font-serif font-black uppercase text-gold-gradient">
-              General Tournament Rules
-            </h2>
-          </div>
+          <SectionHeader
+            eyebrow="Championship Code"
+            title="General Tournament Rules"
+            subtitle="Standard operating procedures binding upon all participating delegations and athletes."
+          />
 
           <div className="space-y-3 max-w-4xl mx-auto">
             {generalRules.map((rule, idx) => {
@@ -160,27 +146,27 @@ export default function RulesPage() {
                   key={idx}
                   className={`rounded-2xl transition-all border ${
                     isOpen
-                      ? "bg-[#20255A] border-gold/40 shadow-gold-glow"
-                      : "bg-[#161A40] border-[rgba(217,178,111,0.15)]"
+                      ? "bg-surface-2 border-gold/40 shadow-sm"
+                      : "bg-surface border-gold/15 hover:border-gold/30"
                   }`}
                 >
                   <button
                     type="button"
                     onClick={() => setOpenRule(isOpen ? null : idx)}
-                    className="w-full p-5 text-left flex items-center justify-between gap-4"
+                    className="w-full p-4 sm:p-5 text-left flex items-center justify-between gap-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/60 rounded-2xl"
                   >
                     <span className="text-sm sm:text-base font-serif font-bold text-gold-light">
                       {rule.title}
                     </span>
                     <ChevronDown
-                      className={`w-5 h-5 text-gold transition-transform duration-300 ${
+                      className={`w-5 h-5 text-gold transition-transform duration-200 flex-shrink-0 ${
                         isOpen ? "rotate-180" : ""
                       }`}
                     />
                   </button>
 
                   {isOpen && (
-                    <div className="px-5 pb-5 text-xs sm:text-sm text-[#AEB3D6] leading-relaxed border-t border-[rgba(217,178,111,0.1)] pt-3 animate-fadeIn">
+                    <div className="px-5 pb-5 text-xs sm:text-sm text-text-muted leading-relaxed border-t border-gold/10 pt-3 animate-fadeIn">
                       {rule.text}
                     </div>
                   )}
@@ -191,19 +177,18 @@ export default function RulesPage() {
         </div>
 
         {/* 4. FAQ Section Anchor: #faq */}
-        <div id="faq" className="pt-10 border-t border-[rgba(217,178,111,0.2)]">
-          <div className="text-center max-w-2xl mx-auto mb-8">
-            <div className="title-ornament text-xs font-mono font-semibold uppercase tracking-widest text-gold mb-2">
-              Frequently Asked Questions
-            </div>
-            <h2 className="text-3xl sm:text-4xl font-serif font-black uppercase text-gold-gradient">
-              Clarifications & Help
-            </h2>
-          </div>
+        <div id="faq" className="pt-10 border-t border-gold/20 scroll-mt-20">
+          <SectionHeader
+            eyebrow="Clarifications & Help"
+            title="Frequently Asked Questions"
+            subtitle="Frequently asked questions regarding match regulations, team reporting, and logistics."
+          />
 
-          <FAQAccordion />
+          <div className="max-w-4xl mx-auto">
+            <FAQAccordion />
+          </div>
         </div>
-      </div>
+      </Container>
     </NavyPatchBackground>
   );
 }

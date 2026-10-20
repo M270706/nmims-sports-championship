@@ -43,19 +43,19 @@ export default function SportLeaderboard({
     const hasData = entries && entries.length > 0;
 
     return (
-      <div className="card-championship p-6 bg-[#161A40]/90 border border-gold/30 rounded-2xl flex flex-col justify-between shadow-xl">
+      <div className="card-championship p-5 md:p-6 bg-surface/90 border border-gold/25 rounded-2xl flex flex-col justify-between shadow-card">
         <div>
-          <div className="flex items-center justify-between pb-3 mb-4 border-b border-[rgba(217,178,111,0.2)]">
+          <div className="flex items-center justify-between pb-3.5 mb-4 border-b border-gold/20">
             <h3 className="font-serif font-black text-base sm:text-lg text-gold-light truncate">
               {title}
             </h3>
-            <span className="text-xs font-mono font-semibold text-gold px-2.5 py-1 rounded-full bg-[#0F122E] border border-gold/30">
+            <span className="text-xs font-mono font-semibold text-gold px-3 py-1 rounded-full bg-indigo-black border border-gold/30">
               {unit}
             </span>
           </div>
 
           {!hasData ? (
-            <div className="py-12 text-center text-xs sm:text-sm text-[#AEB3D6] italic">
+            <div className="py-12 text-center text-xs sm:text-sm text-text-muted italic">
               Official records update after verified match scoresheets are entered.
             </div>
           ) : (
@@ -71,8 +71,8 @@ export default function SportLeaderboard({
                     onClick={() => setSelectedPlayer(entry)}
                     className={`p-3 rounded-xl flex items-center justify-between cursor-pointer transition-all ${
                       isFirst
-                        ? "bg-gradient-to-r from-[#20255A] to-[#161A40] border-2 border-gold shadow-gold-glow"
-                        : "bg-[#0F122E]/60 border border-[rgba(217,178,111,0.12)] hover:border-gold/40 hover:bg-[#20255A]/50"
+                        ? "bg-gradient-to-r from-surface-2 to-surface border-2 border-gold shadow-card-hover"
+                        : "bg-indigo-black/60 border border-gold/15 hover:border-gold/40 hover:bg-surface-2/50"
                     }`}
                   >
                     {/* Rank & Name */}
@@ -87,7 +87,7 @@ export default function SportLeaderboard({
                         ) : isThird ? (
                           <span className="text-bronze font-black">#3</span>
                         ) : (
-                          <span className="text-[#AEB3D6]">#{entry.rank}</span>
+                          <span className="text-text-muted">#{entry.rank}</span>
                         )}
                       </div>
 
@@ -96,12 +96,12 @@ export default function SportLeaderboard({
                       <div>
                         <div
                           className={`font-serif font-bold ${
-                            isFirst ? "text-base text-gold" : "text-sm text-[#F4EFE3]"
+                            isFirst ? "text-base text-gold" : "text-sm text-text-main"
                           }`}
                         >
                           {entry.name}
                         </div>
-                        <div className="text-[11px] text-[#AEB3D6] font-mono">
+                        <div className="text-[11px] text-text-muted font-mono">
                           {entry.campusCode}
                         </div>
                       </div>

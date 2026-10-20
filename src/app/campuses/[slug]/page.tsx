@@ -9,10 +9,15 @@ import {
   Calendar,
   ArrowLeft,
   ArrowRight,
+  Users,
 } from "lucide-react";
 import NavyPatchBackground from "@/components/ui/NavyPatchBackground";
 import CampusBadge from "@/components/ui/CampusBadge";
 import MatchCard from "@/components/match/MatchCard";
+import Container from "@/components/ui/Container";
+import PageHero from "@/components/ui/PageHero";
+import Button from "@/components/ui/Button";
+import EmptyState from "@/components/ui/EmptyState";
 import { getCampusDepartments } from "@/lib/campus-store";
 import { getTeams, getMatches } from "@/lib/tournament-store";
 import { SPORTS_CONFIG } from "@/config/tournament";
@@ -44,21 +49,22 @@ export default function CampusDetailPage() {
   }, [allMatches, dept]);
 
   return (
-    <NavyPatchBackground variant="calm" className="min-h-screen py-16 pb-24">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Back link */}
-        <Link
-          href="/campuses"
-          className="inline-flex items-center gap-1.5 text-xs text-gold/80 hover:text-gold mb-6 transition-colors font-medium"
-        >
-          <ArrowLeft className="w-3.5 h-3.5" />
-          <span>All Campuses</span>
-        </Link>
+    <NavyPatchBackground variant="calm" className="min-h-screen pb-24">
+      {/* 1. Page Hero */}
+      <PageHero
+        eyebrow="Campus Profile"
+        title={dept.name}
+        subtitle={`${dept.city}, ${dept.state} · Official Contingent of ${dept.totalCount > 0 ? dept.totalCount : "Host"} delegates across ${campusTeams.length} championship sports.`}
+        imageSrc="/images/gallery/highlight-02-all-campuses-group.webp"
+        imageAlt={`${dept.name} delegation`}
+        backLink={{ label: "All Campuses", href: "/campuses" }}
+      />
 
-        {/* Campus Header Card */}
-        <div className="p-8 sm:p-10 rounded-3xl bg-[#161A40]/90 border-2 border-gold/30 shadow-2xl relative overflow-hidden mb-12">
+      <Container className="py-12 md:py-16 space-y-12 md:space-y-16">
+        {/* Campus Overview Header Card */}
+        <div className="p-6 sm:p-8 rounded-2xl bg-surface/90 border border-gold/25 shadow-card relative overflow-hidden">
           {dept.isHost && (
-            <div className="absolute top-6 right-6 px-3.5 py-1 rounded-full bg-gradient-to-r from-gold via-gold-light to-gold text-indigo-black font-black text-xs uppercase tracking-wider shadow-lg">
+            <div className="absolute top-4 right-4 sm:top-6 sm:right-6 px-3.5 py-1 rounded-full bg-gradient-to-r from-gold via-gold-light to-gold text-indigo-black font-black text-xs uppercase tracking-wider shadow-sm">
               HOST CAMPUS
             </div>
           )}
@@ -67,150 +73,140 @@ export default function CampusDetailPage() {
             <CampusBadge shortCode={dept.shortCode} size="xl" isHost={false} />
 
             <div className="text-center sm:text-left flex-1">
-              <h1 className="text-3xl sm:text-5xl font-serif font-black uppercase text-gold-gradient tracking-tight">
-                {dept.name} CAMPUS
-              </h1>
-              <p className="text-sm text-[#AEB3D6] mt-1 flex items-center justify-center sm:justify-start gap-1.5">
-                <MapPin className="w-4 h-4 text-gold" />
+              <h2 className="text-2xl sm:text-3xl font-serif font-black uppercase text-gold-light tracking-tight">
+                {dept.name}
+              </h2>
+              <p className="text-xs sm:text-sm text-text-muted flex items-center justify-center sm:justify-start gap-1.5 mt-1.5">
+                <MapPin className="w-4 h-4 text-gold flex-shrink-0" />
                 <span>
                   {dept.city}, {dept.state}
                 </span>
               </p>
 
-              {/* Stat Strip */}
-              <div className="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-3">
-                <div className="p-3 rounded-xl bg-[#0F122E]/80 border border-gold/20">
-                  <div className="text-xl sm:text-2xl font-bold font-heading text-gold">
-                    {dept.totalCount > 0 ? dept.totalCount : "Host Squads"}
-                  </div>
-                  <div className="text-[10px] uppercase font-mono text-[#AEB3D6] mt-0.5">
-                    Athletes
-                  </div>
+              {/* Numbers grid */}
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4 mt-6 max-w-lg">
+                <div className="p-3 rounded-xl bg-indigo-black border border-gold/20 text-center">
+                  <span className="text-[10px] uppercase font-mono tracking-wider text-text-muted block">
+                    Student Athletes
+                  </span>
+                  <span className="text-xl sm:text-2xl font-mono font-black text-gold tabular-nums">
+                    {dept.totalCount > 0 ? dept.totalCount : "Host"}
+                  </span>
                 </div>
-                <div className="p-3 rounded-xl bg-[#0F122E]/80 border border-gold/20">
-                  <div className="text-xl sm:text-2xl font-bold font-heading text-men">
-                    {dept.menCount > 0 ? dept.menCount : "—"}
-                  </div>
-                  <div className="text-[10px] uppercase font-mono text-[#AEB3D6] mt-0.5">
-                    Men
-                  </div>
+                <div className="p-3 rounded-xl bg-indigo-black border border-gold/20 text-center">
+                  <span className="text-[10px] uppercase font-mono tracking-wider text-text-muted block">
+                    Staff Delegates
+                  </span>
+                  <span className="text-xl sm:text-2xl font-mono font-black text-gold tabular-nums">
+                    {dept.staffMen + dept.staffWomen > 0 ? dept.staffMen + dept.staffWomen : "Staff"}
+                  </span>
                 </div>
-                <div className="p-3 rounded-xl bg-[#0F122E]/80 border border-gold/20">
-                  <div className="text-xl sm:text-2xl font-bold font-heading text-women">
-                    {dept.womenCount > 0 ? dept.womenCount : "—"}
-                  </div>
-                  <div className="text-[10px] uppercase font-mono text-[#AEB3D6] mt-0.5">
-                    Women
-                  </div>
-                </div>
-                <div className="p-3 rounded-xl bg-[#0F122E]/80 border border-gold/20">
-                  <div className="text-xl sm:text-2xl font-bold font-heading text-[#F4EFE3]">
-                    {dept.staffMen + dept.staffWomen > 0
-                      ? `${dept.staffMen + dept.staffWomen}`
-                      : dept.isHost
-                      ? "Host Staff"
-                      : "—"}
-                  </div>
-                  <div className="text-[10px] uppercase font-mono text-[#AEB3D6] mt-0.5">
-                    Staff & Officials
-                  </div>
+                <div className="p-3 rounded-xl bg-indigo-black border border-gold/20 text-center col-span-2 sm:col-span-1">
+                  <span className="text-[10px] uppercase font-mono tracking-wider text-text-muted block">
+                    Disciplines
+                  </span>
+                  <span className="text-xl sm:text-2xl font-mono font-black text-gold tabular-nums">
+                    {campusTeams.length}
+                  </span>
                 </div>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Competing Teams Section */}
-        <div className="mb-14">
-          <div className="flex items-center justify-between pb-3 mb-6 border-b border-[rgba(217,178,111,0.2)]">
-            <h2 className="text-2xl font-serif font-black text-gold uppercase tracking-wider flex items-center gap-2">
+        {/* SECTION 1: Registered Teams */}
+        <section className="space-y-6">
+          <div className="pb-3 border-b border-gold/20 flex items-center justify-between">
+            <div className="flex items-center gap-2.5">
               <Trophy className="w-5 h-5 text-gold" />
-              <span>Participating Squads ({campusTeams.length})</span>
-            </h2>
-            <Link
-              href="/teams"
-              className="text-xs font-mono text-gold-light hover:underline flex items-center gap-1"
-            >
-              <span>View All 50 Teams</span>
-              <ArrowRight className="w-3.5 h-3.5" />
-            </Link>
+              <h2 className="text-xl sm:text-2xl font-serif font-bold text-gold uppercase tracking-wider">
+                Teams Representing {dept.shortCode}
+              </h2>
+            </div>
+            <span className="text-xs font-mono text-gold/80">
+              {campusTeams.length} Teams
+            </span>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {campusTeams.map((team) => {
-              const sport = SPORTS_CONFIG.find((s) => s.id === team.sportId);
-              const isWomen = team.category === "women";
-
-              return (
-                <div
-                  key={team.id}
-                  className="card-championship p-6 bg-[#161A40]/90 border border-gold/30 rounded-2xl flex flex-col justify-between"
-                >
-                  <div>
-                    <div className="flex items-center justify-between mb-3">
-                      <span className="text-2xl">{sport?.icon}</span>
-                      <span
-                        className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider border ${
-                          isWomen
-                            ? "bg-women/10 border-women/30 text-women"
-                            : "bg-men/10 border-men/30 text-men"
-                        }`}
-                      >
-                        {team.category}
-                      </span>
-                    </div>
-
-                    <h3 className="text-lg font-serif font-bold text-gold-light">
-                      {team.name}
-                    </h3>
-                    <p className="text-xs text-[#AEB3D6] mt-1 font-mono">
-                      Squad Size: {team.squadSize || 12} Players
-                    </p>
-                  </div>
-
-                  <div className="mt-5 pt-3 border-t border-[rgba(217,178,111,0.15)] flex items-center justify-between">
-                    <span className="text-[11px] font-mono text-gold/80">
-                      MPTP Shirpur 2026
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
+            {campusTeams.map((team) => (
+              <div
+                key={team.id}
+                className="card-championship p-6 rounded-2xl border border-gold/20 hover:border-gold/40 flex flex-col justify-between"
+              >
+                <div>
+                  <div className="flex items-center justify-between mb-3">
+                    <span className="text-3xl">
+                      {
+                        SPORTS_CONFIG.find((s) => s.slug === team.sportId)
+                          ?.icon
+                      }
                     </span>
-                    <Link
-                      href={`/sports/${team.sportId}?category=${team.category}`}
-                      className="text-xs font-bold text-gold hover:text-gold-light flex items-center gap-1"
+                    <span
+                      className={`text-xs font-bold px-2.5 py-0.5 rounded-full uppercase tracking-wider ${
+                        team.category === "women"
+                          ? "bg-women/15 text-women border border-women/30"
+                          : "bg-men/15 text-men border border-men/30"
+                      }`}
                     >
-                      <span>Sport Dashboard</span>
-                      <ArrowRight className="w-3.5 h-3.5" />
-                    </Link>
+                      {team.category}
+                    </span>
                   </div>
+                  <h3 className="font-serif font-bold text-lg text-gold-light">
+                    {team.name}
+                  </h3>
+                  <p className="text-xs text-text-muted mt-1">
+                    Sport:{" "}
+                    {SPORTS_CONFIG.find((s) => s.slug === team.sportId)?.name}
+                  </p>
                 </div>
-              );
-            })}
-          </div>
-        </div>
 
-        {/* Campus Fixtures & Matches */}
-        <div>
-          <div className="flex items-center justify-between pb-3 mb-6 border-b border-[rgba(217,178,111,0.2)]">
-            <h2 className="text-2xl font-serif font-black text-gold uppercase tracking-wider flex items-center gap-2">
+                <div className="mt-6 pt-4 border-t border-gold/15 flex items-center justify-between text-xs">
+                  <span className="text-text-muted font-mono">
+                    {team.squadSize ? `${team.squadSize} Players` : "Squad pending"}
+                  </span>
+                  <Link
+                    href={`/teams?campus=${dept.shortCode}`}
+                    className="text-gold hover:underline font-semibold flex items-center gap-1"
+                  >
+                    <span>View Roster</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </Link>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* SECTION 2: Matches Schedule & Results */}
+        <section className="space-y-6">
+          <div className="pb-3 border-b border-gold/20 flex items-center justify-between">
+            <div className="flex items-center gap-2.5">
               <Calendar className="w-5 h-5 text-gold" />
-              <span>Fixtures & Results</span>
-            </h2>
-            <span className="text-xs font-mono text-[#AEB3D6]">
-              {campusMatches.length} Matches Scheduled
+              <h2 className="text-xl sm:text-2xl font-serif font-bold text-gold uppercase tracking-wider">
+                Matches Involving {dept.shortCode}
+              </h2>
+            </div>
+            <span className="text-xs font-mono text-gold/80">
+              {campusMatches.length} Fixtures
             </span>
           </div>
 
           {campusMatches.length === 0 ? (
-            <div className="p-12 rounded-2xl bg-[#161A40]/50 border border-[rgba(217,178,111,0.15)] text-center text-xs sm:text-sm text-[#AEB3D6]">
-              Detailed fixtures for {dept.name} will be generated as group draws are finalised.
-            </div>
+            <EmptyState
+              icon={<Calendar className="w-6 h-6 sm:w-7 sm:h-7 text-gold/80" />}
+              title="No Fixtures Scheduled Yet"
+              description={`Official match schedules involving ${dept.name} will be published prior to Day 1.`}
+            />
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
               {campusMatches.map((match) => (
                 <MatchCard key={match.id} match={match} />
               ))}
             </div>
           )}
-        </div>
-      </div>
+        </section>
+      </Container>
     </NavyPatchBackground>
   );
 }

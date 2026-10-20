@@ -41,25 +41,25 @@ export default function MatchCard({ match, onSelect, onOpenDetails, type = "sche
   return (
     <div
       onClick={() => handleClick && handleClick(match)}
-      className={`card-championship p-5 relative overflow-hidden transition-all duration-300 ${
+      className={`card-championship p-5 md:p-6 rounded-2xl relative overflow-hidden transition-all duration-200 shadow-card hover:shadow-card-hover hover:-translate-y-0.5 ${
         handleClick ? "cursor-pointer" : ""
       } ${
         isFinal
           ? "border-2 border-gold shadow-gold-glow"
-          : "border-[rgba(217,178,111,0.2)]"
+          : "border-gold/20 hover:border-gold/40"
       }`}
     >
       {/* Top Header Row */}
-      <div className="flex items-center justify-between gap-2 pb-3 mb-4 border-b border-[rgba(217,178,111,0.15)] text-xs">
+      <div className="flex items-center justify-between gap-2 pb-3.5 mb-4 border-b border-gold/15 text-xs">
         <div className="flex items-center gap-2">
-          <span className="font-mono font-bold text-gold px-2 py-0.5 rounded bg-[#0F122E] border border-gold/30">
+          <span className="font-mono font-bold text-gold px-2 py-0.5 rounded bg-indigo-black border border-gold/30">
             M#{match.matchNo}
           </span>
-          <span className="font-semibold px-2 py-0.5 rounded-full bg-[#20255A] text-gold-light border border-gold/20">
+          <span className="font-semibold px-2.5 py-0.5 rounded-full bg-surface-2 text-gold-light border border-gold/20">
             {match.round}
           </span>
           <span
-            className={`font-semibold px-2 py-0.5 rounded-full text-[11px] ${
+            className={`font-semibold px-2 py-0.5 rounded-full text-[11px] font-mono uppercase ${
               match.category === "women"
                 ? "bg-women/15 text-women border border-women/30"
                 : "bg-men/15 text-men border border-men/30"
@@ -72,15 +72,15 @@ export default function MatchCard({ match, onSelect, onOpenDetails, type = "sche
         {/* Status Chip */}
         <div>
           {match.status === "Postponed" ? (
-            <span className="px-2 py-0.5 rounded-full bg-warning/20 text-warning border border-warning/40 font-bold text-[11px]">
+            <span className="px-2.5 py-0.5 rounded-full bg-warning/20 text-warning border border-warning/40 font-bold text-[11px] font-mono uppercase">
               Postponed
             </span>
           ) : isCompleted ? (
-            <span className="px-2 py-0.5 rounded-full bg-success/20 text-success border border-success/40 font-bold text-[11px]">
+            <span className="px-2.5 py-0.5 rounded-full bg-success/20 text-success border border-success/40 font-bold text-[11px] font-mono uppercase">
               Completed
             </span>
           ) : (
-            <span className="text-[#AEB3D6] font-mono text-[11px]">
+            <span className="text-text-muted font-mono text-[11px] tabular-nums">
               {formattedDate} · {formattedTime}
             </span>
           )}

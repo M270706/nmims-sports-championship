@@ -349,16 +349,16 @@ export default function AdminGroupsPage() {
         )}
 
         {/* Top Header */}
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-6 border-b border-[rgba(217,178,111,0.2)]">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-6 border-b border-gold/15">
           <div>
-            <span className="text-xs font-mono font-bold uppercase tracking-wider text-gold">
+            <span className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-gold">
               Tournament Structure
             </span>
-            <h1 className="text-2xl sm:text-3xl font-serif font-black uppercase text-gold-light mt-1 flex items-center gap-2.5">
+            <h1 className="text-2xl sm:text-3xl font-serif font-black uppercase text-gold-gradient mt-1 flex items-center gap-2.5">
               <Layers className="w-7 h-7 text-gold" />
               <span>Groups & Pool Allocation</span>
             </h1>
-            <p className="text-xs text-[#AEB3D6] mt-1 max-w-2xl leading-relaxed">
+            <p className="text-sm text-text-muted mt-1 max-w-2xl leading-relaxed">
               Create and manage dynamic groups per sport and category. Assign participating teams to pools for Stage 1 round-robin fixtures.
             </p>
           </div>

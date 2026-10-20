@@ -122,8 +122,8 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
 
   return (
     <div className="min-h-screen bg-navy text-text-main flex flex-col md:flex-row">
-      {/* Desktop Sidebar */}
-      <aside className="hidden md:flex flex-col w-64 bg-[#0F122E] border-r border-[rgba(217,178,111,0.2)] flex-shrink-0 min-h-screen">
+      {/* Desktop Sidebar: 240px */}
+      <aside className="hidden md:flex flex-col w-60 bg-indigo-black border-r border-gold/20 flex-shrink-0 min-h-screen">
         {/* Brand Header: BrandLogos size="sm" (48x48) */}
         <div className="p-3.5 border-b border-[rgba(217,178,111,0.15)]">
           <BrandLogos size="sm" href="/admin" className="w-full">

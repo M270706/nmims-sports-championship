@@ -7,9 +7,13 @@ import {
   ChevronDown,
   ChevronUp,
   MapPin,
+  Users,
 } from "lucide-react";
 import NavyPatchBackground from "@/components/ui/NavyPatchBackground";
 import CampusBadge from "@/components/ui/CampusBadge";
+import Container from "@/components/ui/Container";
+import PageHero from "@/components/ui/PageHero";
+import EmptyState from "@/components/ui/EmptyState";
 import {
   CAMPUSES_CONFIG,
   SPORTS_CONFIG,
@@ -63,54 +67,38 @@ function TeamsContent() {
 
   return (
     <NavyPatchBackground variant="calm" className="min-h-screen pb-24">
-      {/* 1. Header Banner: highlight-02-all-campuses-group.webp */}
-      <div className="relative h-64 sm:h-80 w-full overflow-hidden border-b border-[rgba(217,178,111,0.25)]">
-        <Image
-          src="/images/gallery/highlight-02-all-campuses-group.webp"
-          alt="All seven NMIMS campuses gathered at the championship"
-          fill
-          sizes="100vw"
-          className="object-cover"
-          priority
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#1B1F4B] via-[#161A40]/75 to-[#0F122E]/80" />
+      {/* 1. Header Banner */}
+      <PageHero
+        eyebrow="Pan-India Delegations"
+        title="Championship Teams"
+        subtitle="7 campuses, 10 categories, 70 official teams competing in Shirpur. Browse rosters, player squads, and campus contingents."
+        imageSrc="/images/gallery/highlight-02-all-campuses-group.webp"
+        imageAlt="All seven NMIMS campuses gathered at the championship"
+      />
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full relative z-10 flex flex-col justify-end pb-8">
-          <div className="title-ornament justify-start text-xs font-mono font-semibold uppercase tracking-widest text-gold mb-2">
-            Pan-India Delegations
-          </div>
-          <h1 className="text-3xl sm:text-5xl font-serif font-black uppercase text-gold-gradient tracking-tight">
-            Championship Teams
-          </h1>
-          <p className="mt-2 text-xs sm:text-sm text-[#AEB3D6] max-w-2xl">
-            7 campuses, 10 categories, 70 official teams competing in Shirpur. Browse rosters, player squads, and campus contingents.
-          </p>
-        </div>
-      </div>
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-10">
+      <Container className="py-12 md:py-16">
         {/* Filters and View Switcher */}
-        <div className="p-4 sm:p-6 rounded-2xl bg-[#161A40] border border-[rgba(217,178,111,0.2)] mb-10 flex flex-col lg:flex-row items-center justify-between gap-4">
+        <div className="p-4 sm:p-6 rounded-2xl bg-surface border border-gold/20 mb-10 flex flex-col lg:flex-row items-center justify-between gap-4 shadow-card">
           {/* View Mode Toggle: Campus View vs Sport View */}
-          <div className="flex items-center p-1 rounded-xl bg-[#0F122E] border border-gold/30">
+          <div className="flex items-center p-1 rounded-xl bg-indigo-black border border-gold/30 w-full sm:w-auto">
             <button
               type="button"
               onClick={() => setViewMode("campus")}
-              className={`px-4 py-2 rounded-lg text-xs font-bold transition-all ${
+              className={`flex-1 sm:flex-none px-5 py-2 rounded-lg text-xs font-bold transition-all min-h-[38px] ${
                 viewMode === "campus"
                   ? "bg-gold text-indigo-black shadow"
-                  : "text-[#AEB3D6] hover:text-[#F4EFE3]"
+                  : "text-text-muted hover:text-text-main"
               }`}
             >
-              Campus View (Default)
+              Campus View
             </button>
             <button
               type="button"
               onClick={() => setViewMode("sport")}
-              className={`px-4 py-2 rounded-lg text-xs font-bold transition-all ${
+              className={`flex-1 sm:flex-none px-5 py-2 rounded-lg text-xs font-bold transition-all min-h-[38px] ${
                 viewMode === "sport"
                   ? "bg-gold text-indigo-black shadow"
-                  : "text-[#AEB3D6] hover:text-[#F4EFE3]"
+                  : "text-text-muted hover:text-text-main"
               }`}
             >
               Sport View
@@ -124,7 +112,7 @@ function TeamsContent() {
               <select
                 value={selectedCampus}
                 onChange={(e) => setSelectedCampus(e.target.value)}
-                className="w-full px-4 py-2 rounded-xl bg-[#0F122E] border border-gold/40 text-xs font-semibold text-gold focus:outline-none"
+                className="w-full px-4 py-2.5 rounded-xl bg-indigo-black border border-gold/30 text-xs font-semibold text-gold focus:outline-none focus:border-gold h-11"
               >
                 <option value="all">All 7 Campuses</option>
                 {CAMPUSES_CONFIG.map((c) => (
@@ -140,7 +128,7 @@ function TeamsContent() {
               <select
                 value={selectedSport}
                 onChange={(e) => setSelectedSport(e.target.value)}
-                className="w-full px-4 py-2 rounded-xl bg-[#0F122E] border border-gold/40 text-xs font-semibold text-gold focus:outline-none"
+                className="w-full px-4 py-2.5 rounded-xl bg-indigo-black border border-gold/30 text-xs font-semibold text-gold focus:outline-none focus:border-gold h-11"
               >
                 <option value="all">All 6 Sports</option>
                 {SPORTS_CONFIG.map((s) => (
@@ -168,7 +156,7 @@ function TeamsContent() {
               return (
                 <div key={campus.id} className="space-y-6">
                   {/* Campus Header Section */}
-                  <div className="p-6 rounded-2xl bg-gradient-to-r from-[#20255A] via-[#161A40] to-[#0F122E] border border-[rgba(217,178,111,0.25)] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                  <div className="p-6 rounded-2xl bg-gradient-to-r from-surface-2 via-surface to-indigo-black border border-gold/25 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-card">
                     <div className="flex items-center gap-4">
                       <CampusBadge
                         shortCode={campus.shortCode}
@@ -186,7 +174,7 @@ function TeamsContent() {
                             </span>
                           )}
                         </div>
-                        <p className="text-xs text-[#AEB3D6] mt-1 flex items-center gap-1">
+                        <p className="text-xs text-text-muted mt-1 flex items-center gap-1">
                           <MapPin className="w-3.5 h-3.5 text-gold" />
                           <span>
                             {campus.city}, {campus.state}
@@ -195,13 +183,13 @@ function TeamsContent() {
                       </div>
                     </div>
 
-                    <div className="text-xs text-gold/90 font-mono">
+                    <div className="text-xs text-gold font-mono">
                       {campusTeams.length} Competition Teams
                     </div>
                   </div>
 
                   {/* Campus Teams Grid */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
                     {campusTeams.map((team) => {
                       const isExpanded = expandedTeamId === team.id;
                       const hasSquad =
@@ -210,11 +198,11 @@ function TeamsContent() {
                       return (
                         <div
                           key={team.id}
-                          className="card-championship overflow-hidden border border-[rgba(217,178,111,0.2)] hover:border-gold/50"
+                          className="card-championship overflow-hidden rounded-2xl border border-gold/20 hover:border-gold/40 flex flex-col"
                         >
                           <div
                             onClick={() => toggleTeamExpand(team.id)}
-                            className="p-5 cursor-pointer flex items-center justify-between gap-3 bg-[#161A40]"
+                            className="p-5 cursor-pointer flex items-center justify-between gap-3 bg-surface hover:bg-surface-2 transition-colors"
                           >
                             <div className="flex items-center gap-3">
                               <span className="text-2xl">
@@ -249,7 +237,7 @@ function TeamsContent() {
 
                             <button
                               type="button"
-                              className="p-1 rounded-full text-gold hover:bg-[#20255A]"
+                              className="p-1.5 rounded-lg text-gold hover:bg-surface-2"
                               aria-label="Toggle team roster"
                             >
                               {isExpanded ? (
@@ -262,41 +250,41 @@ function TeamsContent() {
 
                           {/* Expanded Squad Roster */}
                           {isExpanded && (
-                            <div className="p-5 border-t border-[rgba(217,178,111,0.15)] bg-[#0F122E]/80 space-y-3 animate-fadeIn">
+                            <div className="p-5 border-t border-gold/15 bg-indigo-black/80 space-y-3 animate-fadeIn">
                               <h4 className="text-xs font-semibold uppercase tracking-wider text-gold">
                                 Official Squad Roster
                               </h4>
 
                               {!hasSquad ? (
-                                <div className="py-6 text-center text-xs text-[#AEB3D6] italic">
-                                  Squad to be announced
+                                <div className="py-6 text-center text-xs text-text-muted italic">
+                                  Squad to be announced by sports department
                                 </div>
                               ) : (
                                 <div className="space-y-1.5 text-xs">
                                   {team.players!.map((player) => (
                                     <div
                                       key={player.id}
-                                      className="p-2 rounded-lg bg-[#161A40] flex items-center justify-between"
+                                      className="p-2.5 rounded-xl bg-surface flex items-center justify-between"
                                     >
                                       <div className="flex items-center gap-2">
                                         <span className="font-mono text-gold font-bold w-5">
                                           #{player.jerseyNo || "-"}
                                         </span>
-                                        <span className="font-semibold text-[#F4EFE3]">
+                                        <span className="font-semibold text-text-main">
                                           {player.name}
                                         </span>
                                         {player.isCaptain && (
-                                          <span className="text-[10px] font-black text-gold bg-gold/15 px-1.5 py-0.2 rounded">
+                                          <span className="text-[10px] font-black text-gold bg-gold/15 px-1.5 py-0.5 rounded">
                                             (C)
                                           </span>
                                         )}
                                         {player.isWk && (
-                                          <span className="text-[10px] font-black text-men bg-men/15 px-1.5 py-0.2 rounded">
+                                          <span className="text-[10px] font-black text-men bg-men/15 px-1.5 py-0.5 rounded">
                                             (WK)
                                           </span>
                                         )}
                                       </div>
-                                      <span className="text-[#AEB3D6] text-[11px]">
+                                      <span className="text-text-muted text-[11px]">
                                         {player.role || "Player"}
                                       </span>
                                     </div>
@@ -327,53 +315,53 @@ function TeamsContent() {
 
               return (
                 <div key={sport.id} className="space-y-6">
-                  <div className="p-6 rounded-2xl bg-[#20255A] border border-gold/30 flex items-center justify-between">
+                  {/* Sport Header */}
+                  <div className="p-6 rounded-2xl bg-gradient-to-r from-surface-2 via-surface to-indigo-black border border-gold/25 flex items-center justify-between shadow-card">
                     <div className="flex items-center gap-3">
                       <span className="text-3xl">{sport.icon}</span>
-                      <h2 className="text-2xl font-serif font-black text-gold-light uppercase">
-                        {sport.name} Teams
-                      </h2>
+                      <div>
+                        <h2 className="text-xl sm:text-2xl font-serif font-black text-gold-light">
+                          {sport.name} Championship
+                        </h2>
+                        <p className="text-xs text-text-muted mt-0.5">
+                          {sportTeams.length} Teams Registered
+                        </p>
+                      </div>
                     </div>
-                    <span className="text-xs font-mono text-gold">
-                      {sportTeams.length} Teams
-                    </span>
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {/* Sport Teams Grid */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
                     {sportTeams.map((team) => (
                       <div
                         key={team.id}
-                        className="card-championship p-5 border border-[rgba(217,178,111,0.2)]"
+                        className="card-championship p-5 rounded-2xl border border-gold/20 flex items-center justify-between"
                       >
                         <div className="flex items-center gap-3">
                           <CampusBadge
-                            shortCode={
-                              CAMPUSES_CONFIG.find(
-                                (c) => c.id === team.campusId
-                              )?.shortCode || "MUM"
-                            }
+                            shortCode={team.campusId}
                             size="md"
                           />
                           <div>
-                            <h3 className="font-serif font-bold text-sm text-gold-light">
+                            <h3 className="font-serif font-bold text-sm sm:text-base text-gold-light">
                               {team.name}
                             </h3>
-                            <div className="flex items-center gap-2 mt-1">
-                              <span className="text-[11px] font-bold text-[#AEB3D6]">
-                                {team.category.toUpperCase()}
-                              </span>
-                              {team.squadSize && (
-                                <span className="text-[10px] font-mono font-semibold px-2 py-0.5 rounded-full bg-gold/15 text-gold border border-gold/30">
-                                  Squad: {team.squadSize}
-                                </span>
-                              )}
-                            </div>
+                            <span
+                              className={`text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider inline-block mt-1 ${
+                                team.category === "women"
+                                  ? "bg-women/15 text-women"
+                                  : "bg-men/15 text-men"
+                              }`}
+                            >
+                              {team.category.toUpperCase()}
+                            </span>
                           </div>
                         </div>
-
-                        <div className="mt-4 pt-3 border-t border-[rgba(217,178,111,0.15)] text-xs text-[#AEB3D6] italic">
-                          Squad to be announced
-                        </div>
+                        {team.squadSize && (
+                          <span className="text-xs font-mono text-gold/80">
+                            {team.squadSize} Players
+                          </span>
+                        )}
                       </div>
                     ))}
                   </div>
@@ -382,7 +370,7 @@ function TeamsContent() {
             })}
           </div>
         )}
-      </div>
+      </Container>
     </NavyPatchBackground>
   );
 }
@@ -391,8 +379,8 @@ export default function TeamsPage() {
   return (
     <Suspense
       fallback={
-        <div className="min-h-screen bg-navy flex items-center justify-center text-gold font-serif text-lg">
-          Loading Teams...
+        <div className="min-h-screen bg-navy flex items-center justify-center text-gold font-serif">
+          Loading Teams Directory...
         </div>
       }
     >
@@ -400,4 +388,3 @@ export default function TeamsPage() {
     </Suspense>
   );
 }
-

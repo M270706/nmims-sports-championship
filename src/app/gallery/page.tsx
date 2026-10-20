@@ -9,6 +9,8 @@ import {
 } from "lucide-react";
 import NavyPatchBackground from "@/components/ui/NavyPatchBackground";
 import ImageLightbox, { LightboxImage } from "@/components/ui/ImageLightbox";
+import Container from "@/components/ui/Container";
+import PageHero from "@/components/ui/PageHero";
 import { TOURNAMENT_CONFIG } from "@/config/tournament";
 import { getGalleryImagesAction } from "@/app/actions/gallery";
 
@@ -17,7 +19,6 @@ export default function GalleryPage() {
   const [lightboxIndex, setLightboxIndex] = useState(0);
   const [selectedTag, setSelectedTag] = useState("all");
 
-  // All 9 gallery photos in exact filename order with required captions
   const initialPhotos: (LightboxImage & { id: string; tag: string })[] = [
     {
       id: "highlight-01",
@@ -129,100 +130,72 @@ export default function GalleryPage() {
   };
 
   return (
-    <NavyPatchBackground variant="calm" className="min-h-screen py-16">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Page Header */}
-        <div className="text-center max-w-3xl mx-auto mb-12">
-          <div className="title-ornament text-xs font-mono font-semibold uppercase tracking-widest text-gold mb-2">
-            Visual Memories
+    <NavyPatchBackground variant="calm" className="min-h-screen pb-24">
+      {/* 1. Page Hero */}
+      <PageHero
+        eyebrow="Visual Archives"
+        title="Tournament Gallery"
+        subtitle="Memories in motion: Opening ceremonies, competitive matches, podium celebrations, and distinguished dignitaries at SVKM's NMIMS sports events."
+        imageSrc="/images/gallery/highlight-04-opening-ceremony-anthem.webp"
+        imageAlt="Opening ceremony"
+      />
+
+      <section className="py-12 md:py-16">
+        <Container>
+          {/* Tags Filter (scrollable on mobile) */}
+          <div className="flex items-center justify-start md:justify-center overflow-x-auto pb-4 mb-10 gap-2 no-scrollbar -mx-4 px-4 sm:mx-0 sm:px-0">
+            {tags.map((tag) => (
+              <button
+                key={tag}
+                type="button"
+                onClick={() => setSelectedTag(tag)}
+                className={`px-4 py-2 rounded-full text-xs font-semibold whitespace-nowrap transition-all h-10 ${
+                  selectedTag === tag
+                    ? "btn-gold shadow-sm font-bold"
+                    : "bg-surface text-text-muted hover:text-text-main border border-gold/15"
+                }`}
+              >
+                {tag === "all" ? "All Photos" : tag}
+              </button>
+            ))}
           </div>
-          <h1 className="text-3xl sm:text-5xl font-serif font-black uppercase text-gold-gradient tracking-tight">
-            HIGHLIGHTS OF THE CHAMPIONSHIP
-          </h1>
-          <div className="w-24 h-1 bg-gradient-to-r from-transparent via-gold to-transparent mx-auto mt-3" />
-          <p className="mt-3 text-base text-[#AEB3D6]">
-            Relive the best moments
-          </p>
-        </div>
 
-        {/* Tags Filter (scrollable on mobile) */}
-        <div className="flex items-center justify-start md:justify-center overflow-x-auto pb-4 mb-10 gap-2 no-scrollbar">
-          {tags.map((tag) => (
-            <button
-              key={tag}
-              type="button"
-              onClick={() => setSelectedTag(tag)}
-              className={`px-4 py-2 rounded-full text-xs font-semibold whitespace-nowrap transition-all ${
-                selectedTag === tag
-                  ? "bg-gold text-indigo-black font-bold shadow-md"
-                  : "bg-[#161A40] text-[#AEB3D6] hover:text-[#F4EFE3] border border-[rgba(217,178,111,0.15)]"
-              }`}
-            >
-              {tag === "all" ? "All Photos" : tag}
-            </button>
-          ))}
-        </div>
+          {/* Photo Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-5 md:gap-6">
+            {filteredPhotos.map((photo, index) => (
+              <div
+                key={photo.id}
+                onClick={() => openLightboxAt(index)}
+                className="group relative h-64 sm:h-72 rounded-2xl overflow-hidden cursor-pointer border border-gold/20 hover:border-gold hover:shadow-card-hover transition-all duration-300 bg-surface"
+              >
+                <Image
+                  src={photo.src}
+                  alt={photo.alt}
+                  fill
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-indigo-black/90 via-indigo-black/20 to-transparent opacity-80 group-hover:opacity-95 transition-opacity" />
 
-        {/* Masonry Grid (2, 3, or 4 columns with 12px gap & 12px radius) */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
-          {filteredPhotos.map((photo, index) => (
-            <div
-              key={photo.id}
-              onClick={() => openLightboxAt(index)}
-              className="group relative h-64 sm:h-72 rounded-[12px] overflow-hidden cursor-pointer border border-[rgba(217,178,111,0.2)] hover:border-gold hover:shadow-gold-glow transition-all duration-300 bg-[#161A40]"
-            >
-              <Image
-                src={photo.src}
-                alt={photo.alt}
-                fill
-                sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                className="object-cover group-hover:scale-105 transition-transform duration-500"
-                loading="lazy"
-              />
+                <div className="absolute top-3.5 right-3.5 w-8 h-8 rounded-lg bg-indigo-black/70 backdrop-blur-md border border-gold/30 flex items-center justify-center text-gold opacity-0 group-hover:opacity-100 transition-opacity">
+                  <ZoomIn className="w-4 h-4" />
+                </div>
 
-              {/* Navy Gradient Overlay on Hover */}
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0F122E]/90 via-[#0F122E]/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
-                <span className="text-[10px] font-mono font-bold text-gold/80 uppercase tracking-widest mb-1">
-                  {photo.tag}
-                </span>
-                <h4 className="text-sm font-serif font-bold text-gold-light leading-snug drop-shadow">
-                  {photo.caption}
-                </h4>
-                <div className="mt-2 flex items-center justify-between text-[11px] text-[#AEB3D6]">
-                  <span>Click to expand</span>
-                  <ZoomIn className="w-3.5 h-3.5 text-gold" />
+                <div className="absolute bottom-4 left-4 right-4">
+                  <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-gold block mb-1">
+                    {photo.tag}
+                  </span>
+                  <p className="text-sm font-serif font-bold text-text-main leading-snug drop-shadow line-clamp-2">
+                    {photo.caption}
+                  </p>
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
-
-        {/* Instagram Follow CTA */}
-        <div className="mt-20 p-8 rounded-3xl bg-gradient-to-r from-[#161A40] via-[#20255A] to-[#161A40] border border-gold/30 text-center max-w-2xl mx-auto shadow-2xl">
-          <div className="w-12 h-12 rounded-full bg-gold/15 border border-gold/40 flex items-center justify-center mx-auto mb-3 text-gold">
-            <Camera className="w-6 h-6" />
+            ))}
           </div>
-          <h3 className="text-xl sm:text-2xl font-serif font-black uppercase text-gold">
-            Follow the Championship on Instagram
-          </h3>
-          <p className="text-xs sm:text-sm text-[#AEB3D6] mt-2 leading-relaxed">
-            Stay tuned for daily reels, story highlights, player interviews, and podium celebrations from Shirpur.
-          </p>
-          <div className="mt-5">
-            <a
-              href={`https://instagram.com/${TOURNAMENT_CONFIG.instagramHandle.replace("@", "")}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full btn-gold text-xs font-bold uppercase tracking-wider"
-            >
-              <span>Follow {TOURNAMENT_CONFIG.instagramHandle}</span>
-              <ExternalLink className="w-3.5 h-3.5" />
-            </a>
-          </div>
-        </div>
-      </div>
+        </Container>
+      </section>
 
-      {/* Lightbox Modal */}
+      {/* LIGHTBOX MODAL */}
       <ImageLightbox
         images={filteredPhotos}
         currentIndex={lightboxIndex}
@@ -233,7 +206,8 @@ export default function GalleryPage() {
         }
         onPrev={() =>
           setLightboxIndex(
-            (prev) => (prev - 1 + filteredPhotos.length) % filteredPhotos.length
+            (prev) =>
+              (prev - 1 + filteredPhotos.length) % filteredPhotos.length
           )
         }
       />

@@ -3,55 +3,68 @@ import Link from "next/link";
 import { ArrowLeft, Compass } from "lucide-react";
 import NavyPatchBackground from "@/components/ui/NavyPatchBackground";
 import BrandLogos from "@/components/ui/BrandLogos";
+import Container from "@/components/ui/Container";
+import Button from "@/components/ui/Button";
 
 export default function NotFound() {
   return (
-    <div className="relative min-h-screen bg-navy text-text-main flex flex-col justify-between p-6 overflow-hidden">
+    <div className="relative min-h-screen min-h-[100svh] bg-navy text-text-main flex flex-col justify-between overflow-hidden">
       <NavyPatchBackground variant="calm" />
 
       {/* Header with Brand Logos */}
-      <header className="relative z-10 w-full max-w-7xl mx-auto flex items-center justify-between py-4">
-        <BrandLogos size="md" href="/home" />
+      <header className="relative z-10 w-full py-6">
+        <Container>
+          <BrandLogos size="lg" mobileSize="xs" href="/home" />
+        </Container>
       </header>
 
       {/* Centre Content */}
-      <main className="relative z-10 flex-1 flex flex-col items-center justify-center text-center max-w-xl mx-auto py-12">
-        <div className="w-16 h-16 rounded-3xl bg-[#161A40] border-2 border-gold/40 flex items-center justify-center text-gold shadow-gold-glow mb-6 animate-pulse">
-          <Compass className="w-8 h-8" />
-        </div>
+      <main className="relative z-10 flex-1 flex flex-col items-center justify-center text-center py-12">
+        <Container className="max-w-xl">
+          <div className="w-16 h-16 rounded-2xl bg-surface border border-gold/40 flex items-center justify-center text-gold shadow-card mb-6 mx-auto">
+            <Compass className="w-8 h-8 text-gold-light" />
+          </div>
 
-        <span className="text-xs font-mono font-bold uppercase tracking-widest text-gold mb-2">
-          Error 404 · Fixture Not Located
-        </span>
+          <div className="text-xs font-mono font-semibold uppercase tracking-[0.2em] text-gold mb-2">
+            Error 404 · Fixture Not Located
+          </div>
 
-        <h1 className="text-3xl sm:text-4xl font-serif font-black uppercase text-gold-light">
-          Page Not Found
-        </h1>
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-serif font-black uppercase text-gold-gradient tracking-tight">
+            Page Not Found
+          </h1>
 
-        <p className="mt-4 text-sm text-[#AEB3D6] leading-relaxed">
-          The sports championship page, fixture, or document you requested does not exist or has been relocated.
-        </p>
+          <p className="mt-4 text-sm sm:text-base text-text-muted leading-relaxed max-w-md mx-auto text-pretty">
+            The sports championship page, fixture scorecard, or document you requested does not exist or has been relocated.
+          </p>
 
-        <div className="mt-8 flex flex-col sm:flex-row items-center gap-4">
-          <Link
-            href="/home"
-            className="w-full sm:w-auto px-8 py-3.5 rounded-full btn-gold text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 shadow-gold-glow"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            <span>Return to Championship Home</span>
-          </Link>
-          <Link
-            href="/sports"
-            className="w-full sm:w-auto px-6 py-3.5 rounded-full btn-royal text-xs font-semibold tracking-wide flex items-center justify-center"
-          >
-            <span>Explore Disciplines</span>
-          </Link>
-        </div>
+          <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+            <Button
+              href="/home"
+              variant="primary"
+              size="md"
+              icon={<ArrowLeft className="w-4 h-4" />}
+              iconPosition="left"
+              className="w-full sm:w-auto"
+            >
+              Return to Championship Home
+            </Button>
+            <Button
+              href="/sports"
+              variant="secondary"
+              size="md"
+              className="w-full sm:w-auto"
+            >
+              Explore Disciplines
+            </Button>
+          </div>
+        </Container>
       </main>
 
       {/* Footer */}
-      <footer className="relative z-10 text-center py-4 text-xs text-[#AEB3D6]/70 border-t border-[rgba(217,178,111,0.1)]">
-        <p>© 2026 SVKM&apos;s NMIMS Sports Department · MPTP Shirpur Campus</p>
+      <footer className="relative z-10 text-center py-4 text-xs text-text-muted/70 border-t border-gold/10 pb-[calc(1rem+env(safe-area-inset-bottom))]">
+        <Container>
+          <p>© 2026 SVKM&apos;s NMIMS Sports Department · MPTP Shirpur Campus</p>
+        </Container>
       </footer>
     </div>
   );

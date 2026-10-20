@@ -8,6 +8,10 @@ import PointsTable from "@/components/sports/PointsTable";
 import SportLeaderboard, {
   SportLeaderboardConfig,
 } from "@/components/leaderboard/SportLeaderboard";
+import Container from "@/components/ui/Container";
+import PageHero from "@/components/ui/PageHero";
+import SectionHeader from "@/components/ui/SectionHeader";
+import EmptyState from "@/components/ui/EmptyState";
 import { SPORTS_CONFIG } from "@/config/tournament";
 import { SportType, CategoryGender, Team, Match, TeamGroup, Group } from "@/types/tournament";
 import { getTeams, fetchTeams, getMatches, fetchMatches } from "@/lib/tournament-store";
@@ -98,29 +102,19 @@ function StandingsContent() {
   }, [selectedSportSlug, selectedCategory]);
 
   return (
-    <NavyPatchBackground variant="calm" className="min-h-screen py-12 sm:py-16 pb-24">
-      <div className="w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Page Header */}
-        <div className="text-center max-w-md sm:max-w-3xl mx-auto mb-8 sm:mb-10">
-          {/* Subtitle - hide decorative side lines on mobile */}
-          <div className="text-[11px] sm:text-xs font-mono font-semibold uppercase text-gold mb-2 tracking-[0.2em] sm:tracking-widest">
-            <span className="hidden sm:inline-flex items-center gap-3 title-ornament">
-              Official Standings &amp; Statistics
-            </span>
-            <span className="sm:hidden">
-              Official Standings &amp; Statistics
-            </span>
-          </div>
-          <h1 className="text-[32px] sm:text-5xl font-serif font-black uppercase text-gold-gradient tracking-tight leading-tight">
-            POINTS &amp; STATS
-          </h1>
-          <p className="mt-3 text-[15px] sm:text-base text-[#AEB3D6] max-w-md mx-auto">
-            Group standings, qualification status, and verified player stat leaderboards computed strictly from official match scoresheets.
-          </p>
-        </div>
+    <NavyPatchBackground variant="calm" className="min-h-screen pb-24">
+      {/* 1. Page Hero */}
+      <PageHero
+        eyebrow="Official Standings & Statistics"
+        title="Points & Stats"
+        subtitle="Group pool standings, qualification status, and verified player record leaderboards computed strictly from official match scoresheets."
+        imageSrc="/images/gallery/highlight-07-trophies.webp"
+        imageAlt="Championship Trophies"
+      />
 
+      <Container className="py-12 md:py-16">
         {/* Sport Switcher — horizontally scrollable pills */}
-        <div className="overflow-x-auto no-scrollbar -mx-4 px-4 sm:mx-0 sm:px-0 mb-6">
+        <div className="overflow-x-auto no-scrollbar -mx-4 px-4 sm:mx-0 sm:px-0 mb-8">
           <div className="flex items-center gap-2 sm:gap-3 sm:justify-center w-max sm:w-auto sm:flex-wrap">
             {SPORTS_CONFIG.map((sport) => {
               const active = selectedSportSlug === sport.slug;
@@ -135,7 +129,7 @@ function StandingsContent() {
                   className={`flex items-center gap-2 px-4 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all whitespace-nowrap h-11 flex-shrink-0 ${
                     active
                       ? "btn-gold shadow-gold-glow"
-                      : "bg-[#161A40] text-[#AEB3D6] hover:text-[#F4EFE3] hover:bg-[#20255A] border border-[rgba(217,178,111,0.2)]"
+                      : "bg-surface text-text-muted hover:text-text-main hover:bg-surface-2 border border-gold/20"
                   }`}
                 >
                   <span>{sport.icon}</span>
@@ -146,47 +140,47 @@ function StandingsContent() {
           </div>
         </div>
 
-        {/* Category Switcher (Men / Women) — full width on mobile */}
+        {/* Category Switcher (Men / Women) */}
         {currentSport.hasMen && currentSport.hasWomen && (
-          <div className="flex w-full sm:w-auto sm:justify-center mb-8 sm:mb-10">
-            <div className="flex w-full sm:w-auto p-1 rounded-full bg-[#0F122E]/90 border border-gold/40 shadow-lg">
+          <div className="flex w-full sm:w-auto sm:justify-center mb-10 md:mb-12">
+            <div className="flex w-full sm:w-auto p-1 rounded-full bg-indigo-black/90 border border-gold/40 shadow-card">
               <button
                 type="button"
                 onClick={() => setSelectedCategory("men")}
-                className={`flex-1 sm:flex-none px-5 py-2 rounded-full text-xs font-bold uppercase tracking-wider transition-all min-h-[40px] ${
+                className={`flex-1 sm:flex-none px-6 py-2 rounded-full text-xs font-bold uppercase tracking-wider transition-all min-h-[40px] ${
                   selectedCategory === "men"
                     ? "bg-men text-indigo-black shadow-md"
-                    : "text-[#AEB3D6] hover:text-men"
+                    : "text-text-muted hover:text-men"
                 }`}
               >
-                Men&apos;s
+                Men&apos;s Division
               </button>
               <button
                 type="button"
                 onClick={() => setSelectedCategory("women")}
-                className={`flex-1 sm:flex-none px-5 py-2 rounded-full text-xs font-bold uppercase tracking-wider transition-all min-h-[40px] ${
+                className={`flex-1 sm:flex-none px-6 py-2 rounded-full text-xs font-bold uppercase tracking-wider transition-all min-h-[40px] ${
                   selectedCategory === "women"
                     ? "bg-women text-indigo-black shadow-md"
-                    : "text-[#AEB3D6] hover:text-women"
+                    : "text-text-muted hover:text-women"
                 }`}
               >
-                Women&apos;s
+                Women&apos;s Division
               </button>
             </div>
           </div>
         )}
 
-        {/* SECTION 1: POINTS TABLE — single unified heading */}
-        <div className="mb-14">
-          <div className="pb-3 mb-6 border-b border-[rgba(217,178,111,0.2)]">
-            <div className="flex items-center gap-2 mb-1">
+        {/* SECTION 1: POINTS TABLE */}
+        <div className="mb-16">
+          <div className="pb-3 mb-8 border-b border-gold/20">
+            <div className="flex items-center gap-2.5 mb-1.5">
               <Trophy className="w-5 h-5 sm:w-6 sm:h-6 text-gold flex-shrink-0" />
-              <h2 className="text-[22px] sm:text-2xl font-serif font-black text-gold uppercase leading-tight">
+              <h2 className="text-xl sm:text-2xl font-serif font-black text-gold uppercase tracking-wide leading-tight">
                 {currentSport.name} ({selectedCategory === "men" ? "Men" : "Women"})
               </h2>
             </div>
-            <p className="text-[13px] text-gold-light/80 font-mono">
-              Group Points Table · Top 2 qualify for semis (Q)
+            <p className="text-xs sm:text-sm text-gold-light/80 font-mono">
+              Group Points Table · Top 2 teams from each group qualify for semi-finals (Q)
             </p>
           </div>
 
@@ -203,29 +197,28 @@ function StandingsContent() {
         {/* SECTION 2: STAT LEADERBOARDS */}
         {leaderboardConfig ? (
           <div>
-            <div className="pb-3 mb-6 border-b border-[rgba(217,178,111,0.2)]">
-              <div className="flex items-center gap-2 mb-1">
+            <div className="pb-3 mb-8 border-b border-gold/20">
+              <div className="flex items-center gap-2.5 mb-1.5">
                 <Award className="w-5 h-5 sm:w-6 sm:h-6 text-gold flex-shrink-0" />
-                <h2 className="text-[22px] sm:text-2xl font-serif font-black text-gold uppercase leading-tight">
-                  {currentSport.name} ({selectedCategory === "men" ? "Men" : "Women"}) – Stats
+                <h2 className="text-xl sm:text-2xl font-serif font-black text-gold uppercase tracking-wide leading-tight">
+                  {currentSport.name} ({selectedCategory === "men" ? "Men" : "Women"}) – Statistical Leaderboard
                 </h2>
               </div>
-              <p className="text-[13px] text-[#AEB3D6] font-mono">
-                Official Records
+              <p className="text-xs sm:text-sm text-text-muted font-mono">
+                Official Tournament Individual Records
               </p>
             </div>
 
             <SportLeaderboard config={leaderboardConfig} />
           </div>
         ) : (
-          <div className="p-6 sm:p-8 rounded-2xl bg-[#161A40]/50 border border-[rgba(217,178,111,0.2)] text-center text-sm text-[#AEB3D6] max-w-xl mx-auto flex flex-col sm:flex-row items-center justify-center gap-3">
-            <AlertCircle className="w-5 h-5 text-gold flex-shrink-0" />
-            <span>
-              {currentSport.name} tournament standings and advancement are decided exclusively by the Group Points Table above.
-            </span>
-          </div>
+          <EmptyState
+            icon={<AlertCircle className="w-6 h-6 sm:w-7 sm:h-7 text-gold/80" />}
+            title="Single-Stage Tournament"
+            description={`${currentSport.name} tournament standings and advancement are decided exclusively by the Group Points Table above.`}
+          />
         )}
-      </div>
+      </Container>
     </NavyPatchBackground>
   );
 }

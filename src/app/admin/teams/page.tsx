@@ -185,15 +185,15 @@ export default function AdminTeamsPage() {
         )}
 
         {/* Top Header */}
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-6 border-b border-[rgba(217,178,111,0.2)]">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-6 border-b border-gold/15">
           <div>
-            <span className="text-xs font-mono font-bold uppercase tracking-wider text-gold">
+            <span className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-gold">
               Roster & Group Allocation
             </span>
-            <h1 className="text-2xl sm:text-3xl font-serif font-black uppercase text-gold-light mt-1">
+            <h1 className="text-2xl sm:text-3xl font-serif font-black uppercase text-gold-gradient mt-1">
               Teams Management
             </h1>
-            <p className="text-xs text-[#AEB3D6] mt-0.5">
+            <p className="text-sm text-text-muted mt-1">
               Manage participating squads, update official squad sizes, and assign teams to Group A or Group B.
             </p>
           </div>
@@ -211,7 +211,7 @@ export default function AdminTeamsPage() {
                 });
                 setAddModalOpen(true);
               }}
-              className="px-5 py-2.5 rounded-full btn-gold text-xs font-bold uppercase tracking-wider flex items-center gap-2 shadow-gold-glow"
+              className="px-5 py-2.5 rounded-xl btn-gold text-xs font-bold uppercase tracking-wider flex items-center gap-2 shadow-gold-glow min-h-[44px]"
             >
               <Plus className="w-4 h-4" />
               <span>Add Team</span>

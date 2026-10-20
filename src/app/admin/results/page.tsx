@@ -82,16 +82,16 @@ function ResultsAdminContent() {
         )}
 
         {/* Top Header */}
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-6 border-b border-[rgba(217,178,111,0.2)]">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-6 border-b border-gold/15">
           <div>
-            <span className="text-xs font-mono font-bold uppercase tracking-wider text-gold">
+            <span className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-gold">
               Outcome Declaration
             </span>
-            <h1 className="text-2xl sm:text-3xl font-serif font-black uppercase text-gold-light mt-1">
+            <h1 className="text-2xl sm:text-3xl font-serif font-black uppercase text-gold-gradient mt-1">
               Declare Match Results
             </h1>
-            <p className="text-xs text-[#AEB3D6] mt-0.5">
-              Enter official scorecards, verify winners, record Man of the Match awards, and update points tables.
+            <p className="text-sm text-text-muted mt-1">
+              Enter official scorecards, verify winners, record Player of the Match awards, and update points tables.
             </p>
           </div>
         </div>

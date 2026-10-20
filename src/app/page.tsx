@@ -11,6 +11,7 @@ import ChampionshipTitle from "@/components/ui/ChampionshipTitle";
 import NavyPatchBackground from "@/components/ui/NavyPatchBackground";
 import BrandLogos from "@/components/ui/BrandLogos";
 import CampusBackground from "@/components/ui/CampusBackground";
+import Container from "@/components/ui/Container";
 
 const emptySubscribe = () => () => {};
 
@@ -51,7 +52,7 @@ export default function StartingEntryPage() {
   }, []);
 
   return (
-    <main className="relative isolate min-h-screen overflow-hidden flex flex-col justify-between text-text-main select-none">
+    <main className="relative isolate min-h-screen min-h-[100svh] overflow-hidden flex flex-col justify-between text-text-main select-none">
       {/* 1. SHARED CAMPUS BACKGROUND */}
       <CampusBackground />
 
@@ -60,76 +61,78 @@ export default function StartingEntryPage() {
         <NavyPatchBackground variant="calm" className="w-full h-full" />
       </div>
 
-      {/* 2. HEADER: BrandLogos size="xl" (120x120) with SVKM on far left and NMIMS on far right */}
-      <header className="relative z-20 w-full max-w-7xl mx-auto px-6 sm:px-10 py-6 sm:py-8">
-        <BrandLogos size="xl" href="/home" />
+      {/* 2. HEADER: BrandLogos with SVKM on far left and NMIMS on far right */}
+      <header className="relative z-20 w-full py-6 sm:py-8">
+        <Container>
+          <BrandLogos size="lg" mobileSize="xs" href="/home" />
+        </Container>
       </header>
 
-      {/* 3. CENTRE: Championship Title, Dates, Countdown, and Two Glass Cards */}
-      <div className="relative z-20 flex-1 flex flex-col items-center justify-center px-4 sm:px-6 py-6 max-w-6xl mx-auto w-full text-center">
-        {/* Championship Title (Uniform Cinzel 700 on all lines, lowercase "s", shimmer) */}
+      {/* 3. CENTRE: Championship Title, Dates, Countdown, and Two Cards */}
+      <Container className="relative z-20 flex-1 flex flex-col items-center justify-center py-6 text-center max-w-5xl">
+        {/* Championship Title */}
         <ChampionshipTitle />
 
         {/* Dates Line */}
-        <p className="mt-4 sm:mt-5 text-sm sm:text-lg md:text-xl font-light text-[#F4EFE3] tracking-wide drop-shadow">
+        <p className="mt-4 sm:mt-5 text-sm sm:text-base md:text-lg font-light text-text-main tracking-wide drop-shadow text-balance">
           27 – 31 October 2026 · MPTP Shirpur Campus
         </p>
 
         {/* Countdown Timer */}
-        <div className="mt-6 sm:mt-7 flex items-center justify-center gap-3 sm:gap-6 font-heading">
-          <div className="flex flex-col items-center p-2.5 sm:p-3 rounded-2xl bg-[#161A40]/80 border border-gold/30 backdrop-blur-md min-w-[64px] sm:min-w-[80px] shadow-lg">
-            <span className="text-xl sm:text-3xl font-bold text-gold tabular-nums">
+        <div className="mt-6 sm:mt-8 flex items-center justify-center gap-2.5 sm:gap-4 font-heading">
+          <div className="flex flex-col items-center p-3 rounded-2xl bg-surface/85 border border-gold/30 backdrop-blur-md min-w-[64px] sm:min-w-[76px] shadow-card">
+            <span className="text-xl sm:text-2xl md:text-3xl font-bold text-gold tabular-nums">
               {mounted ? timeLeft.days : "00"}
             </span>
-            <span className="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-[#AEB3D6] mt-0.5">
+            <span className="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-text-muted mt-0.5">
               Days
             </span>
           </div>
-          <span className="text-xl font-bold text-gold/60">:</span>
-          <div className="flex flex-col items-center p-2.5 sm:p-3 rounded-2xl bg-[#161A40]/80 border border-gold/30 backdrop-blur-md min-w-[64px] sm:min-w-[80px] shadow-lg">
-            <span className="text-xl sm:text-3xl font-bold text-gold tabular-nums">
+          <span className="text-lg sm:text-xl font-bold text-gold/60">:</span>
+          <div className="flex flex-col items-center p-3 rounded-2xl bg-surface/85 border border-gold/30 backdrop-blur-md min-w-[64px] sm:min-w-[76px] shadow-card">
+            <span className="text-xl sm:text-2xl md:text-3xl font-bold text-gold tabular-nums">
               {mounted ? String(timeLeft.hours).padStart(2, "0") : "00"}
             </span>
-            <span className="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-[#AEB3D6] mt-0.5">
+            <span className="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-text-muted mt-0.5">
               Hours
             </span>
           </div>
-          <span className="text-xl font-bold text-gold/60">:</span>
-          <div className="flex flex-col items-center p-2.5 sm:p-3 rounded-2xl bg-[#161A40]/80 border border-gold/30 backdrop-blur-md min-w-[64px] sm:min-w-[80px] shadow-lg">
-            <span className="text-xl sm:text-3xl font-bold text-gold tabular-nums">
+          <span className="text-lg sm:text-xl font-bold text-gold/60">:</span>
+          <div className="flex flex-col items-center p-3 rounded-2xl bg-surface/85 border border-gold/30 backdrop-blur-md min-w-[64px] sm:min-w-[76px] shadow-card">
+            <span className="text-xl sm:text-2xl md:text-3xl font-bold text-gold tabular-nums">
               {mounted ? String(timeLeft.minutes).padStart(2, "0") : "00"}
             </span>
-            <span className="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-[#AEB3D6] mt-0.5">
+            <span className="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-text-muted mt-0.5">
               Minutes
             </span>
           </div>
         </div>
 
-        {/* Two Large Glass Cards */}
-        <div className="mt-10 sm:mt-12 grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 w-full max-w-4xl text-left">
+        {/* Two Portal Cards */}
+        <div className="mt-8 sm:mt-12 grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6 w-full max-w-3xl text-left items-stretch">
           {/* USER PORTAL CARD */}
-          <div className="group relative p-6 sm:p-8 rounded-3xl bg-[#161A40]/75 backdrop-blur-xl border border-gold/30 hover:border-gold hover:shadow-[0_0_32px_rgba(217,178,111,0.25)] transition-all duration-300 flex flex-col justify-between">
+          <div className="p-6 md:p-8 rounded-2xl bg-surface/80 backdrop-blur-xl border border-gold/25 hover:border-gold/50 shadow-card hover:shadow-card-hover hover:-translate-y-0.5 transition-all duration-200 flex flex-col justify-between">
             <div>
               <div className="flex items-center justify-between mb-4">
-                <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#F0D38F]/20 to-[#A88345]/10 border border-gold/40 flex items-center justify-center text-gold shadow-md group-hover:scale-110 transition-transform">
+                <div className="w-12 h-12 rounded-xl bg-gold/10 border border-gold/30 flex items-center justify-center text-gold shadow-sm">
                   <Trophy className="w-6 h-6 text-gold" />
                 </div>
-                <span className="text-[10px] font-mono font-bold uppercase tracking-widest px-2.5 py-1 rounded-full bg-gold/10 text-gold border border-gold/30">
-                  Public Access
+                <span className="text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-gold/15 text-gold border border-gold/30">
+                  Public Portal
                 </span>
               </div>
-              <h2 className="text-xl sm:text-2xl font-serif font-bold text-[#F4EFE3] group-hover:text-gold transition-colors">
-                USER PORTAL
+              <h2 className="text-xl font-serif font-bold text-text-main">
+                User Portal
               </h2>
-              <p className="mt-2 text-xs sm:text-sm text-[#AEB3D6] leading-relaxed">
-                View schedules, results, points tables, teams, gallery and travel info.
+              <p className="mt-2 text-xs sm:text-sm text-text-muted leading-relaxed">
+                View schedules, match results, points tables, team contingents, photo gallery, and travel instructions.
               </p>
             </div>
 
-            <div className="mt-6 pt-4 border-t border-[rgba(217,178,111,0.15)]">
+            <div className="mt-6 pt-4 border-t border-gold/15">
               <Link
                 href="/home"
-                className="w-full py-3.5 px-6 rounded-full btn-gold text-xs sm:text-sm font-bold uppercase tracking-wider flex items-center justify-center gap-2 shadow-gold-glow group-hover:brightness-110 transition-all"
+                className="w-full h-11 px-6 rounded-xl btn-gold text-xs sm:text-sm font-bold uppercase tracking-wider flex items-center justify-center gap-2 shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/60"
               >
                 <span>Enter User Portal</span>
                 <ArrowRight className="w-4 h-4" />
@@ -138,28 +141,28 @@ export default function StartingEntryPage() {
           </div>
 
           {/* ADMIN PORTAL CARD */}
-          <div className="group relative p-6 sm:p-8 rounded-3xl bg-[#161A40]/75 backdrop-blur-xl border border-royal/40 hover:border-gold/60 hover:shadow-[0_0_32px_rgba(30,63,168,0.35)] transition-all duration-300 flex flex-col justify-between">
+          <div className="p-6 md:p-8 rounded-2xl bg-surface/80 backdrop-blur-xl border border-royal/40 hover:border-gold/50 shadow-card hover:shadow-card-hover hover:-translate-y-0.5 transition-all duration-200 flex flex-col justify-between">
             <div>
               <div className="flex items-center justify-between mb-4">
-                <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-royal/30 to-cobalt/20 border border-royal/60 flex items-center justify-center text-gold shadow-md group-hover:scale-110 transition-transform">
+                <div className="w-12 h-12 rounded-xl bg-royal/20 border border-royal/40 flex items-center justify-center text-gold shadow-sm">
                   <ShieldCheck className="w-6 h-6 text-gold-light" />
                 </div>
-                <span className="text-[10px] font-mono font-bold uppercase tracking-widest px-2.5 py-1 rounded-full bg-royal/30 text-royal-light border border-royal/40 text-[#AEB3D6]">
+                <span className="text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-royal/30 text-gold-light border border-royal/40">
                   Organisers Only
                 </span>
               </div>
-              <h2 className="text-xl sm:text-2xl font-serif font-bold text-[#F4EFE3] group-hover:text-gold transition-colors">
-                ADMIN PORTAL
+              <h2 className="text-xl font-serif font-bold text-text-main">
+                Admin Portal
               </h2>
-              <p className="mt-2 text-xs sm:text-sm text-[#AEB3D6] leading-relaxed">
-                For organisers: manage teams, fixtures, results and points tables.
+              <p className="mt-2 text-xs sm:text-sm text-text-muted leading-relaxed">
+                Authorised sports committee portal to schedule fixtures, verify scorecards, and publish points.
               </p>
             </div>
 
-            <div className="mt-6 pt-4 border-t border-[rgba(217,178,111,0.15)]">
+            <div className="mt-6 pt-4 border-t border-gold/15">
               <Link
                 href="/admin/login"
-                className="w-full py-3.5 px-6 rounded-full btn-royal text-xs sm:text-sm font-bold uppercase tracking-wider flex items-center justify-center gap-2 group-hover:border-gold transition-all"
+                className="w-full h-11 px-6 rounded-xl btn-royal text-xs sm:text-sm font-semibold tracking-wide flex items-center justify-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/60"
               >
                 <span>Admin Login</span>
                 <ArrowRight className="w-4 h-4 text-gold" />
@@ -167,11 +170,13 @@ export default function StartingEntryPage() {
             </div>
           </div>
         </div>
-      </div>
+      </Container>
 
-      {/* 4. FOOTER: Small footer "© 2026 SVKM's NMIMS Sports Department" */}
-      <footer className="relative z-20 w-full py-5 text-center text-xs text-[#AEB3D6]/70 border-t border-[rgba(217,178,111,0.1)]">
-        <p>© 2026 SVKM&apos;s NMIMS Sports Department</p>
+      {/* 4. FOOTER */}
+      <footer className="relative z-20 w-full py-4 text-center text-xs text-text-muted/70 border-t border-gold/10 pb-[calc(1rem+env(safe-area-inset-bottom))]">
+        <Container>
+          <p>© 2026 SVKM&apos;s NMIMS Sports Department. All rights reserved.</p>
+        </Container>
       </footer>
     </main>
   );

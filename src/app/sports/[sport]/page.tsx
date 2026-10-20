@@ -18,6 +18,9 @@ import PointsTable from "@/components/sports/PointsTable";
 import SportLeaderboard, {
   SportLeaderboardConfig,
 } from "@/components/leaderboard/SportLeaderboard";
+import Container from "@/components/ui/Container";
+import PageHero from "@/components/ui/PageHero";
+import EmptyState from "@/components/ui/EmptyState";
 import {
   SPORTS_CONFIG,
   CAMPUSES_CONFIG,
@@ -44,7 +47,7 @@ function SportDashboardContent() {
   const [selectedCategory, setSelectedCategory] =
     useState<CategoryGender>(defaultCategory);
 
-  // Tab state per Part 3: Schedule · Results · Points Table · Leaderboard
+  // Tab state
   const hasLeaderboard = sportSlug !== "table-tennis" && sportSlug !== "lawn-tennis";
   const [activeTab, setActiveTab] = useState<"schedule" | "results" | "points" | "leaderboard">(
     "schedule"
@@ -124,7 +127,7 @@ function SportDashboardContent() {
       );
   }, [sportMatches]);
 
-  // Leaderboard config strictly matching Part 3 requirements
+  // Leaderboard config
   const leaderboardConfig = useMemo<SportLeaderboardConfig | null>(() => {
     if (sportSlug === "cricket") {
       return {
@@ -173,7 +176,7 @@ function SportDashboardContent() {
       <div className="min-h-screen flex items-center justify-center text-center p-4">
         <div>
           <h2 className="text-2xl font-serif font-bold text-gold">Sport Not Found</h2>
-          <Link href="/sports" className="mt-4 inline-block btn-gold px-6 py-2 text-xs font-bold uppercase">
+          <Link href="/sports" className="mt-4 inline-block btn-gold px-6 py-2.5 text-xs font-bold uppercase rounded-xl">
             Return to Sports Overview
           </Link>
         </div>
@@ -188,75 +191,53 @@ function SportDashboardContent() {
 
   return (
     <NavyPatchBackground variant="calm" className="min-h-screen pb-24">
-      {/* 1. SPORT BANNER */}
-      <div className="relative h-64 sm:h-80 w-full overflow-hidden border-b border-[rgba(217,178,111,0.25)]">
-        <Image
-          src={currentSport.image}
-          alt={currentSport.name}
-          fill
-          sizes="100vw"
-          className="object-cover"
-          priority
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#1B1F4B] via-[#161A40]/70 to-[#0F122E]/80" />
-
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full relative z-10 flex flex-col justify-end pb-8">
-          <Link
-            href="/sports"
-            className="inline-flex items-center gap-1.5 text-xs text-gold/80 hover:text-gold mb-3 transition-colors"
-          >
-            <ArrowLeft className="w-3.5 h-3.5" />
-            <span>All Sports Overview</span>
-          </Link>
-
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
-            <div>
-              <div className="flex items-center gap-3">
-                <span className="text-3xl">{currentSport.icon}</span>
-                <h1 className="text-3xl sm:text-5xl font-serif font-black text-gold-gradient uppercase tracking-tight">
-                  {currentSport.name}
-                </h1>
-              </div>
-              <p className="text-xs sm:text-sm text-[#AEB3D6] mt-2 max-w-xl">
-                {currentSport.description}
-              </p>
-            </div>
-
-            {/* DYNAMIC MEN / WOMEN TOGGLE (only where both exist) */}
-            {currentSport.hasMen && currentSport.hasWomen && (
-              <div className="inline-flex p-1 rounded-full bg-[#0F122E]/90 border border-gold/40 shadow-lg backdrop-blur-md">
-                <button
-                  type="button"
-                  onClick={() => setSelectedCategory("men")}
-                  className={`px-5 py-1.5 rounded-full text-xs font-bold transition-all ${
-                    selectedCategory === "men"
-                      ? "bg-men text-indigo-black shadow-md"
-                      : "text-men hover:bg-men/10"
-                  }`}
-                >
-                  Men
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setSelectedCategory("women")}
-                  className={`px-5 py-1.5 rounded-full text-xs font-bold transition-all ${
-                    selectedCategory === "women"
-                      ? "bg-women text-indigo-black shadow-md"
-                      : "text-women hover:bg-women/10"
-                  }`}
-                >
-                  Women
-                </button>
-              </div>
-            )}
+      {/* 1. SPORT BANNER HERO */}
+      <PageHero
+        eyebrow="Tournament Discipline"
+        title={
+          <span className="inline-flex items-center gap-3">
+            <span>{currentSport.icon}</span>
+            <span>{currentSport.name}</span>
+          </span>
+        }
+        subtitle={currentSport.description}
+        imageSrc={currentSport.image}
+        imageAlt={`${currentSport.name} Championship`}
+        backLink={{ label: "All Sports Overview", href: "/sports" }}
+      >
+        {/* Dynamic Men/Women Toggle in Hero */}
+        {currentSport.hasMen && currentSport.hasWomen && (
+          <div className="inline-flex p-1 rounded-full bg-indigo-black/90 border border-gold/40 shadow-card backdrop-blur-md">
+            <button
+              type="button"
+              onClick={() => setSelectedCategory("men")}
+              className={`px-5 py-2 rounded-full text-xs font-bold transition-all min-h-[40px] ${
+                selectedCategory === "men"
+                  ? "bg-men text-indigo-black shadow-md"
+                  : "text-men hover:bg-men/10"
+              }`}
+            >
+              Men
+            </button>
+            <button
+              type="button"
+              onClick={() => setSelectedCategory("women")}
+              className={`px-5 py-2 rounded-full text-xs font-bold transition-all min-h-[40px] ${
+                selectedCategory === "women"
+                  ? "bg-women text-indigo-black shadow-md"
+                  : "text-women hover:bg-women/10"
+              }`}
+            >
+              Women
+            </button>
           </div>
-        </div>
-      </div>
+        )}
+      </PageHero>
 
       {/* 2. TABS: Schedule · Results · Points Table · Leaderboard */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
+      <Container className="mt-8 md:mt-12">
         {/* Navigation Tabs Bar */}
-        <div className="flex items-center justify-center border-b border-[rgba(217,178,111,0.2)] mb-8 overflow-x-auto no-scrollbar">
+        <div className="flex items-center justify-start sm:justify-center border-b border-gold/20 mb-8 overflow-x-auto no-scrollbar">
           <div className="flex space-x-2 sm:space-x-4">
             <button
               type="button"
@@ -264,7 +245,7 @@ function SportDashboardContent() {
               className={`px-4 sm:px-6 py-3 font-serif font-bold text-xs sm:text-base border-b-2 transition-all whitespace-nowrap min-h-[44px] ${
                 activeTab === "schedule"
                   ? "border-gold text-gold"
-                  : "border-transparent text-[#AEB3D6] hover:text-[#F4EFE3]"
+                  : "border-transparent text-text-muted hover:text-text-main"
               }`}
             >
               Schedule
@@ -275,7 +256,7 @@ function SportDashboardContent() {
               className={`px-4 sm:px-6 py-3 font-serif font-bold text-xs sm:text-base border-b-2 transition-all whitespace-nowrap min-h-[44px] ${
                 activeTab === "results"
                   ? "border-gold text-gold"
-                  : "border-transparent text-[#AEB3D6] hover:text-[#F4EFE3]"
+                  : "border-transparent text-text-muted hover:text-text-main"
               }`}
             >
               Results
@@ -286,7 +267,7 @@ function SportDashboardContent() {
               className={`px-4 sm:px-6 py-3 font-serif font-bold text-xs sm:text-base border-b-2 transition-all whitespace-nowrap min-h-[44px] ${
                 activeTab === "points"
                   ? "border-gold text-gold"
-                  : "border-transparent text-[#AEB3D6] hover:text-[#F4EFE3]"
+                  : "border-transparent text-text-muted hover:text-text-main"
               }`}
             >
               Points Table
@@ -298,7 +279,7 @@ function SportDashboardContent() {
                 className={`px-4 sm:px-6 py-3 font-serif font-bold text-xs sm:text-base border-b-2 transition-all whitespace-nowrap min-h-[44px] ${
                   activeTab === "leaderboard"
                     ? "border-gold text-gold"
-                    : "border-transparent text-[#AEB3D6] hover:text-[#F4EFE3]"
+                    : "border-transparent text-text-muted hover:text-text-main"
                 }`}
               >
                 Leaderboard
@@ -311,19 +292,19 @@ function SportDashboardContent() {
         {activeTab === "schedule" && (
           <div className="space-y-6">
             {/* Filter Chips: Days & Campuses */}
-            <div className="p-4 rounded-2xl bg-[#161A40]/80 border border-[rgba(217,178,111,0.2)] flex flex-col md:flex-row items-center justify-between gap-4">
+            <div className="p-4 rounded-2xl bg-surface/80 border border-gold/20 flex flex-col md:flex-row items-center justify-between gap-4 shadow-card">
               {/* Day Chips */}
               <div className="flex items-center gap-1.5 overflow-x-auto w-full md:w-auto pb-1 md:pb-0 no-scrollbar">
-                <span className="text-xs font-mono text-gold uppercase tracking-wider mr-1 flex items-center gap-1">
+                <span className="text-xs font-mono text-gold uppercase tracking-wider mr-1 flex items-center gap-1 flex-shrink-0">
                   <CalendarDays className="w-3.5 h-3.5" /> Day:
                 </span>
                 <button
                   type="button"
                   onClick={() => setSelectedDay("all")}
-                  className={`px-3 py-1 rounded-full text-xs font-semibold whitespace-nowrap transition-all ${
+                  className={`px-3.5 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all ${
                     selectedDay === "all"
-                      ? "btn-gold"
-                      : "bg-[#0F122E] text-[#AEB3D6] hover:text-[#F4EFE3]"
+                      ? "btn-gold shadow-sm"
+                      : "bg-indigo-black text-text-muted hover:text-text-main"
                   }`}
                 >
                   All Days
@@ -333,10 +314,10 @@ function SportDashboardContent() {
                     key={day.dayNumber}
                     type="button"
                     onClick={() => setSelectedDay(day.dayNumber)}
-                    className={`px-3 py-1 rounded-full text-xs font-semibold whitespace-nowrap transition-all ${
+                    className={`px-3.5 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all ${
                       selectedDay === day.dayNumber
-                        ? "btn-gold"
-                        : "bg-[#0F122E] text-[#AEB3D6] hover:text-[#F4EFE3]"
+                        ? "btn-gold shadow-sm"
+                        : "bg-indigo-black text-text-muted hover:text-text-main"
                     }`}
                   >
                     Day {day.dayNumber} ({day.label.split(",")[0]})
@@ -346,13 +327,13 @@ function SportDashboardContent() {
 
               {/* Campus Filter */}
               <div className="flex items-center gap-1.5 overflow-x-auto w-full md:w-auto pb-1 md:pb-0 no-scrollbar">
-                <span className="text-xs font-mono text-gold uppercase tracking-wider mr-1 flex items-center gap-1">
+                <span className="text-xs font-mono text-gold uppercase tracking-wider mr-1 flex items-center gap-1 flex-shrink-0">
                   <Filter className="w-3.5 h-3.5" /> Campus:
                 </span>
                 <select
                   value={selectedCampus}
                   onChange={(e) => setSelectedCampus(e.target.value)}
-                  className="bg-[#0F122E] text-xs font-semibold text-[#F4EFE3] px-3 py-1.5 rounded-xl border border-[rgba(217,178,111,0.3)] focus:outline-none focus:border-gold"
+                  className="bg-indigo-black text-xs font-semibold text-text-main px-3.5 py-2 rounded-xl border border-gold/30 focus:outline-none focus:border-gold h-10 min-w-[160px]"
                 >
                   <option value="all">All Campuses</option>
                   {CAMPUSES_CONFIG.map((c) => (
@@ -366,17 +347,13 @@ function SportDashboardContent() {
 
             {/* Matches Grid */}
             {scheduledMatches.length === 0 ? (
-              <div className="p-16 rounded-2xl bg-[#161A40]/40 border border-[rgba(217,178,111,0.15)] text-center max-w-lg mx-auto">
-                <Calendar className="w-10 h-10 text-gold/60 mx-auto mb-3" />
-                <h3 className="text-lg font-serif font-bold text-gold-light">
-                  No Fixtures Found
-                </h3>
-                <p className="text-xs text-[#AEB3D6] mt-2 leading-relaxed">
-                  No scheduled fixtures match your current filters. Try selecting All Days or All Campuses.
-                </p>
-              </div>
+              <EmptyState
+                icon={<Calendar className="w-6 h-6 sm:w-7 sm:h-7 text-gold/80" />}
+                title="No Fixtures Found"
+                description="No scheduled fixtures match your selected filters. Try selecting All Days or All Campuses."
+              />
             ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
                 {scheduledMatches.map((match) => (
                   <MatchCard
                     key={match.id}
@@ -389,21 +366,17 @@ function SportDashboardContent() {
           </div>
         )}
 
-        {/* TAB 2: RESULTS (Completed Matches) */}
+        {/* TAB 2: RESULTS */}
         {activeTab === "results" && (
           <div className="space-y-6">
             {completedMatches.length === 0 ? (
-              <div className="p-16 rounded-2xl bg-[#161A40]/40 border border-[rgba(217,178,111,0.15)] text-center max-w-lg mx-auto">
-                <Trophy className="w-10 h-10 text-gold/60 mx-auto mb-3" />
-                <h3 className="text-lg font-serif font-bold text-gold-light">
-                  No Completed Matches Yet
-                </h3>
-                <p className="text-xs text-[#AEB3D6] mt-2 leading-relaxed">
-                  Results, scoresheets, and Man of the Match awards will appear here as fixtures are played and declared.
-                </p>
-              </div>
+              <EmptyState
+                icon={<Trophy className="w-6 h-6 sm:w-7 sm:h-7 text-gold/80" />}
+                title="No Completed Matches Yet"
+                description="Results, scorecards, and Man of the Match awards will appear here as fixtures are concluded and declared by the organising committee."
+              />
             ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
                 {completedMatches.map((match) => (
                   <MatchCard
                     key={match.id}
@@ -416,12 +389,12 @@ function SportDashboardContent() {
           </div>
         )}
 
-        {/* TAB 3: POINTS TABLE (Side-by-side Group A and Group B) */}
+        {/* TAB 3: POINTS TABLE */}
         {activeTab === "points" && (
           <div className="space-y-6">
-            <div className="flex items-center justify-between pb-2 border-b border-[rgba(217,178,111,0.2)]">
+            <div className="flex items-center justify-between pb-3 border-b border-gold/20">
               <h3 className="text-lg sm:text-xl font-serif font-bold text-gold uppercase tracking-wider">
-                {currentSport.name} ({selectedCategory.toUpperCase()}) – GROUP STAGE
+                {currentSport.name} ({selectedCategory.toUpperCase()}) – Group Stage
               </h3>
               <span className="text-xs font-mono text-gold-light/80">
                 Top 2 Qualify for Semi-Finals
@@ -439,13 +412,13 @@ function SportDashboardContent() {
           </div>
         )}
 
-        {/* TAB 4: LEADERBOARD (Only if hasLeaderboard) */}
+        {/* TAB 4: LEADERBOARD */}
         {activeTab === "leaderboard" && hasLeaderboard && leaderboardConfig && (
           <div className="space-y-6">
             <SportLeaderboard config={leaderboardConfig} />
           </div>
         )}
-      </div>
+      </Container>
 
       {/* MATCH DETAILS MODAL */}
       <MatchDetailsModal

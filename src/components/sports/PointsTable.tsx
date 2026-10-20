@@ -69,68 +69,68 @@ export default function PointsTable({
 
         {/* Content */}
         {rows.length === 0 ? (
-          <div className="p-10 text-center text-xs sm:text-sm text-[#AEB3D6] italic">
+          <div className="p-10 text-center text-xs sm:text-sm text-text-muted italic">
             No teams assigned to this group yet
           </div>
         ) : (
-          <div className="overflow-x-auto">
+          <div className="overflow-x-auto relative">
             <table className="w-full text-left border-collapse text-xs">
               <thead>
-                <tr className="border-b border-[rgba(217,178,111,0.15)] bg-[#0F122E]/70 text-[10px] sm:text-[11px] font-mono uppercase text-gold tracking-wider">
-                  <th className="py-2.5 px-3 text-center w-10">Pos</th>
-                  <th className="py-2.5 px-3">Team</th>
-                  <th className="py-2.5 px-2 text-center">P</th>
-                  <th className="py-2.5 px-2 text-center">W</th>
+                <tr className="border-b border-gold/15 bg-white/5 text-[11px] font-mono uppercase text-gold tracking-wider h-12">
+                  <th className="py-3 px-3 text-center w-12 sticky left-0 bg-surface z-10">Pos</th>
+                  <th className="py-3 px-4 min-w-[140px] sticky left-12 bg-surface z-10">Team</th>
+                  <th className="py-3 px-2 text-center tabular-nums">P</th>
+                  <th className="py-3 px-2 text-center tabular-nums">W</th>
                   {sportId === "football" && (
-                    <th className="py-2.5 px-2 text-center">D</th>
+                    <th className="py-3 px-2 text-center tabular-nums">D</th>
                   )}
-                  <th className="py-2.5 px-2 text-center">L</th>
+                  <th className="py-3 px-2 text-center tabular-nums">L</th>
                   {sportId === "cricket" && (
-                    <th className="py-2.5 px-2 text-center">NR</th>
+                    <th className="py-3 px-2 text-center tabular-nums">NR</th>
                   )}
                   {sportId === "football" && (
                     <>
-                      <th className="py-2.5 px-2 text-center">GF</th>
-                      <th className="py-2.5 px-2 text-center">GA</th>
-                      <th className="py-2.5 px-2 text-center">GD</th>
+                      <th className="py-3 px-2 text-center tabular-nums">GF</th>
+                      <th className="py-3 px-2 text-center tabular-nums">GA</th>
+                      <th className="py-3 px-2 text-center tabular-nums">GD</th>
                     </>
                   )}
                   {sportId === "basketball" && (
                     <>
-                      <th className="py-2.5 px-2 text-center">PF</th>
-                      <th className="py-2.5 px-2 text-center">PA</th>
-                      <th className="py-2.5 px-2 text-center">Diff</th>
+                      <th className="py-3 px-2 text-center tabular-nums">PF</th>
+                      <th className="py-3 px-2 text-center tabular-nums">PA</th>
+                      <th className="py-3 px-2 text-center tabular-nums">Diff</th>
                     </>
                   )}
                   {sportId === "volleyball" && (
-                    <th className="py-2.5 px-2 text-center">Sets W–L</th>
+                    <th className="py-3 px-2 text-center tabular-nums">Sets W–L</th>
                   )}
-                  <th className="py-2.5 px-3 text-center font-bold text-gold-light">
+                  <th className="py-3 px-3 text-center font-bold text-gold-light tabular-nums">
                     Pts
                   </th>
                   {sportId === "cricket" && (
-                    <th className="py-2.5 px-3 text-right">NRR</th>
+                    <th className="py-3 px-3 text-right tabular-nums">NRR</th>
                   )}
                 </tr>
               </thead>
-              <tbody className="divide-y divide-[rgba(217,178,111,0.08)]">
+              <tbody className="divide-y divide-gold/10">
                 {rows.map((row) => (
                   <tr
                     key={row.teamId}
-                    className={`transition-colors hover:bg-[#20255A]/40 ${
+                    className={`transition-colors hover:bg-surface-2/40 h-12 ${
                       row.qualified
                         ? "border-l-4 border-l-gold bg-gold/[0.04]"
                         : "border-l-4 border-l-transparent"
                     }`}
                   >
                     {/* Position & Qualification */}
-                    <td className="py-3 px-3 text-center font-mono font-bold">
+                    <td className="py-2.5 px-3 text-center font-mono font-bold sticky left-0 bg-surface z-10">
                       <div className="flex items-center justify-center gap-1">
                         <span
                           className={
                             row.qualified
                               ? "text-gold font-black"
-                              : "text-[#AEB3D6]"
+                              : "text-text-muted"
                           }
                         >
                           {row.pos}
@@ -147,14 +147,14 @@ export default function PointsTable({
                     </td>
 
                     {/* Team Name + Monogram */}
-                    <td className="py-3 px-3">
+                    <td className="py-2.5 px-4 sticky left-12 bg-surface z-10">
                       <div className="flex items-center gap-2.5">
                         <CampusBadge shortCode={row.shortCode} size="sm" />
                         <div>
                           <div className="font-serif font-bold text-xs sm:text-sm text-gold-light leading-tight">
                             {row.teamName.split("–")[0].trim()}
                           </div>
-                          <span className="text-[10px] text-[#AEB3D6] font-mono">
+                          <span className="text-[10px] text-text-muted font-mono">
                             {row.shortCode}
                           </span>
                         </div>
@@ -162,24 +162,24 @@ export default function PointsTable({
                     </td>
 
                     {/* Played, Won, Lost */}
-                    <td className="py-3 px-2 text-center font-mono text-[#F4EFE3]">
+                    <td className="py-2.5 px-2 text-center font-mono text-text-main tabular-nums">
                       {row.played}
                     </td>
-                    <td className="py-3 px-2 text-center font-mono text-emerald-400 font-semibold">
+                    <td className="py-2.5 px-2 text-center font-mono text-emerald-400 font-semibold tabular-nums">
                       {row.won}
                     </td>
                     {sportId === "football" && (
-                      <td className="py-3 px-2 text-center font-mono text-amber-400">
+                      <td className="py-2.5 px-2 text-center font-mono text-amber-400 tabular-nums">
                         {row.drawn ?? 0}
                       </td>
                     )}
-                    <td className="py-3 px-2 text-center font-mono text-rose-400">
+                    <td className="py-2.5 px-2 text-center font-mono text-rose-400 tabular-nums">
                       {row.lost}
                     </td>
 
                     {/* Cricket NR */}
                     {sportId === "cricket" && (
-                      <td className="py-3 px-2 text-center font-mono text-[#AEB3D6]">
+                      <td className="py-2.5 px-2 text-center font-mono text-text-muted tabular-nums">
                         {row.noResult ?? 0}
                       </td>
                     )}
@@ -187,13 +187,13 @@ export default function PointsTable({
                     {/* Football GF, GA, GD */}
                     {sportId === "football" && (
                       <>
-                        <td className="py-3 px-2 text-center font-mono text-[#AEB3D6]">
+                        <td className="py-2.5 px-2 text-center font-mono text-text-muted tabular-nums">
                           {row.gf ?? 0}
                         </td>
-                        <td className="py-3 px-2 text-center font-mono text-[#AEB3D6]">
+                        <td className="py-2.5 px-2 text-center font-mono text-text-muted tabular-nums">
                           {row.ga ?? 0}
                         </td>
-                        <td className="py-3 px-2 text-center font-mono font-semibold">
+                        <td className="py-2.5 px-2 text-center font-mono font-semibold tabular-nums">
                           {(row.gd ?? 0) > 0 ? `+${row.gd}` : row.gd ?? 0}
                         </td>
                       </>
@@ -202,13 +202,13 @@ export default function PointsTable({
                     {/* Basketball PF, PA, Diff */}
                     {sportId === "basketball" && (
                       <>
-                        <td className="py-3 px-2 text-center font-mono text-[#AEB3D6]">
+                        <td className="py-2.5 px-2 text-center font-mono text-text-muted tabular-nums">
                           {row.pf ?? 0}
                         </td>
-                        <td className="py-3 px-2 text-center font-mono text-[#AEB3D6]">
+                        <td className="py-2.5 px-2 text-center font-mono text-text-muted tabular-nums">
                           {row.pa ?? 0}
                         </td>
-                        <td className="py-3 px-2 text-center font-mono font-semibold">
+                        <td className="py-2.5 px-2 text-center font-mono font-semibold tabular-nums">
                           {(row.diff ?? 0) > 0 ? `+${row.diff}` : row.diff ?? 0}
                         </td>
                       </>
@@ -216,19 +216,19 @@ export default function PointsTable({
 
                     {/* Volleyball Sets W-L */}
                     {sportId === "volleyball" && (
-                      <td className="py-3 px-2 text-center font-mono text-[#F4EFE3]">
+                      <td className="py-2.5 px-2 text-center font-mono text-text-main tabular-nums">
                         {row.setsWon ?? 0}–{row.setsLost ?? 0}
                       </td>
                     )}
 
                     {/* Points */}
-                    <td className="py-3 px-3 text-center font-mono font-black text-sm text-gold">
+                    <td className="py-2.5 px-3 text-center font-mono font-black text-sm text-gold tabular-nums">
                       {row.points}
                     </td>
 
                     {/* Cricket NRR */}
                     {sportId === "cricket" && (
-                      <td className="py-3 px-3 text-right font-mono text-xs font-semibold text-[#AEB3D6]">
+                      <td className="py-2.5 px-3 text-right font-mono text-xs font-semibold text-text-muted tabular-nums">
                         {(row.nrr ?? 0) >= 0
                           ? `+${(row.nrr ?? 0).toFixed(3)}`
                           : (row.nrr ?? 0).toFixed(3)}

@@ -136,17 +136,18 @@ body {
   background: linear-gradient(90deg, transparent, #D9B26F, transparent);
 }
 
-/* Card hover glow */
+/* Card styles */
 .card-championship {
   background-color: var(--surface);
-  border: 1px solid var(--border);
+  border: 1px solid rgba(217, 178, 111, 0.15);
   border-radius: 16px;
+  box-shadow: 0 4px 20px -2px rgba(15, 18, 46, 0.5), 0 0 0 1px rgba(217, 178, 111, 0.08);
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .card-championship:hover {
-  border-color: var(--border-strong);
-  box-shadow: 0 0 24px rgba(217, 178, 111, 0.25);
+  border-color: rgba(217, 178, 111, 0.35);
+  box-shadow: 0 12px 32px -4px rgba(15, 18, 46, 0.7), 0 0 24px rgba(217, 178, 111, 0.25);
   transform: translateY(-2px);
 }
 
@@ -157,45 +158,72 @@ body {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  border-radius: 9999px;
-  transition: all 0.2s ease-in-out;
+  border-radius: 12px;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .btn-gold:hover {
-  filter: brightness(1.1);
-  box-shadow: 0 0 20px rgba(240, 211, 143, 0.45);
+  filter: brightness(1.08);
+  box-shadow: 0 4px 20px rgba(217, 178, 111, 0.35);
+  transform: translateY(-1px);
+}
+
+.btn-gold:active {
+  transform: translateY(0);
 }
 
 /* Secondary royal button */
 .btn-royal {
   background-color: var(--royal);
   color: var(--gold-light);
-  border: 1px solid var(--border-strong);
+  border: 1px solid rgba(217, 178, 111, 0.3);
   font-weight: 600;
-  border-radius: 9999px;
-  transition: all 0.2s ease-in-out;
+  border-radius: 12px;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .btn-royal:hover {
   background-color: var(--cobalt);
   color: #FFFFFF;
   border-color: var(--gold);
+  transform: translateY(-1px);
+}
+
+.btn-royal:active {
+  transform: translateY(0);
 }
 
 /* Outline button */
 .btn-outline-gold {
-  border: 1px solid var(--border-strong);
+  border: 1px solid rgba(217, 178, 111, 0.35);
   color: var(--gold);
   background: transparent;
   font-weight: 600;
-  border-radius: 9999px;
-  transition: all 0.2s ease-in-out;
+  border-radius: 12px;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .btn-outline-gold:hover {
   background: rgba(217, 178, 111, 0.12);
   border-color: var(--gold);
   color: var(--gold-light);
+  transform: translateY(-1px);
+}
+
+.btn-outline-gold:active {
+  transform: translateY(0);
 }
 
 /* Active and inactive tabs */

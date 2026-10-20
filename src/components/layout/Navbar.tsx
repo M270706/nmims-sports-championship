@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { Menu, X, ChevronDown, Shield } from "lucide-react";
 import { TOURNAMENT_CONFIG } from "@/config/tournament";
 import { SvkmLogo, NmimsLogo } from "@/components/ui/BrandLogos";
+import Container from "@/components/ui/Container";
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -67,12 +68,12 @@ export default function Navbar() {
     <header
       className={`sticky top-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-[#0F122E]/90 backdrop-blur-md shadow-lg border-b border-[rgba(217,178,111,0.2)]"
-          : "bg-[#0F122E]/75 backdrop-blur-sm border-b border-[rgba(217,178,111,0.12)]"
+          ? "bg-indigo-black/95 backdrop-blur-md shadow-lg border-b border-gold/20"
+          : "bg-indigo-black/80 backdrop-blur-sm border-b border-gold/15"
       }`}
     >
       {/* ===== MOBILE HEADER (below lg) ===== */}
-      <div className="lg:hidden flex items-center justify-between h-16 px-3">
+      <div className="lg:hidden flex items-center justify-between h-16 px-4">
         {/* Left: SVKM logo */}
         <SvkmLogo size="xs" href="/home" />
 
@@ -80,7 +81,7 @@ export default function Navbar() {
         <div className="flex-1 min-w-0 px-2 text-center">
           <Link
             href="/home"
-            className="block text-[14px] sm:text-[15px] font-serif font-semibold text-gold tracking-wide truncate"
+            className="block text-[14px] sm:text-[15px] font-serif font-semibold text-gold tracking-wide truncate focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gold rounded"
           >
             NMIMS Sports 26-27
           </Link>
@@ -92,7 +93,7 @@ export default function Navbar() {
           <button
             type="button"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="flex items-center justify-center w-11 h-11 rounded-lg text-gold hover:text-gold-light focus:outline-none focus:ring-2 focus:ring-gold"
+            className="flex items-center justify-center w-11 h-11 rounded-xl text-gold hover:text-gold-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/60"
             aria-label="Toggle navigation menu"
           >
             {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -101,12 +102,12 @@ export default function Navbar() {
       </div>
 
       {/* ===== DESKTOP HEADER (lg and above) ===== */}
-      <div className="hidden lg:block max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-[72px] xl:h-24">
+      <Container className="hidden lg:block">
+        <div className="flex items-center justify-between h-[72px] xl:h-20">
           {/* Left: SVKM logo */}
           <SvkmLogo size="lg" href="/home" />
 
-          {/* Centre: Navigation Links */}
+          {/* Centre: Navigation Links (XL screens) */}
           <div className="hidden xl:flex flex-col items-center justify-center flex-1 px-4">
             <nav className="flex items-center space-x-1">
               {navLinks.map((link) => {
@@ -115,15 +116,15 @@ export default function Navbar() {
                   <Link
                     key={link.href}
                     href={link.href}
-                    className={`relative px-2.5 py-1.5 text-xs lg:text-sm font-medium transition-colors duration-200 rounded-md ${
+                    className={`relative px-3 py-2 text-xs lg:text-sm font-medium transition-colors duration-200 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/60 ${
                       active
                         ? "text-gold font-semibold"
-                        : "text-[#F4EFE3] hover:text-gold-light"
+                        : "text-text-main hover:text-gold-light"
                     }`}
                   >
                     {link.label}
                     {active && (
-                      <span className="absolute bottom-0 left-2 right-2 h-0.5 bg-gradient-to-r from-transparent via-[#D9B26F] to-transparent" />
+                      <span className="absolute bottom-0.5 left-3 right-3 h-0.5 bg-gradient-to-r from-transparent via-gold to-transparent" />
                     )}
                   </Link>
                 );
@@ -135,24 +136,24 @@ export default function Navbar() {
                   type="button"
                   onClick={() => setMoreDropdownOpen(!moreDropdownOpen)}
                   onBlur={() => setTimeout(() => setMoreDropdownOpen(false), 200)}
-                  className={`flex items-center gap-1 px-2.5 py-1.5 text-xs lg:text-sm font-medium transition-colors duration-200 rounded-md ${
+                  className={`flex items-center gap-1 px-3 py-2 text-xs lg:text-sm font-medium transition-colors duration-200 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/60 ${
                     pathname === "/rules" || pathname === "/previous-edition"
                       ? "text-gold font-semibold"
-                      : "text-[#F4EFE3] hover:text-gold-light"
+                      : "text-text-main hover:text-gold-light"
                   }`}
                   aria-expanded={moreDropdownOpen}
                 >
-                  More
+                  <span>More</span>
                   <ChevronDown className="w-3.5 h-3.5" />
                 </button>
 
                 {moreDropdownOpen && (
-                  <div className="absolute right-0 mt-2 w-48 rounded-xl bg-[#161A40] border border-[rgba(217,178,111,0.25)] shadow-xl py-1 z-50 backdrop-blur-md">
+                  <div className="absolute right-0 mt-2 w-48 rounded-2xl bg-surface border border-gold/25 shadow-card-hover py-1.5 z-50 backdrop-blur-md">
                     {moreLinks.map((item) => (
                       <Link
                         key={item.href}
                         href={item.href}
-                        className="block px-4 py-2 text-sm text-[#F4EFE3] hover:bg-[#20255A] hover:text-gold transition-colors"
+                        className="block px-4 py-2.5 text-xs text-text-main hover:bg-surface-2 hover:text-gold transition-colors"
                       >
                         {item.label}
                       </Link>
@@ -163,7 +164,7 @@ export default function Navbar() {
             </nav>
           </div>
 
-          {/* DESKTOP (LG but not XL): Condensed Links */}
+          {/* DESKTOP (LG screen): Condensed Links */}
           <div className="hidden lg:flex xl:hidden flex-1 px-2 justify-center">
             <nav className="flex items-center space-x-1">
               {navLinks.slice(0, 5).map((link) => {
@@ -172,31 +173,32 @@ export default function Navbar() {
                   <Link
                     key={link.href}
                     href={link.href}
-                    className={`relative px-2 py-1.5 text-xs font-medium transition-colors ${
-                      active ? "text-gold font-semibold" : "text-[#F4EFE3] hover:text-gold"
+                    className={`relative px-2.5 py-1.5 text-xs font-medium transition-colors rounded-lg ${
+                      active ? "text-gold font-semibold" : "text-text-main hover:text-gold"
                     }`}
                   >
                     {link.label}
                   </Link>
                 );
               })}
-              {/* More Dropdown for medium-large */}
+              {/* More Dropdown for LG */}
               <div className="relative">
                 <button
                   type="button"
                   onClick={() => setMoreDropdownOpen(!moreDropdownOpen)}
                   onBlur={() => setTimeout(() => setMoreDropdownOpen(false), 200)}
-                  className="flex items-center gap-1 px-2 py-1.5 text-xs font-medium text-[#F4EFE3] hover:text-gold"
+                  className="flex items-center gap-1 px-2.5 py-1.5 text-xs font-medium text-text-main hover:text-gold rounded-lg"
                 >
-                  More <ChevronDown className="w-3 h-3" />
+                  <span>More</span>
+                  <ChevronDown className="w-3 h-3" />
                 </button>
                 {moreDropdownOpen && (
-                  <div className="absolute right-0 mt-2 w-48 rounded-xl bg-[#161A40] border border-[rgba(217,178,111,0.25)] shadow-xl py-1 z-50 backdrop-blur-md">
+                  <div className="absolute right-0 mt-2 w-48 rounded-2xl bg-surface border border-gold/25 shadow-card-hover py-1.5 z-50 backdrop-blur-md">
                     {[...navLinks.slice(5), ...moreLinks].map((item) => (
                       <Link
                         key={item.href}
                         href={item.href}
-                        className="block px-4 py-2 text-xs text-[#F4EFE3] hover:bg-[#20255A] hover:text-gold"
+                        className="block px-4 py-2.5 text-xs text-text-main hover:bg-surface-2 hover:text-gold transition-colors"
                       >
                         {item.label}
                       </Link>
@@ -211,7 +213,7 @@ export default function Navbar() {
           <div className="flex items-center gap-3">
             <Link
               href="/admin/login"
-              className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg border border-[rgba(217,178,111,0.3)] bg-[#161A40]/80 hover:bg-gold/15 text-gold text-xs font-semibold tracking-wider transition-all"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-gold/30 bg-surface/80 hover:bg-gold/15 text-gold text-xs font-semibold tracking-wider transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/60"
               title="Organisers / Admin Login"
             >
               <Shield className="w-3.5 h-3.5" />
@@ -220,14 +222,14 @@ export default function Navbar() {
             <NmimsLogo size="lg" href="/home" />
           </div>
         </div>
-      </div>
+      </Container>
 
       {/* ===== MOBILE FULL-SCREEN NAV OVERLAY ===== */}
       {mobileMenuOpen && (
-        <div className="lg:hidden fixed inset-0 top-16 z-40 bg-[#0F122E]/98 backdrop-blur-xl flex flex-col justify-between overflow-y-auto animate-fadeIn">
+        <div className="lg:hidden fixed inset-0 top-16 z-40 bg-indigo-black/98 backdrop-blur-xl flex flex-col justify-between overflow-y-auto animate-fadeIn">
           <div className="p-4 space-y-3">
-            <div className="text-center pb-3 border-b border-[rgba(217,178,111,0.15)]">
-              <span className="text-[11px] uppercase tracking-widest text-[#AEB3D6]">
+            <div className="text-center pb-3 border-b border-gold/15">
+              <span className="text-[11px] uppercase tracking-widest text-text-muted">
                 {TOURNAMENT_CONFIG.organizedBy}
               </span>
               <h2 className="text-sm font-serif font-bold text-gold mt-0.5">
@@ -245,8 +247,8 @@ export default function Navbar() {
                     onClick={() => setMobileMenuOpen(false)}
                     className={`px-4 py-3 rounded-xl text-base font-medium transition-all min-h-[44px] flex items-center ${
                       active
-                        ? "bg-[#20255A] text-gold font-bold border-l-4 border-gold"
-                        : "text-[#F4EFE3] active:bg-[#161A40]"
+                        ? "bg-surface-2 text-gold font-bold border-l-4 border-gold"
+                        : "text-text-main active:bg-surface"
                     }`}
                   >
                     {link.label}
@@ -254,8 +256,8 @@ export default function Navbar() {
                 );
               })}
 
-              <div className="pt-2 border-t border-[rgba(217,178,111,0.15)]">
-                <p className="px-4 text-xs font-semibold uppercase tracking-wider text-[#AEB3D6] mb-1.5">
+              <div className="pt-2 border-t border-gold/15">
+                <p className="px-4 text-xs font-semibold uppercase tracking-wider text-text-muted mb-1.5">
                   More Resources
                 </p>
                 {moreLinks.map((item) => (
@@ -263,14 +265,14 @@ export default function Navbar() {
                     key={item.href}
                     href={item.href}
                     onClick={() => setMobileMenuOpen(false)}
-                    className="block px-4 py-3 rounded-lg text-sm text-[#F4EFE3] active:text-gold active:bg-[#161A40] min-h-[44px] flex items-center"
+                    className="block px-4 py-3 rounded-xl text-sm text-text-main active:text-gold active:bg-surface min-h-[44px] flex items-center"
                   >
                     {item.label}
                   </Link>
                 ))}
               </div>
 
-              {/* Admin link — visible only in mobile menu */}
+              {/* Admin link */}
               <div className="pt-2">
                 <Link
                   href="/admin/login"
@@ -284,7 +286,7 @@ export default function Navbar() {
             </nav>
           </div>
 
-          <div className="p-4 border-t border-[rgba(217,178,111,0.15)] text-center text-xs text-[#AEB3D6] pb-[env(safe-area-inset-bottom)]">
+          <div className="p-4 border-t border-gold/15 text-center text-xs text-text-muted pb-[env(safe-area-inset-bottom)]">
             <p>{TOURNAMENT_CONFIG.hostCampus}</p>
             <p className="mt-0.5 text-gold font-mono">{TOURNAMENT_CONFIG.dates}</p>
           </div>

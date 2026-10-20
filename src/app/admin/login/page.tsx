@@ -7,6 +7,7 @@ import { Lock, Mail, ArrowRight, ShieldCheck, ArrowLeft, Loader2, AlertTriangle 
 import NavyPatchBackground from "@/components/ui/NavyPatchBackground";
 import { createClient } from "@/lib/supabase/client";
 import BrandLogos from "@/components/ui/BrandLogos";
+import Button from "@/components/ui/Button";
 
 const MAX_FAILED_ATTEMPTS = 5;
 const COOLDOWN_SECONDS = 60;
@@ -93,19 +94,18 @@ export default function AdminLoginPage() {
       setCooldownRemaining(COOLDOWN_SECONDS);
       setError(`Too many failed attempts. Please wait ${COOLDOWN_SECONDS} seconds before trying again.`);
     } else {
-      // Generic error message without revealing account existence
       setError("Invalid email or password.");
     }
   };
 
   return (
-    <div className="relative min-h-screen bg-navy flex items-center justify-center p-4 py-16 sm:py-6 overflow-x-hidden">
+    <div className="relative min-h-screen min-h-[100svh] bg-navy flex items-center justify-center p-4 py-16 sm:py-6 overflow-x-hidden">
       <NavyPatchBackground />
 
       {/* Back to Starting Page Link */}
       <Link
         href="/"
-        className="absolute top-4 left-4 sm:top-6 sm:left-6 text-xs font-mono font-bold text-gold hover:text-gold-light flex items-center gap-1.5 transition-colors z-20 max-w-[calc(100vw-2rem)] truncate"
+        className="absolute top-4 left-4 sm:top-6 sm:left-6 text-xs font-mono font-bold text-gold hover:text-gold-light flex items-center gap-1.5 transition-colors z-20 max-w-[calc(100vw-2rem)] truncate focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/60 rounded"
       >
         <ArrowLeft className="w-4 h-4 shrink-0" />
         <span className="hidden sm:inline">Return to Championship Portal</span>
@@ -113,47 +113,47 @@ export default function AdminLoginPage() {
       </Link>
 
       <div className="relative z-10 w-full max-w-md">
-        {/* Logos Header: BrandLogos size="lg" (96x96 desktop, 72x72 mobile) */}
+        {/* Logos Header */}
         <div className="w-full max-w-xs mx-auto mb-6 sm:mb-8">
-          <BrandLogos size="lg" mobileSize="md" href="/" />
+          <BrandLogos size="lg" mobileSize="xs" href="/" />
         </div>
 
         {/* Login Card */}
-        <div className="card-championship p-5 sm:p-8 rounded-2xl sm:rounded-3xl relative overflow-hidden backdrop-blur-2xl">
+        <div className="card-championship p-6 sm:p-8 rounded-2xl relative overflow-hidden backdrop-blur-2xl shadow-card">
           <div className="flex items-center justify-center mb-5 sm:mb-6">
-            <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-[#0F122E] border border-gold/40 flex items-center justify-center shadow-gold-glow">
+            <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-indigo-black border border-gold/40 flex items-center justify-center shadow-card">
               <ShieldCheck className="w-6 h-6 sm:w-7 sm:h-7 text-gold-light" />
             </div>
           </div>
 
           <div className="text-center mb-5 sm:mb-6">
-            <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-gold">
+            <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-gold">
               Organisers Portal
             </span>
             <h1 className="text-xl sm:text-2xl font-serif font-black uppercase text-gold-light mt-1">
               Admin Login
             </h1>
-            <p className="text-xs text-[#AEB3D6] mt-1">
+            <p className="text-xs text-text-muted mt-1">
               Enter your credentials to manage tournament fixtures, scores and standings.
             </p>
           </div>
 
           {error && (
-            <div className="mb-5 sm:mb-6 p-3.5 sm:p-4 rounded-xl bg-red-950/60 border border-red-500/50 text-red-200 text-xs font-semibold animate-fadeIn flex items-center gap-2">
+            <div className="mb-5 p-3.5 rounded-xl bg-red-950/60 border border-red-500/50 text-red-200 text-xs font-semibold animate-fadeIn flex items-center gap-2">
               <AlertTriangle className="w-4 h-4 text-red-400 shrink-0" />
               <span>{error}</span>
             </div>
           )}
 
           {cooldownRemaining > 0 && (
-            <div className="mb-5 sm:mb-6 p-3.5 sm:p-4 rounded-xl bg-amber-950/60 border border-amber-500/50 text-amber-200 text-xs font-mono text-center animate-fadeIn">
+            <div className="mb-5 p-3.5 rounded-xl bg-amber-950/60 border border-amber-500/50 text-amber-200 text-xs font-mono text-center animate-fadeIn">
               Rate limit active: retry in {cooldownRemaining}s
             </div>
           )}
 
           <form onSubmit={handleLogin} className="space-y-4">
             <div>
-              <label className="block text-[11px] font-bold text-[#AEB3D6] uppercase tracking-wider mb-1.5">
+              <label className="block text-[11px] font-bold text-text-muted uppercase tracking-wider mb-1.5">
                 Official Email
               </label>
               <div className="relative">
@@ -164,14 +164,14 @@ export default function AdminLoginPage() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="admin@nmims.edu"
-                  className="w-full pl-10 pr-4 py-3 min-h-[44px] rounded-xl bg-[#0F122E] border border-gold/30 text-base sm:text-xs text-[#F4EFE3] placeholder-gray-500 focus:outline-none focus:border-gold font-mono disabled:opacity-50"
+                  className="w-full pl-10 pr-4 h-11 rounded-xl bg-indigo-black border border-gold/30 text-sm text-text-main placeholder-gray-500 focus:outline-none focus:border-gold font-mono disabled:opacity-50 focus-visible:ring-2 focus-visible:ring-gold/60"
                 />
                 <Mail className="w-4 h-4 text-gold absolute left-3.5 top-3.5" />
               </div>
             </div>
 
             <div>
-              <label className="block text-[11px] font-bold text-[#AEB3D6] uppercase tracking-wider mb-1.5">
+              <label className="block text-[11px] font-bold text-text-muted uppercase tracking-wider mb-1.5">
                 Password
               </label>
               <div className="relative">
@@ -182,35 +182,36 @@ export default function AdminLoginPage() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••••••"
-                  className="w-full pl-10 pr-4 py-3 min-h-[44px] rounded-xl bg-[#0F122E] border border-gold/30 text-base sm:text-xs text-[#F4EFE3] placeholder-gray-500 focus:outline-none focus:border-gold font-mono disabled:opacity-50"
+                  className="w-full pl-10 pr-4 h-11 rounded-xl bg-indigo-black border border-gold/30 text-sm text-text-main placeholder-gray-500 focus:outline-none focus:border-gold font-mono disabled:opacity-50 focus-visible:ring-2 focus-visible:ring-gold/60"
                 />
                 <Lock className="w-4 h-4 text-gold absolute left-3.5 top-3.5" />
               </div>
             </div>
 
-            <button
+            <Button
               type="submit"
+              variant="primary"
+              size="md"
               disabled={loading || cooldownRemaining > 0}
-              className="w-full py-3.5 min-h-[48px] rounded-full btn-gold text-xs sm:text-sm font-bold uppercase tracking-wider flex items-center justify-center gap-2 shadow-gold-glow mt-6 disabled:opacity-50"
-            >
-              {loading ? (
-                <>
+              className="w-full mt-6"
+              icon={
+                loading ? (
                   <Loader2 className="w-4 h-4 animate-spin" />
-                  <span>Verifying Credentials...</span>
-                </>
-              ) : cooldownRemaining > 0 ? (
-                <span>Locked ({cooldownRemaining}s)</span>
-              ) : (
-                <>
-                  <span>Sign In</span>
+                ) : (
                   <ArrowRight className="w-4 h-4" />
-                </>
-              )}
-            </button>
+                )
+              }
+            >
+              {loading
+                ? "Verifying Credentials..."
+                : cooldownRemaining > 0
+                ? `Locked (${cooldownRemaining}s)`
+                : "Sign In"}
+            </Button>
           </form>
 
           {/* Footer note */}
-          <div className="mt-5 sm:mt-6 pt-5 sm:pt-6 border-t border-[rgba(217,178,111,0.15)] text-center">
+          <div className="mt-6 pt-5 border-t border-gold/15 text-center">
             <span className="text-[10px] text-text-muted">
               Access is strictly restricted to designated sports committee members and administrators.
             </span>

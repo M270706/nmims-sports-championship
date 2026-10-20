@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-export type LogoSize = "xs" | "sm" | "md" | "lg" | "xl";
+export type LogoSize = "xs" | "sm" | "footer" | "md" | "lg" | "xl";
 
 interface SizeSpec {
   px: number;
@@ -12,6 +12,7 @@ interface SizeSpec {
 const SIZE_SPECS: Record<LogoSize, SizeSpec> = {
   xs: { px: 40, boxClass: "w-10 h-10" },
   sm: { px: 48, boxClass: "w-12 h-12" },
+  footer: { px: 56, boxClass: "w-14 h-14" },
   md: { px: 72, boxClass: "w-[72px] h-[72px]" },
   lg: { px: 96, boxClass: "w-24 h-24" },
   xl: { px: 120, boxClass: "w-[120px] h-[120px]" },
