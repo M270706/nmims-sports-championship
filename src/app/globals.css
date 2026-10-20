@@ -64,9 +64,16 @@ body {
   overflow-x: clip;
   max-width: 100%;
   font-size: 16px;
+  line-height: 1.6;
   /* Safe areas for notched iPhones */
   padding-left: env(safe-area-inset-left);
   padding-right: env(safe-area-inset-right);
+}
+
+@media (min-width: 1024px) {
+  body {
+    font-size: 17px;
+  }
 }
 
 /* Hide scrollbar utility */

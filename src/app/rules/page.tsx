@@ -86,7 +86,7 @@ export default function RulesPage() {
         imageAlt="Opening ceremony and national anthem"
       />
 
-      <Container className="py-12 md:py-16 space-y-12 md:space-y-16">
+      <Container className="py-12 lg:py-20 space-y-12 lg:space-y-20">
         {/* 2. Eligibility Section */}
         <div className="p-6 sm:p-10 rounded-2xl bg-gradient-to-br from-surface via-surface-2 to-surface border border-gold/30 shadow-card">
           <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 pb-6 mb-6 border-b border-gold/20">

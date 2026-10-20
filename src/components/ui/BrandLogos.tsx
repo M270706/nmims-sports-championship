@@ -10,12 +10,12 @@ interface SizeSpec {
 }
 
 const SIZE_SPECS: Record<LogoSize, SizeSpec> = {
-  xs: { px: 40, boxClass: "w-10 h-10" },
+  xs: { px: 44, boxClass: "w-11 h-11" },
   sm: { px: 48, boxClass: "w-12 h-12" },
   footer: { px: 56, boxClass: "w-14 h-14" },
-  md: { px: 72, boxClass: "w-[72px] h-[72px]" },
-  lg: { px: 96, boxClass: "w-24 h-24" },
-  xl: { px: 120, boxClass: "w-[120px] h-[120px]" },
+  md: { px: 56, boxClass: "w-14 h-14" },
+  lg: { px: 56, boxClass: "w-14 h-14" },
+  xl: { px: 96, boxClass: "w-24 h-24" },
 };
 
 function getDimensions(size: LogoSize, mobileSize?: LogoSize) {
@@ -54,7 +54,7 @@ export function SvkmLogo({
 
   const content = (
     <div
-      className={`relative ${boxClass} flex-shrink-0 flex items-center justify-start overflow-hidden ${className}`}
+      className={`relative ${boxClass} flex-shrink-0 flex items-center justify-center ${className}`}
     >
       <div className="relative w-full h-full">
         <Image
@@ -99,10 +99,9 @@ export function NmimsLogo({
 
   const content = (
     <div
-      className={`relative ${boxClass} flex-shrink-0 flex items-center justify-end overflow-hidden ${className}`}
+      className={`relative ${boxClass} flex-shrink-0 flex items-center justify-center ${className}`}
     >
-      {/* Visual equalisation: scale up by 1.15 to balance visual weight against SVKM */}
-      <div className="relative w-full h-full transform scale-[1.15] origin-center">
+      <div className="relative w-full h-full">
         <Image
           src="/images/nmims-logo-white.webp"
           alt="NMIMS Deemed to be University"

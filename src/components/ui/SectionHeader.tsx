@@ -36,7 +36,15 @@ export default function SectionHeader({
         </div>
       )}
 
-      <TitleTag className="text-2xl sm:text-3xl md:text-4xl font-serif font-black uppercase text-gold-gradient tracking-tight leading-tight text-balance">
+      <TitleTag
+        className="font-serif font-black uppercase text-gold-gradient tracking-tight leading-tight text-balance"
+        style={{
+          fontSize:
+            TitleTag === "h1"
+              ? "clamp(1.9rem, 5vw, 3.5rem)"
+              : "clamp(1.5rem, 3.5vw, 2.25rem)",
+        }}
+      >
         {title}
       </TitleTag>
 

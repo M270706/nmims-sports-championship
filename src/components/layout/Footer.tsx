@@ -8,7 +8,7 @@ import Container from "@/components/ui/Container";
 
 export default function Footer() {
   return (
-    <footer className="relative bg-indigo-black border-t border-gold/20 text-text-main overflow-hidden pt-12 md:pt-16 pb-12 sm:pb-16">
+    <footer className="relative bg-navy border-t border-gold/20 text-text-main overflow-hidden pt-12 lg:pt-16 pb-20 lg:pb-12">
       {/* Background ambient subtle glow */}
       <div className="absolute inset-0 pointer-events-none opacity-5">
         <div className="absolute -bottom-20 -left-20 w-96 h-96 bg-royal rounded-full filter blur-3xl" />
@@ -17,7 +17,7 @@ export default function Footer() {
 
       <Container className="relative z-10">
         {/* Top bar with dual logos: BrandLogos size="footer" (h-14 w-14) */}
-        <div className="pb-8 md:pb-10 border-b border-gold/15">
+        <div className="pb-8 lg:pb-10 border-b border-gold/15">
           <BrandLogos
             size="footer"
             leftAddon={
@@ -39,10 +39,10 @@ export default function Footer() {
           />
         </div>
 
-        {/* Main 4-column footer content */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-10 py-10 md:py-12 border-b border-gold/15">
+        {/* Main content: Phone = stacked & centred; Laptop = 4 columns */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10 py-10 lg:py-12 border-b border-gold/15 text-center lg:text-left">
           {/* Col 1: Championship Info & Venue */}
-          <div className="space-y-4">
+          <div className="space-y-4 flex flex-col items-center lg:items-start">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface border border-gold/25 text-xs font-semibold text-gold">
               <Trophy className="w-3.5 h-3.5" />
               <span>Official Sports Portal</span>
@@ -53,16 +53,16 @@ export default function Footer() {
             <p className="text-xs text-text-muted leading-relaxed">
               Hosted by {TOURNAMENT_CONFIG.hostCampus}
             </p>
-            <div className="pt-2 text-xs text-text-muted flex items-start gap-2.5">
-              <MapPin className="w-4 h-4 text-gold flex-shrink-0 mt-0.5" />
-              <div className="whitespace-pre-line leading-relaxed font-sans">
+            <div className="pt-2 text-xs text-text-muted flex items-center lg:items-start justify-center lg:justify-start gap-2.5">
+              <MapPin className="w-4 h-4 text-gold shrink-0 mt-0.5" />
+              <div className="whitespace-pre-line leading-relaxed font-sans text-center lg:text-left">
                 {TOURNAMENT_CONFIG.venueAddress}
               </div>
             </div>
           </div>
 
           {/* Col 2: Quick Links */}
-          <div>
+          <div className="flex flex-col items-center lg:items-start">
             <h4 className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-gold mb-4">
               Championship Links
             </h4>
@@ -117,11 +117,11 @@ export default function Footer() {
           </div>
 
           {/* Col 3: Sports Dashboards */}
-          <div>
+          <div className="flex flex-col items-center lg:items-start">
             <h4 className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-gold mb-4">
               Sports Categories
             </h4>
-            <ul className="space-y-2.5 text-sm text-text-muted">
+            <ul className="space-y-2.5 text-sm text-text-muted w-full max-w-xs lg:max-w-none">
               {SPORTS_CONFIG.map((sport) => (
                 <li key={sport.id}>
                   <Link
@@ -141,14 +141,14 @@ export default function Footer() {
           </div>
 
           {/* Col 4: Key Contacts */}
-          <div>
+          <div className="flex flex-col items-center lg:items-start w-full">
             <h4 className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-gold mb-4">
               Key Contacts
             </h4>
-            <div className="space-y-3.5 text-xs">
+            <div className="space-y-3.5 text-xs w-full max-w-sm lg:max-w-none">
               {/* Leadership */}
-              <div className="p-3.5 rounded-xl bg-surface border border-gold/20">
-                <div className="flex items-center gap-1.5 text-[10px] font-bold text-gold uppercase tracking-wider mb-1">
+              <div className="p-3.5 rounded-xl bg-surface border border-gold/20 text-center lg:text-left">
+                <div className="flex items-center justify-center lg:justify-start gap-1.5 text-[10px] font-bold text-gold uppercase tracking-wider mb-1">
                   <Award className="w-3.5 h-3.5" />
                   <span>Leadership</span>
                 </div>
@@ -158,15 +158,15 @@ export default function Footer() {
 
               {/* Organising Committee */}
               <div className="space-y-2.5 pt-1">
-                <div className="font-semibold text-text-muted text-[11px] uppercase tracking-wide">
+                <div className="font-semibold text-text-muted text-[11px] uppercase tracking-wide text-center lg:text-left">
                   Organising Committee:
                 </div>
                 {COMMITTEE_CONFIG.map((member) => (
                   <div
                     key={member.name}
-                    className="py-1.5 border-b border-gold/10 flex flex-col sm:flex-row sm:items-start justify-between gap-1.5"
+                    className="py-2 border-b border-gold/10 flex flex-col lg:flex-row items-center lg:items-start justify-between gap-2"
                   >
-                    <div className="min-w-0">
+                    <div className="min-w-0 text-center lg:text-left">
                       <span className="text-text-main font-semibold text-xs block leading-snug">
                         {member.name}
                       </span>
@@ -177,9 +177,9 @@ export default function Footer() {
                     {member.phone && (
                       <a
                         href={`tel:${member.phone.replace(/\s+/g, "")}`}
-                        className="text-gold hover:underline font-mono text-xs whitespace-nowrap inline-flex items-center justify-center sm:justify-start gap-1 py-1 px-2.5 sm:p-0 rounded-lg sm:rounded-none bg-surface/60 sm:bg-transparent border sm:border-0 border-gold/20 mt-1 sm:mt-0"
+                        className="text-gold font-mono text-xs whitespace-nowrap inline-flex items-center justify-center gap-1.5 py-2 px-3.5 rounded-xl bg-surface hover:bg-gold hover:text-navy border border-gold/30 min-h-[44px] lg:min-h-0 lg:py-1 lg:px-2.5 transition-colors"
                       >
-                        <Phone className="w-3 h-3 text-gold/80" />
+                        <Phone className="w-3.5 h-3.5 text-gold shrink-0" />
                         <span>{member.phone}</span>
                       </a>
                     )}
@@ -190,11 +190,12 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Bottom copyright, privacy notice, and navigation */}
-        <div className="pt-8 flex flex-col md:flex-row items-center justify-between text-xs text-text-muted gap-4 text-center md:text-left pb-6 md:pb-2">
+        {/* Bottom bar: Laptop = © left / links right; Phone = stacked */}
+        {/* Extra bottom padding pb-12 ensures privacy notice never overlaps dev badges */}
+        <div className="pt-8 pb-12 flex flex-col lg:flex-row items-center justify-between text-xs text-text-muted gap-4 text-center lg:text-left">
           <div className="space-y-1">
             <p>© 2026 SVKM&apos;s NMIMS Sports Department. All rights reserved.</p>
-            <p className="text-[11px] text-text-muted/70">
+            <p className="text-[11px] text-text-muted/80">
               Privacy Notice: This site does not collect personal data from visitors.
             </p>
           </div>

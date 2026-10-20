@@ -142,8 +142,8 @@ export default function CountdownTimer() {
           </div>
         </div>
 
-        {/* 4 Flip Counters */}
-        <div className="grid grid-cols-4 gap-3 md:gap-6 text-center">
+        {/* 4 Flip Counters in a single row */}
+        <div className="grid grid-cols-4 gap-2 sm:gap-3 md:gap-6 text-center">
           {[
             { label: "DAYS", value: timeLeft.days },
             { label: "HOURS", value: timeLeft.hours },
@@ -152,12 +152,12 @@ export default function CountdownTimer() {
           ].map((item) => (
             <div
               key={item.label}
-              className="p-3 md:p-4 rounded-xl bg-[#0F122E]/80 border border-[rgba(217,178,111,0.2)] flex flex-col items-center justify-center shadow-inner"
+              className="p-2 sm:p-3 md:p-4 rounded-xl bg-indigo-black/80 border border-gold/20 flex flex-col items-center justify-center shadow-inner"
             >
-              <span className="text-2xl sm:text-4xl md:text-5xl font-mono font-bold text-gold tabular-nums leading-none">
+              <span className="text-xl sm:text-3xl md:text-4xl lg:text-5xl font-mono font-bold text-gold tabular-nums leading-none">
                 {String(item.value).padStart(2, "0")}
               </span>
-              <span className="text-[10px] sm:text-xs font-semibold text-[#AEB3D6] tracking-widest mt-2 uppercase">
+              <span className="text-[9px] sm:text-[10px] md:text-xs font-semibold text-text-muted tracking-widest mt-1.5 uppercase">
                 {item.label}
               </span>
             </div>

@@ -71,7 +71,10 @@ export default function PageHero({
 
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
           <div className="max-w-3xl">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-serif font-black uppercase text-gold-gradient tracking-tight leading-tight text-balance">
+            <h1
+              className="font-serif font-black uppercase text-gold-gradient tracking-tight leading-tight text-balance"
+              style={{ fontSize: "clamp(1.9rem, 5vw, 3.5rem)" }}
+            >
               {title}
             </h1>
             {subtitle && (

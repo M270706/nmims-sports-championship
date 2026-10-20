@@ -90,7 +90,7 @@ export default function UserHomePage() {
   return (
     <div className="relative text-text-main overflow-hidden">
       {/* 1. HERO SECTION */}
-      <section className="relative isolate min-h-[90vh] min-h-[90svh] flex flex-col justify-between overflow-hidden">
+      <section className="relative isolate min-h-[100svh] lg:min-h-[90vh] flex flex-col justify-between overflow-hidden">
         <CampusBackground />
 
         {/* Hero Content */}
@@ -147,7 +147,7 @@ export default function UserHomePage() {
         <AnnouncementTicker announcements={announcements.length > 0 ? announcements : undefined} />
 
         {/* 4. SPORTS SECTION */}
-        <section id="sports" className="py-16 md:py-24 relative scroll-mt-16">
+        <section id="sports" className="py-12 lg:py-20 relative scroll-mt-16">
           <Container>
             <SectionHeader
               eyebrow="Championship Disciplines"
@@ -262,7 +262,7 @@ export default function UserHomePage() {
         </section>
 
         {/* 6. PARTICIPATING CAMPUSES */}
-        <section className="py-16 md:py-24 relative">
+        <section className="py-12 lg:py-20 relative">
           <Container>
             <SectionHeader
               eyebrow="Pan-India Representation"
@@ -312,7 +312,7 @@ export default function UserHomePage() {
         </section>
 
         {/* 7. ABOUT THE CHAMPIONSHIP */}
-        <section className="py-16 md:py-24 border-t border-gold/15 relative">
+        <section className="py-12 lg:py-20 border-t border-gold/15 relative">
           <Container>
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
               <div className="lg:col-span-6 relative h-[360px] sm:h-[440px] rounded-2xl overflow-hidden border border-gold/25 shadow-card">
@@ -357,7 +357,7 @@ export default function UserHomePage() {
         </section>
 
         {/* 8. GALLERY PREVIEW */}
-        <section className="py-16 md:py-24 bg-surface/40 border-y border-gold/15 relative">
+        <section className="py-12 lg:py-20 bg-surface/40 border-y border-gold/15 relative">
           <Container>
             <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-10 md:mb-12">
               <div>
@@ -404,7 +404,7 @@ export default function UserHomePage() {
         </section>
 
         {/* 9. "WHO WILL LIFT THE TROPHY?" */}
-        <section className="py-16 md:py-24 relative">
+        <section className="py-12 lg:py-20 relative">
           <Container>
             <div className="p-8 sm:p-12 rounded-2xl bg-gradient-to-br from-surface via-surface-2 to-indigo-black border border-gold/30 shadow-card relative overflow-hidden">
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
@@ -448,7 +448,7 @@ export default function UserHomePage() {
         </section>
 
         {/* 10. IN THE NEWS */}
-        <section className="py-16 md:py-24 border-t border-gold/15 relative">
+        <section className="py-12 lg:py-20 border-t border-gold/15 relative">
           <Container className="max-w-4xl">
             <SectionHeader
               eyebrow="Media Coverage"
@@ -489,7 +489,7 @@ export default function UserHomePage() {
         </section>
 
         {/* 11. FAQ ACCORDION */}
-        <section className="py-16 md:py-24 relative overflow-hidden border-t border-gold/15">
+        <section className="py-12 lg:py-20 relative overflow-hidden border-t border-gold/15">
           <div className="absolute inset-0 -z-20">
             <Image
               src="/images/gallery/highlight-08-closing-group.webp"

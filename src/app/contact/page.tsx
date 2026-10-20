@@ -42,7 +42,7 @@ export default async function ContactPage() {
         imageAlt="Felicitation of dignitaries"
       />
 
-      <Container className="py-12 md:py-16 space-y-12 md:space-y-16">
+      <Container className="py-12 lg:py-20 space-y-12 lg:space-y-20">
         {/* 2. LEADERSHIP: Single card, NO phone number, NO Call/WhatsApp buttons */}
         <div className="max-w-2xl mx-auto">
           <SectionHeader

@@ -60,7 +60,7 @@ export default function CampusDetailPage() {
         backLink={{ label: "All Campuses", href: "/campuses" }}
       />
 
-      <Container className="py-12 md:py-16 space-y-12 md:space-y-16">
+      <Container className="py-12 lg:py-20 space-y-12 lg:space-y-20">
         {/* Campus Overview Header Card */}
         <div className="p-6 sm:p-8 rounded-2xl bg-surface/90 border border-gold/25 shadow-card relative overflow-hidden">
           {dept.isHost && (

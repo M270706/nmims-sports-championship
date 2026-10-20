@@ -76,7 +76,7 @@ function TeamsContent() {
         imageAlt="All seven NMIMS campuses gathered at the championship"
       />
 
-      <Container className="py-12 md:py-16">
+      <Container className="py-12 lg:py-20">
         {/* Filters and View Switcher */}
         <div className="p-4 sm:p-6 rounded-2xl bg-surface border border-gold/20 mb-10 flex flex-col lg:flex-row items-center justify-between gap-4 shadow-card">
           {/* View Mode Toggle: Campus View vs Sport View */}

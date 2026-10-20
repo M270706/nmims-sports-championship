@@ -74,6 +74,11 @@ export default function PointsTable({
           </div>
         ) : (
           <div className="overflow-x-auto relative">
+            {/* Mobile swipe hint */}
+            <div className="md:hidden px-4 py-1 bg-surface-2/60 border-b border-gold/10 text-[10px] text-gold/70 flex items-center justify-end gap-1">
+              <span>Swipe table for stats</span>
+              <span>→</span>
+            </div>
             <table className="w-full text-left border-collapse text-xs">
               <thead>
                 <tr className="border-b border-gold/15 bg-white/5 text-[11px] font-mono uppercase text-gold tracking-wider h-12">

@@ -46,7 +46,7 @@ export default function CampusesPublicPage() {
         imageAlt="All seven NMIMS campuses gathered together"
       />
 
-      <section className="py-16 md:py-24">
+      <section className="py-12 lg:py-20">
         <Container>
           {/* 7 Campus Cards */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 items-stretch">

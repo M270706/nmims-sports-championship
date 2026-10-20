@@ -27,7 +27,7 @@ export default function SportsOverviewPage() {
       />
 
       {/* 2. Sports Cards Grid */}
-      <section className="py-16 md:py-24">
+      <section className="py-12 lg:py-20">
         <Container>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 items-stretch">
             {SPORTS_CONFIG.map((sport) => (

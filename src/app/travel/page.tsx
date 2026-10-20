@@ -60,7 +60,7 @@ export default function TravelPage() {
         imageAlt="Aerial view of Mukesh Patel Technology Park, Shirpur Campus"
       />
 
-      <Container className="py-12 md:py-16 space-y-12 md:space-y-16">
+      <Container className="py-12 lg:py-20 space-y-12 lg:space-y-20">
         {/* 2. Prominent Reporting Card */}
         <div className="p-6 sm:p-8 rounded-2xl bg-gradient-to-r from-surface-2 via-surface to-surface-2 border border-gold/40 shadow-card flex flex-col sm:flex-row items-center justify-between gap-6">
           <div className="flex flex-col sm:flex-row items-center sm:items-start gap-5 text-center sm:text-left">
@@ -116,8 +116,8 @@ export default function TravelPage() {
             </Button>
           </div>
 
-          {/* Embedded Map */}
-          <div className="lg:col-span-7 h-64 sm:h-80 rounded-2xl overflow-hidden border border-gold/25 shadow-card relative">
+          {/* Embedded Map: 250px on phone, 400px on laptop */}
+          <div className="lg:col-span-7 h-[250px] lg:h-[400px] w-full rounded-2xl overflow-hidden border border-gold/25 shadow-card relative">
             <iframe
               src={TOURNAMENT_CONFIG.googleMapsEmbedUrl}
               width="100%"

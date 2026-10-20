@@ -140,7 +140,7 @@ export default function GalleryPage() {
         imageAlt="Opening ceremony"
       />
 
-      <section className="py-12 md:py-16">
+      <section className="py-12 lg:py-20">
         <Container>
           {/* Tags Filter (scrollable on mobile) */}
           <div className="flex items-center justify-start md:justify-center overflow-x-auto pb-4 mb-10 gap-2 no-scrollbar -mx-4 px-4 sm:mx-0 sm:px-0">

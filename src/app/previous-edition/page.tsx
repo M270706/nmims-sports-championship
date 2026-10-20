@@ -32,7 +32,7 @@ export default function PreviousEditionPage() {
         imageAlt="Inauguration Ceremony"
       />
 
-      <Container className="py-12 md:py-16">
+      <Container className="py-12 lg:py-20">
         {/* Navigation Tabs Bar */}
         <div className="flex items-center justify-start sm:justify-center overflow-x-auto pb-4 border-b border-gold/20 mb-12 gap-2 sm:gap-3 no-scrollbar -mx-4 px-4 sm:mx-0 sm:px-0">
           {tabs.map((tab) => {

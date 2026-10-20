@@ -207,45 +207,45 @@ function SportDashboardContent() {
       >
         {/* Dynamic Men/Women Toggle in Hero */}
         {currentSport.hasMen && currentSport.hasWomen && (
-          <div className="inline-flex p-1 rounded-full bg-indigo-black/90 border border-gold/40 shadow-card backdrop-blur-md">
+          <div className="w-full sm:w-auto flex p-1 rounded-full bg-indigo-black/90 border border-gold/40 shadow-card backdrop-blur-md">
             <button
               type="button"
               onClick={() => setSelectedCategory("men")}
-              className={`px-5 py-2 rounded-full text-xs font-bold transition-all min-h-[40px] ${
+              className={`flex-1 sm:flex-none px-6 py-2 rounded-full text-xs font-bold transition-all min-h-[40px] ${
                 selectedCategory === "men"
                   ? "bg-men text-indigo-black shadow-md"
                   : "text-men hover:bg-men/10"
               }`}
             >
-              Men
+              Men&apos;s Division
             </button>
             <button
               type="button"
               onClick={() => setSelectedCategory("women")}
-              className={`px-5 py-2 rounded-full text-xs font-bold transition-all min-h-[40px] ${
+              className={`flex-1 sm:flex-none px-6 py-2 rounded-full text-xs font-bold transition-all min-h-[40px] ${
                 selectedCategory === "women"
                   ? "bg-women text-indigo-black shadow-md"
                   : "text-women hover:bg-women/10"
               }`}
             >
-              Women
+              Women&apos;s Division
             </button>
           </div>
         )}
       </PageHero>
 
       {/* 2. TABS: Schedule · Results · Points Table · Leaderboard */}
-      <Container className="mt-8 md:mt-12">
-        {/* Navigation Tabs Bar */}
-        <div className="flex items-center justify-start sm:justify-center border-b border-gold/20 mb-8 overflow-x-auto no-scrollbar">
-          <div className="flex space-x-2 sm:space-x-4">
+      {/* Sticky pill row on mobile under 64px header, centred on laptop */}
+      <div className="sticky top-16 z-30 bg-navy/95 backdrop-blur-md border-b border-gold/20 py-3 shadow-md">
+        <Container>
+          <div className="flex items-center justify-start lg:justify-center gap-2 sm:gap-3 overflow-x-auto no-scrollbar">
             <button
               type="button"
               onClick={() => setActiveTab("schedule")}
-              className={`px-4 sm:px-6 py-3 font-serif font-bold text-xs sm:text-base border-b-2 transition-all whitespace-nowrap min-h-[44px] ${
+              className={`px-4 sm:px-6 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all whitespace-nowrap min-h-[44px] shrink-0 ${
                 activeTab === "schedule"
-                  ? "border-gold text-gold"
-                  : "border-transparent text-text-muted hover:text-text-main"
+                  ? "btn-gold shadow-gold-glow"
+                  : "bg-surface text-text-muted hover:text-text-main hover:bg-surface-2 border border-gold/20"
               }`}
             >
               Schedule
@@ -253,10 +253,10 @@ function SportDashboardContent() {
             <button
               type="button"
               onClick={() => setActiveTab("results")}
-              className={`px-4 sm:px-6 py-3 font-serif font-bold text-xs sm:text-base border-b-2 transition-all whitespace-nowrap min-h-[44px] ${
+              className={`px-4 sm:px-6 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all whitespace-nowrap min-h-[44px] shrink-0 ${
                 activeTab === "results"
-                  ? "border-gold text-gold"
-                  : "border-transparent text-text-muted hover:text-text-main"
+                  ? "btn-gold shadow-gold-glow"
+                  : "bg-surface text-text-muted hover:text-text-main hover:bg-surface-2 border border-gold/20"
               }`}
             >
               Results
@@ -264,10 +264,10 @@ function SportDashboardContent() {
             <button
               type="button"
               onClick={() => setActiveTab("points")}
-              className={`px-4 sm:px-6 py-3 font-serif font-bold text-xs sm:text-base border-b-2 transition-all whitespace-nowrap min-h-[44px] ${
+              className={`px-4 sm:px-6 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all whitespace-nowrap min-h-[44px] shrink-0 ${
                 activeTab === "points"
-                  ? "border-gold text-gold"
-                  : "border-transparent text-text-muted hover:text-text-main"
+                  ? "btn-gold shadow-gold-glow"
+                  : "bg-surface text-text-muted hover:text-text-main hover:bg-surface-2 border border-gold/20"
               }`}
             >
               Points Table
@@ -276,18 +276,20 @@ function SportDashboardContent() {
               <button
                 type="button"
                 onClick={() => setActiveTab("leaderboard")}
-                className={`px-4 sm:px-6 py-3 font-serif font-bold text-xs sm:text-base border-b-2 transition-all whitespace-nowrap min-h-[44px] ${
+                className={`px-4 sm:px-6 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all whitespace-nowrap min-h-[44px] shrink-0 ${
                   activeTab === "leaderboard"
-                    ? "border-gold text-gold"
-                    : "border-transparent text-text-muted hover:text-text-main"
+                    ? "btn-gold shadow-gold-glow"
+                    : "bg-surface text-text-muted hover:text-text-main hover:bg-surface-2 border border-gold/20"
                 }`}
               >
                 Leaderboard
               </button>
             )}
           </div>
-        </div>
+        </Container>
+      </div>
 
+      <Container className="mt-8 md:mt-12">
         {/* TAB 1: SCHEDULE */}
         {activeTab === "schedule" && (
           <div className="space-y-6">
