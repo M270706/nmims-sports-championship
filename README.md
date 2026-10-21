@@ -8,7 +8,7 @@ Official website for the **SVKM's NMIMS INTER CAMPUS SPORTS CHAMPIONSHIP 2026-27
 
 - **Mobile-First & Premium Championship Aesthetic**: Midnight Navy (`#1B1F4B`), royal/cobalt blue layered patch textures (`<NavyPatchBackground />`), and champagne gold (`#D9B26F`) typography.
 - **Header Layout**: SVKM logo anchored at far left, NMIMS white crest anchored at far right across all viewport breakpoints.
-- **Dynamic Countdown & Reporting Notice**: Real-time flip countdown to 27 Oct 2026 09:00 IST with reporting badge (26 Oct 12:00 Noon).
+- **Dynamic Countdown & Reporting Notice**: Real-time flip countdown to 27 Oct 2026 09:00 IST with reporting badge (27th Oct 2026, 12:00 Noon).
 - **Sport Dashboards (`/sports/[sport]`)**:
   - Exactly three tabs: **Schedule · Results · Leaderboard**.
   - **COMING UP** schedule grouped by tournament day with calendar `.ics` download.

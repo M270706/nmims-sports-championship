@@ -235,7 +235,7 @@ export default function Footer() {
               Eligibility Rules
             </Link>
             <Link href="/travel" className="hover:text-gold transition-colors focus-visible:ring-1 focus-visible:ring-gold rounded">
-              Reporting: 26 Oct 12:00 Noon
+              Reporting: 27th Oct 2026, 12:00 Noon
             </Link>
             <Link href="/contact" className="hover:text-gold transition-colors focus-visible:ring-1 focus-visible:ring-gold rounded">
               Contact Us

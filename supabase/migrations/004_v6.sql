@@ -376,11 +376,11 @@ INSERT INTO site_config (key, value) VALUES
   "lawn-tennis": { "win": 2, "draw": 0, "loss": 0, "nr": 0 }
 }'::jsonb),
 ('venue_address', '"Mukesh Patel Technology Park – Shirpur Campus\nBabulde, Near Tapi River Bridge, Mumbai-Agra Road (NH3),\nShirpur – 425405, Dist.: Dhule, Maharashtra, INDIA"'::jsonb),
-('reporting_text', '"26th October 2026, 12:00 Noon"'::jsonb),
+('reporting_text', '"27th October 2026, 12:00 Noon"'::jsonb),
 ('faqs', '[
   {
     "question": "When should teams report?",
-    "answer": "On 26th October 2026 by 12:00 Noon at Mukesh Patel Technology Park – Shirpur Campus. Team managers and players must complete registration and accreditation upon arrival."
+    "answer": "On 27th October 2026 by 12:00 Noon at Mukesh Patel Technology Park – Shirpur Campus. Team managers and players must complete registration and accreditation upon arrival."
   },
   {
     "question": "When is the championship?",

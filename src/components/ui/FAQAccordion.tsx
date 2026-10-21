@@ -12,7 +12,7 @@ export const CHAMPIONSHIP_FAQS: FAQItem[] = [
   {
     question: "When should teams report?",
     answer:
-      "On 26th October 2026 by 12:00 Noon at Mukesh Patel Technology Park – Shirpur Campus. Team managers and players must complete registration and accreditation upon arrival.",
+      "On 27th October 2026 by 12:00 Noon at Mukesh Patel Technology Park – Shirpur Campus. Team managers and players must complete registration and accreditation upon arrival.",
   },
   {
     question: "When is the championship?",

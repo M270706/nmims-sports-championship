@@ -71,7 +71,7 @@ export default function RulesPage() {
 
   const handleDownloadProforma = () => {
     alert(
-      "Eligibility Proforma template will be available for download from your campus sports director. Please submit on 26 October."
+      "Eligibility Proforma template will be available for download from your campus sports director. Please submit on 27th October 2026, 12:00 Noon."
     );
   };
 

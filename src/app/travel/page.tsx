@@ -72,7 +72,7 @@ export default function TravelPage() {
                 Reporting Deadline
               </span>
               <h2 className="text-xl sm:text-2xl font-serif font-black text-gold-light mt-1">
-                Report on 26th October 2026 by 12:00 Noon
+                Reporting: 27th October 2026, 12:00 Noon
               </h2>
               <p className="text-xs sm:text-sm text-text-muted mt-1">
                 At Mukesh Patel Technology Park (MPTP), Shirpur Campus.

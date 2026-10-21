@@ -13,7 +13,7 @@ import {
 export default function AdminAnnouncementsPage() {
   const [tickerList, setTickerList] = useState<AnnouncementItem[]>([]);
   const [content, setContent] = useState("");
-  const [startTime, setStartTime] = useState("2026-10-26T09:00");
+  const [startTime, setStartTime] = useState("2026-10-27T09:00");
   const [endTime, setEndTime] = useState("2026-10-31T20:00");
   const [priority, setPriority] = useState(1);
   const [editingItem, setEditingItem] = useState<AnnouncementItem | null>(null);

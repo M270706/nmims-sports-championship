@@ -27,9 +27,9 @@ export const TOURNAMENT_CONFIG = {
   dateRange: {
     start: "2026-10-27T09:00:00+05:30",
     end: "2026-10-31T20:00:00+05:30",
-    reporting: "2026-10-26T12:00:00+05:30",
+    reporting: "2026-10-27T12:00:00+05:30",
   },
-  reportingText: "26th October 2026, 12:00 Noon",
+  reportingText: "27th October 2026, 12:00 Noon",
   organizedBy: "Sports Department, SVKM's NMIMS",
   hostCampus: "Mukesh Patel Technology Park (MPTP), Shirpur Campus",
   venueAddress: `Mukesh Patel Technology Park – Shirpur Campus

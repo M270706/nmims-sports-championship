@@ -45,9 +45,9 @@ const DEFAULT_ANNOUNCEMENTS: AnnouncementItem[] = [
   {
     id: "ann-2",
     title: "Team Reporting Notice",
-    content: "Teams must report on 26th October 2026 by 12:00 Noon. Complimentary travel pick-up available from railway stations and airports.",
+    content: "Teams must report on 27th October 2026 by 12:00 Noon. Complimentary travel pick-up available from railway stations and airports.",
     startTime: "2026-10-25T08:00",
-    endTime: "2026-10-27T12:00",
+    endTime: "2026-10-27T18:00",
     priority: 2,
   },
   {
@@ -78,7 +78,7 @@ export async function getAnnouncementsAction(): Promise<AnnouncementItem[]> {
     title: a.title || "",
     content: a.content,
     priority: a.priority ?? 1,
-    startTime: a.start_time ? a.start_time.substring(0, 16) : "2026-10-26T09:00",
+    startTime: a.start_time ? a.start_time.substring(0, 16) : "2026-10-27T09:00",
     endTime: a.end_time ? a.end_time.substring(0, 16) : "2026-10-31T20:00",
   }));
 }
