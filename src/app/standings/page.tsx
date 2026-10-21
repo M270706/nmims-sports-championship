@@ -16,6 +16,7 @@ import { SPORTS_CONFIG } from "@/config/tournament";
 import { SportType, CategoryGender, Team, Match, TeamGroup, Group } from "@/types/tournament";
 import { getTeams, fetchTeams, getMatches, fetchMatches } from "@/lib/tournament-store";
 import { getTeamGroups, fetchTeamGroups, fetchGroups } from "@/lib/groups-store";
+import { buildStatLeaderboard } from "@/lib/points-calculator";
 
 export const dynamic = "force-dynamic";
 
@@ -60,10 +61,10 @@ function StandingsContent() {
         category: selectedCategory,
         board1Title: "🏏 Highest Runs",
         board1Unit: "Runs",
-        board1Data: [],
+        board1Data: buildStatLeaderboard(matches, "cricket", selectedCategory, "Runs"),
         board2Title: "🎯 Most Wickets",
         board2Unit: "Wickets",
-        board2Data: [],
+        board2Data: buildStatLeaderboard(matches, "cricket", selectedCategory, "Wickets"),
       };
     }
 
@@ -73,7 +74,7 @@ function StandingsContent() {
         category: selectedCategory,
         board1Title: "⚽ Most Goals",
         board1Unit: "Goals",
-        board1Data: [],
+        board1Data: buildStatLeaderboard(matches, "football", selectedCategory, "Goals"),
       };
     }
 
@@ -83,7 +84,7 @@ function StandingsContent() {
         category: selectedCategory,
         board1Title: "🏀 Most Points Scored",
         board1Unit: "Points",
-        board1Data: [],
+        board1Data: buildStatLeaderboard(matches, "basketball", selectedCategory, "Points"),
       };
     }
 
@@ -93,13 +94,13 @@ function StandingsContent() {
         category: selectedCategory,
         board1Title: "🏐 Most Points Scored",
         board1Unit: "Points",
-        board1Data: [],
+        board1Data: buildStatLeaderboard(matches, "volleyball", selectedCategory, "Points"),
       };
     }
 
     // Table Tennis and Lawn Tennis have NO leaderboard
     return null;
-  }, [selectedSportSlug, selectedCategory]);
+  }, [selectedSportSlug, selectedCategory, matches]);
 
   return (
     <NavyPatchBackground variant="calm" className="min-h-screen pb-24">
