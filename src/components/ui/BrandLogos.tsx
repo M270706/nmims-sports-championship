@@ -103,7 +103,7 @@ export function NmimsLogo({
     >
       <div className="relative w-full h-full">
         <Image
-          src="/images/nmims-logo-white.webp"
+          src="/images/nmims-logo-v3-white.webp"
           alt="NMIMS Deemed to be University"
           fill
           sizes={sizesAttr}

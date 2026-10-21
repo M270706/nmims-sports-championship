@@ -55,7 +55,7 @@ export default function Footer() {
               title="NMIMS Deemed to be University"
             >
               <Image
-                src="/images/nmims-logo-white.webp"
+                src="/images/nmims-logo-v3-white.webp"
                 alt="NMIMS"
                 fill
                 sizes="64px"

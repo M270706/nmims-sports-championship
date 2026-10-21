@@ -22,7 +22,7 @@ const MORE = [
 const ALL = [...MAIN, ...MORE];
 
 const SVKM_LOGO = "/images/svkm-logo.webp";
-const NMIMS_LOGO = "/images/nmims-logo-white.webp";
+const NMIMS_LOGO = "/images/nmims-logo-v3-white.webp";
 
 export default function SiteHeader() {
   const pathname = usePathname() || "";
