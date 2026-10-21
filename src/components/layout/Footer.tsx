@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { MapPin, Phone, Trophy, Award } from "lucide-react";
+import { MapPin, Trophy, Award } from "lucide-react";
 import { TOURNAMENT_CONFIG, SPORTS_CONFIG } from "@/config/tournament";
 import { LEADERSHIP_CONFIG, COMMITTEE_CONFIG } from "@/config/contacts";
 import Container from "@/components/ui/Container";
@@ -167,13 +167,13 @@ export default function Footer() {
           </div>
 
           {/* Col 4: Key Contacts */}
-          <div className="flex flex-col items-center lg:items-start w-full">
+          <div className="flex flex-col items-start w-full text-left">
             <h4 className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-gold mb-4">
               Key Contacts
             </h4>
-            <div className="space-y-3.5 text-xs w-full max-w-sm lg:max-w-none">
+            <div className="w-full">
               {/* Leadership */}
-              <div className="p-3.5 rounded-xl bg-surface border border-gold/20 text-left">
+              <div className="w-full p-3.5 rounded-xl bg-surface border border-gold/20 text-left">
                 <div className="flex items-center gap-1.5 text-[10px] font-bold text-gold uppercase tracking-wider mb-1">
                   <Award className="w-3.5 h-3.5" />
                   <span>Leadership</span>
@@ -183,36 +183,39 @@ export default function Footer() {
               </div>
 
               {/* Organising Committee */}
-              <div className="pt-1">
-                <div className="font-semibold text-text-muted text-xs uppercase tracking-wide text-left mb-1">
-                  Organising Committee:
-                </div>
-                <div>
-                  {COMMITTEE_CONFIG.map((member) => (
-                    <div
-                      key={member.name}
-                      className="grid grid-cols-[1fr_auto] items-start gap-4 py-3 border-b border-gold/10"
-                    >
-                      <div className="min-w-0 text-left">
-                        <span className="text-text-main font-semibold text-xs sm:text-sm block leading-snug">
-                          {member.name}
-                        </span>
-                        <span className="text-text-muted text-xs block leading-tight mt-0.5">
-                          {member.role}
-                        </span>
-                      </div>
-                      {member.phone && (
+              <div className="mt-5 w-full">
+                <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-white/60">
+                  Organising Committee
+                </p>
+                <ul className="divide-y divide-[#D9B26F]/10">
+                  {COMMITTEE_CONFIG.map((c) => (
+                    <li key={c.name} className="py-3">
+                      <p className="text-[15px] font-semibold leading-tight text-white">{c.name}</p>
+                      <p className="mt-0.5 text-xs leading-snug text-white/60">{c.role}</p>
+                      {c.phone && (
                         <a
-                          href={`tel:${member.phone.replace(/\s+/g, "")}`}
-                          className="inline-flex items-center gap-1.5 whitespace-nowrap tabular-nums text-sm text-gold hover:text-gold-light transition-colors"
+                          href={`tel:${c.phone.replace(/\s/g, "")}`}
+                          className="mt-1.5 inline-flex items-center gap-1.5 whitespace-nowrap text-sm tabular-nums text-[#D9B26F] hover:text-[#F0D38F]"
                         >
-                          <Phone className="w-3.5 h-3.5 text-gold shrink-0" />
-                          <span>{member.phone}</span>
+                          <svg
+                            width="14"
+                            height="14"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            className="shrink-0"
+                          >
+                            <path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z" />
+                          </svg>
+                          {c.phone}
                         </a>
                       )}
-                    </div>
+                    </li>
                   ))}
-                </div>
+                </ul>
               </div>
             </div>
           </div>
