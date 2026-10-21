@@ -119,3 +119,22 @@ INSERT INTO contacts (name, role, phone, "group", sort_order) VALUES
 ('Tushar Jain', 'Sports Incharge, MPTP Shirpur Campus', '+91 95886 75238', 'committee', 2),
 ('Aryan Pawar', 'Sports Council Member, MPTP Shirpur Campus', '+91 91569 88019', 'committee', 3),
 ('Mehi Manswa', 'Sports Council Member, MPTP Shirpur Campus', '+91 93249 79109', 'committee', 4);
+
+-- 7. REPORTING DATE UPDATES
+UPDATE public.site_config
+SET value = '"27th October 2026, 12:00 Noon"'::jsonb,
+    updated_at = NOW()
+WHERE key = 'reporting_text';
+
+UPDATE public.site_config
+SET value = jsonb_set(
+  value,
+  '{0,answer}',
+  '"On 27th October 2026 by 12:00 Noon at Mukesh Patel Technology Park – Shirpur Campus. Team managers and players must complete registration and accreditation upon arrival."'
+),
+updated_at = NOW()
+WHERE key = 'faqs';
+
+UPDATE public.announcements
+SET content = REPLACE(content, '26th October 2026', '27th October 2026')
+WHERE content ILIKE '%26th October 2026%';
