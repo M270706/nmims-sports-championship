@@ -64,7 +64,7 @@ export default function StartingEntryPage() {
       {/* 2. HEADER: BrandLogos with SVKM on far left and NMIMS on far right */}
       <header className="relative z-20 w-full py-6 sm:py-8">
         <Container>
-          <BrandLogos size="lg" mobileSize="xs" href="/home" />
+          <BrandLogos size="xl" mobileSize="xs" href="/home" />
         </Container>
       </header>
 

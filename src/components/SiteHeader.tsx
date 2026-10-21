@@ -22,12 +22,18 @@ const MORE = [
 const ALL = [...MAIN, ...MORE];
 
 const SVKM_LOGO = "/images/svkm-logo.webp";
-const NMIMS_LOGO = "/images/nmims-logo-v3-white.webp";
+const NMIMS_LOGO = "/images/nmims-logo-v3.webp";
 
 function LogoBox({ src, alt }: { src: string; alt: string }) {
   return (
-    <Link href="/home" aria-label={alt} className="relative h-11 w-11 shrink-0 lg:h-14 lg:w-14">
-      <Image src={src} alt={alt} fill sizes="56px" priority className="object-contain" />
+    <Link
+      href="/home"
+      aria-label={alt}
+      className="grid h-11 w-11 shrink-0 place-items-center rounded-lg bg-white p-1 shadow-sm ring-1 ring-black/5 lg:h-14 lg:w-14 lg:rounded-xl lg:p-1.5"
+    >
+      <span className="relative h-full w-full">
+        <Image src={src} alt={alt} fill sizes="56px" priority className="object-contain" />
+      </span>
     </Link>
   );
 }

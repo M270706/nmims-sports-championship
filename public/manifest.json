@@ -8,12 +8,12 @@
   "theme_color": "#1B1F4B",
   "icons": [
     {
-      "src": "/images/nmims-logo-v3-white.webp",
+      "src": "/images/nmims-logo-v3.webp",
       "sizes": "192x192",
       "type": "image/webp"
     },
     {
-      "src": "/images/nmims-logo-v3-white.webp",
+      "src": "/images/nmims-logo-v3.webp",
       "sizes": "512x512",
       "type": "image/webp"
     }

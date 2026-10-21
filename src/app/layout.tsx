@@ -34,8 +34,8 @@ export const metadata: Metadata = {
     "Official website of SVKM's NMIMS INTER CAMPUS SPORTS CHAMPIONSHIP 2026-27. 27–31 October 2026 at Mukesh Patel Technology Park, Shirpur. Fixtures, Results, Leaderboards, MOTM awards & Gallery.",
   manifest: "/manifest.json",
   icons: {
-    icon: "/images/nmims-logo-v3-white.webp",
-    apple: "/images/nmims-logo-v3-white.webp",
+    icon: "/images/nmims-logo-v3.webp",
+    apple: "/images/nmims-logo-v3.webp",
   },
   openGraph: {
     title: TOURNAMENT_CONFIG.fullName,

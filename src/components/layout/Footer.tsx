@@ -22,16 +22,18 @@ export default function Footer() {
           <div className="flex items-center gap-3.5 shrink-0">
             <Link
               href="/home"
-              className="relative h-16 w-16 shrink-0 flex items-center justify-center focus:outline-none focus-visible:ring-2 focus-visible:ring-gold rounded"
+              className="grid h-16 w-16 shrink-0 place-items-center rounded-xl bg-white p-1.5 shadow-sm ring-1 ring-black/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
               title="SVKM - Shri Vile Parle Kelavani Mandal"
             >
-              <Image
-                src="/images/svkm-logo.webp"
-                alt="SVKM"
-                fill
-                sizes="64px"
-                className="object-contain"
-              />
+              <span className="relative h-full w-full">
+                <Image
+                  src="/images/svkm-logo.webp"
+                  alt="SVKM"
+                  fill
+                  sizes="64px"
+                  className="object-contain"
+                />
+              </span>
             </Link>
             <div className="hidden sm:flex items-center gap-3.5">
               <div className="h-8 w-px bg-gold/25" />
@@ -51,16 +53,18 @@ export default function Footer() {
             </div>
             <Link
               href="/home"
-              className="relative h-16 w-16 shrink-0 flex items-center justify-center focus:outline-none focus-visible:ring-2 focus-visible:ring-gold rounded"
+              className="grid h-16 w-16 shrink-0 place-items-center rounded-xl bg-white p-1.5 shadow-sm ring-1 ring-black/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
               title="NMIMS Deemed to be University"
             >
-              <Image
-                src="/images/nmims-logo-v3-white.webp"
-                alt="NMIMS"
-                fill
-                sizes="64px"
-                className="object-contain"
-              />
+              <span className="relative h-full w-full">
+                <Image
+                  src="/images/nmims-logo-v3.webp"
+                  alt="NMIMS"
+                  fill
+                  sizes="64px"
+                  className="object-contain"
+                />
+              </span>
             </Link>
           </div>
         </div>

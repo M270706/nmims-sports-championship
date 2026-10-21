@@ -54,9 +54,9 @@ export function SvkmLogo({
 
   const content = (
     <div
-      className={`relative ${boxClass} flex-shrink-0 flex items-center justify-center ${className}`}
+      className={`grid ${boxClass} shrink-0 place-items-center rounded-xl bg-white p-1 sm:p-1.5 shadow-sm ring-1 ring-black/5 ${className}`}
     >
-      <div className="relative w-full h-full">
+      <span className="relative h-full w-full">
         <Image
           src="/images/svkm-logo.webp"
           alt="SVKM - Shri Vile Parle Kelavani Mandal"
@@ -65,7 +65,7 @@ export function SvkmLogo({
           className="object-contain"
           priority
         />
-      </div>
+      </span>
     </div>
   );
 
@@ -73,7 +73,7 @@ export function SvkmLogo({
     return (
       <Link
         href={href}
-        className="focus:outline-none focus-visible:ring-2 focus-visible:ring-gold rounded flex items-center flex-shrink-0"
+        className="focus:outline-none focus-visible:ring-2 focus-visible:ring-gold rounded-xl flex items-center shrink-0"
         title="SVKM - Shri Vile Parle Kelavani Mandal"
       >
         {content}
@@ -97,18 +97,18 @@ export function NmimsLogo({
 
   const content = (
     <div
-      className={`relative ${boxClass} flex-shrink-0 flex items-center justify-center ${className}`}
+      className={`grid ${boxClass} shrink-0 place-items-center rounded-xl bg-white p-1 sm:p-1.5 shadow-sm ring-1 ring-black/5 ${className}`}
     >
-      <div className="relative w-full h-full">
+      <span className="relative h-full w-full">
         <Image
-          src="/images/nmims-logo-v3-white.webp"
+          src="/images/nmims-logo-v3.webp"
           alt="NMIMS Deemed to be University"
           fill
           sizes={sizesAttr}
           className="object-contain"
           priority
         />
-      </div>
+      </span>
     </div>
   );
 
@@ -116,7 +116,7 @@ export function NmimsLogo({
     return (
       <Link
         href={href}
-        className="focus:outline-none focus-visible:ring-2 focus-visible:ring-gold rounded flex items-center flex-shrink-0"
+        className="focus:outline-none focus-visible:ring-2 focus-visible:ring-gold rounded-xl flex items-center shrink-0"
         title="NMIMS Deemed to be University"
       >
         {content}
