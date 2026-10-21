@@ -1,9 +1,9 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { MapPin, Phone, Trophy, Award } from "lucide-react";
 import { TOURNAMENT_CONFIG, SPORTS_CONFIG } from "@/config/tournament";
 import { LEADERSHIP_CONFIG, COMMITTEE_CONFIG } from "@/config/contacts";
-import BrandLogos from "@/components/ui/BrandLogos";
 import Container from "@/components/ui/Container";
 
 export default function Footer() {
@@ -16,27 +16,53 @@ export default function Footer() {
       </div>
 
       <Container className="relative z-10">
-        {/* Top bar with dual logos: BrandLogos size="footer" (h-14 w-14) */}
-        <div className="pb-8 lg:pb-10 border-b border-gold/15">
-          <BrandLogos
-            size="footer"
-            leftAddon={
-              <div className="hidden sm:flex items-center space-x-3.5 pl-2">
-                <div className="h-7 w-px bg-gold/25" />
-                <span className="text-xs font-medium text-text-muted">
-                  Shri Vile Parle Kelavani Mandal
-                </span>
-              </div>
-            }
-            rightAddon={
-              <div className="hidden sm:flex items-center space-x-3.5 pr-2">
-                <span className="text-xs font-medium text-text-muted text-right">
-                  Deemed-to-be University
-                </span>
-                <div className="h-7 w-px bg-gold/25" />
-              </div>
-            }
-          />
+        {/* Top bar with dual logos in identical boxes (relative h-16 w-16 shrink-0) */}
+        <div className="pb-8 lg:pb-10 border-b border-gold/15 flex items-center justify-between w-full min-w-0">
+          {/* SVKM logo + text */}
+          <div className="flex items-center gap-3.5 shrink-0">
+            <Link
+              href="/home"
+              className="relative h-16 w-16 shrink-0 flex items-center justify-center focus:outline-none focus-visible:ring-2 focus-visible:ring-gold rounded"
+              title="SVKM - Shri Vile Parle Kelavani Mandal"
+            >
+              <Image
+                src="/images/svkm-logo.webp"
+                alt="SVKM"
+                fill
+                sizes="64px"
+                className="object-contain"
+              />
+            </Link>
+            <div className="hidden sm:flex items-center gap-3.5">
+              <div className="h-8 w-px bg-gold/25" />
+              <span className="text-xs font-medium text-text-muted leading-tight">
+                Shri Vile Parle Kelavani Mandal
+              </span>
+            </div>
+          </div>
+
+          {/* NMIMS logo + text */}
+          <div className="flex items-center gap-3.5 shrink-0">
+            <div className="hidden sm:flex items-center gap-3.5">
+              <span className="text-xs font-medium text-text-muted text-right leading-tight">
+                Deemed-to-be University
+              </span>
+              <div className="h-8 w-px bg-gold/25" />
+            </div>
+            <Link
+              href="/home"
+              className="relative h-16 w-16 shrink-0 flex items-center justify-center focus:outline-none focus-visible:ring-2 focus-visible:ring-gold rounded"
+              title="NMIMS Deemed to be University"
+            >
+              <Image
+                src="/images/nmims-logo-white.webp"
+                alt="NMIMS"
+                fill
+                sizes="64px"
+                className="object-contain"
+              />
+            </Link>
+          </div>
         </div>
 
         {/* Main content: Phone = stacked & centred; Laptop = 4 columns */}
@@ -147,44 +173,46 @@ export default function Footer() {
             </h4>
             <div className="space-y-3.5 text-xs w-full max-w-sm lg:max-w-none">
               {/* Leadership */}
-              <div className="p-3.5 rounded-xl bg-surface border border-gold/20 text-center lg:text-left">
-                <div className="flex items-center justify-center lg:justify-start gap-1.5 text-[10px] font-bold text-gold uppercase tracking-wider mb-1">
+              <div className="p-3.5 rounded-xl bg-surface border border-gold/20 text-left">
+                <div className="flex items-center gap-1.5 text-[10px] font-bold text-gold uppercase tracking-wider mb-1">
                   <Award className="w-3.5 h-3.5" />
                   <span>Leadership</span>
                 </div>
                 <div className="font-serif font-bold text-gold text-sm">{LEADERSHIP_CONFIG.name}</div>
-                <div className="text-text-muted text-[11px] mt-0.5">{LEADERSHIP_CONFIG.role}</div>
+                <div className="text-text-muted text-xs mt-0.5">{LEADERSHIP_CONFIG.role}</div>
               </div>
 
               {/* Organising Committee */}
-              <div className="space-y-2.5 pt-1">
-                <div className="font-semibold text-text-muted text-[11px] uppercase tracking-wide text-center lg:text-left">
+              <div className="pt-1">
+                <div className="font-semibold text-text-muted text-xs uppercase tracking-wide text-left mb-1">
                   Organising Committee:
                 </div>
-                {COMMITTEE_CONFIG.map((member) => (
-                  <div
-                    key={member.name}
-                    className="py-2 border-b border-gold/10 flex flex-col lg:flex-row items-center lg:items-start justify-between gap-2"
-                  >
-                    <div className="min-w-0 text-center lg:text-left">
-                      <span className="text-text-main font-semibold text-xs block leading-snug">
-                        {member.name}
-                      </span>
-                      <span className="text-text-muted text-[11px] block">
-                        {member.role}
-                      </span>
+                <div>
+                  {COMMITTEE_CONFIG.map((member) => (
+                    <div
+                      key={member.name}
+                      className="grid grid-cols-[1fr_auto] items-start gap-4 py-3 border-b border-gold/10"
+                    >
+                      <div className="min-w-0 text-left">
+                        <span className="text-text-main font-semibold text-xs sm:text-sm block leading-snug">
+                          {member.name}
+                        </span>
+                        <span className="text-text-muted text-xs block leading-tight mt-0.5">
+                          {member.role}
+                        </span>
+                      </div>
+                      {member.phone && (
+                        <a
+                          href={`tel:${member.phone.replace(/\s+/g, "")}`}
+                          className="inline-flex items-center gap-1.5 whitespace-nowrap tabular-nums text-sm text-gold hover:text-gold-light transition-colors"
+                        >
+                          <Phone className="w-3.5 h-3.5 text-gold shrink-0" />
+                          <span>{member.phone}</span>
+                        </a>
+                      )}
                     </div>
-                    {member.phone && (
-                      <a
-                        href={`tel:${member.phone.replace(/\s+/g, "")}`}
-                        className="text-gold font-mono text-xs whitespace-nowrap inline-flex items-center justify-center gap-1.5 py-2 px-3.5 rounded-xl bg-surface hover:bg-gold hover:text-navy border border-gold/30 min-h-[44px] lg:min-h-0 lg:py-1 lg:px-2.5 transition-colors"
-                      >
-                        <Phone className="w-3.5 h-3.5 text-gold shrink-0" />
-                        <span>{member.phone}</span>
-                      </a>
-                    )}
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
             </div>
           </div>
