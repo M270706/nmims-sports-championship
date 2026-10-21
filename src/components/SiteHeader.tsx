@@ -24,6 +24,14 @@ const ALL = [...MAIN, ...MORE];
 const SVKM_LOGO = "/images/svkm-logo.webp";
 const NMIMS_LOGO = "/images/nmims-logo-v3-white.webp";
 
+function LogoBox({ src, alt }: { src: string; alt: string }) {
+  return (
+    <Link href="/home" aria-label={alt} className="relative h-11 w-11 shrink-0 lg:h-14 lg:w-14">
+      <Image src={src} alt={alt} fill sizes="56px" priority className="object-contain" />
+    </Link>
+  );
+}
+
 export default function SiteHeader() {
   const pathname = usePathname() || "";
   const stripRef = useRef<HTMLDivElement>(null);
@@ -42,9 +50,7 @@ export default function SiteHeader() {
       {/* ===== PHONE LAYOUT (rows 1 & 2, below lg) ===== */}
       {/* Row 1 */}
       <div className="flex h-16 items-center gap-3 px-4 md:px-6 lg:hidden">
-        <Link href="/home" aria-label="SVKM" className="relative h-11 w-11 shrink-0">
-          <Image src={SVKM_LOGO} alt="SVKM" fill sizes="44px" priority className="object-contain" />
-        </Link>
+        <LogoBox src={SVKM_LOGO} alt="SVKM" />
 
         {/* Phone title */}
         <Link href="/home" className="min-w-0 flex-1 text-center leading-tight">
@@ -52,9 +58,7 @@ export default function SiteHeader() {
           <span className="block truncate text-[10.5px] uppercase tracking-[0.12em] text-white/70">Championship 2026-27</span>
         </Link>
 
-        <Link href="/home" aria-label="NMIMS" className="relative h-11 w-11 shrink-0">
-          <Image src={NMIMS_LOGO} alt="NMIMS" fill sizes="44px" priority className="object-contain" />
-        </Link>
+        <LogoBox src={NMIMS_LOGO} alt="NMIMS" />
       </div>
 
       {/* Row 2: phone swipe menu */}
@@ -93,9 +97,7 @@ export default function SiteHeader() {
       <div className="mx-auto hidden h-20 max-w-7xl grid-cols-[1fr_auto_1fr] items-center gap-6 px-8 lg:grid">
         {/* Left zone: SVKM logo (justify-self-start) */}
         <div className="justify-self-start flex items-center">
-          <Link href="/home" aria-label="SVKM" className="relative h-14 w-16 shrink-0">
-            <Image src={SVKM_LOGO} alt="SVKM" fill sizes="64px" priority className="object-contain" />
-          </Link>
+          <LogoBox src={SVKM_LOGO} alt="SVKM" />
         </div>
 
         {/* Centre zone: nav links (justify-self-center, flex gap-8) */}
@@ -164,9 +166,7 @@ export default function SiteHeader() {
             <span>Admin</span>
           </Link>
 
-          <Link href="/home" aria-label="NMIMS" className="relative h-14 w-16 shrink-0">
-            <Image src={NMIMS_LOGO} alt="NMIMS" fill sizes="64px" priority className="object-contain" />
-          </Link>
+          <LogoBox src={NMIMS_LOGO} alt="NMIMS" />
         </div>
       </div>
     </header>

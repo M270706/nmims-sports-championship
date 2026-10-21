@@ -12,10 +12,10 @@ interface SizeSpec {
 const SIZE_SPECS: Record<LogoSize, SizeSpec> = {
   xs: { px: 44, boxClass: "w-11 h-11" },
   sm: { px: 48, boxClass: "w-12 h-12" },
-  footer: { px: 56, boxClass: "w-14 h-14" },
+  footer: { px: 64, boxClass: "w-16 h-16" },
   md: { px: 56, boxClass: "w-14 h-14" },
-  lg: { px: 56, boxClass: "w-14 h-14" },
-  xl: { px: 96, boxClass: "w-24 h-24" },
+  lg: { px: 64, boxClass: "w-16 h-16" },
+  xl: { px: 80, boxClass: "w-20 h-20" },
 };
 
 function getDimensions(size: LogoSize, mobileSize?: LogoSize) {
@@ -85,9 +85,7 @@ export function SvkmLogo({
 }
 
 /**
- * NMIMS Logo in a fixed square box with object-contain, scaled up visually by 1.15
- * so its circular crest and delicate wordmark equal the visual mass of the SVKM logo.
- * overflow-hidden on the outer box prevents the scaled image from pushing layout wider.
+ * NMIMS Logo in a fixed square box with object-contain.
  */
 export function NmimsLogo({
   size = "md",
