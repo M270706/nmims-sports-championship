@@ -104,26 +104,22 @@ export default function UserHomePage() {
           </div>
 
           {/* CTAs */}
-          <div className="mt-8 flex flex-col sm:flex-row items-center gap-4 sm:gap-5 w-full sm:w-auto">
-            <Button
+          <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3 w-full sm:w-auto">
+            <Link
               href="#sports"
-              variant="primary"
-              size="lg"
-              className="w-full sm:w-auto shadow-gold-glow"
-              icon={<ArrowRight className="w-4 h-4" />}
+              className="inline-flex h-12 w-full sm:w-auto items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#A88345] via-[#D9B26F] to-[#F0D38F] px-7 text-[15px] font-semibold uppercase tracking-wide text-[#0F122E] shadow-[0_8px_24px_-8px_rgba(217,178,111,0.6)] transition hover:brightness-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F0D38F]/70"
             >
-              Explore Sports
-            </Button>
+              <span>Explore Sports</span>
+              <ArrowRight className="w-4 h-4 text-[#0F122E] shrink-0" />
+            </Link>
 
-            <Button
+            <Link
               href="/standings"
-              variant="secondary"
-              size="lg"
-              className="w-full sm:w-auto"
-              icon={<Trophy className="w-4 h-4 text-gold" />}
+              className="inline-flex h-12 w-full sm:w-auto items-center justify-center gap-2 rounded-xl border border-[#D9B26F]/40 bg-[#161A40] px-7 text-[15px] font-semibold text-[#D9B26F] transition hover:bg-[#D9B26F]/10 hover:border-[#D9B26F] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D9B26F]/70"
             >
-              Points &amp; Stats
-            </Button>
+              <Trophy className="w-4 h-4 text-[#D9B26F] shrink-0" />
+              <span>Points &amp; Stats</span>
+            </Link>
           </div>
         </Container>
 

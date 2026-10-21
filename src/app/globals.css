@@ -126,6 +126,11 @@ body {
   -webkit-text-fill-color: transparent;
 }
 
+/* Background gold gradient utility */
+.bg-gold-gradient {
+  background: linear-gradient(90deg, #A88345 0%, #D9B26F 50%, #F0D38F 100%);
+}
+
 /* Gold section title decoration */
 .title-ornament {
   display: flex;
