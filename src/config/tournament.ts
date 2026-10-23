@@ -25,7 +25,7 @@ export const TOURNAMENT_CONFIG = {
   pwaShortName: "NMIMS Sports 26-27",
   dates: "27th – 31st October 2026",
   dateRange: {
-    start: "2026-10-27T09:00:00+05:30",
+    start: "2026-10-27T17:30:00+05:30",
     end: "2026-10-31T20:00:00+05:30",
     reporting: "2026-10-27T12:00:00+17:30",
   },

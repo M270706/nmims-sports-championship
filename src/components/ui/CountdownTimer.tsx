@@ -19,7 +19,7 @@ export default function CountdownTimer() {
   });
 
   useEffect(() => {
-    const tournamentStart = new Date("2026-10-27T09:00:00+05:30").getTime();
+    const tournamentStart = new Date("2026-10-27T17:30:00+05:30").getTime();
     const tournamentEnd = new Date("2026-10-31T20:00:00+05:30").getTime();
 
     const updateTimer = () => {
@@ -131,7 +131,7 @@ export default function CountdownTimer() {
           <div className="flex items-center gap-2 text-gold">
             <Clock className="w-5 h-5 text-gold-light" />
             <span className="text-xs md:text-sm font-semibold uppercase tracking-wider">
-              Countdown to Opening Ceremony · 27 Oct, 09:00 IST
+              Countdown to Opening Ceremony · 27 Oct, 17:30 IST
             </span>
           </div>
 

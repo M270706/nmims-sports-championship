@@ -25,7 +25,7 @@ export default function StartingEntryPage() {
   const mounted = useSyncExternalStore(emptySubscribe, () => true, () => false);
 
   useEffect(() => {
-    const targetDate = new Date("2026-10-27T09:00:00+05:30").getTime();
+    const targetDate = new Date("2026-10-27T17:30:00+05:30").getTime();
 
     const updateCountdown = () => {
       const now = new Date().getTime();
